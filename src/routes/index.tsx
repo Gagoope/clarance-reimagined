@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import cvAsset from "@/assets/cv.pdf.asset.json";
 import {
   ArrowUpRight,
   Database,
