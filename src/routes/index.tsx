@@ -229,7 +229,7 @@ function Portfolio() {
             <a href="#contact" className="inline-flex items-center gap-2 rounded-md border border-border px-5 py-3 text-sm font-medium text-foreground transition hover:border-primary hover:text-primary">
               Get in Touch
             </a>
-            <a href="/cv.pdf" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-md border border-border px-5 py-3 text-sm font-medium text-muted-foreground transition hover:border-primary hover:text-primary">
+            <a href={cvAsset.url} target="_blank" rel="noreferrer" download className="inline-flex items-center gap-2 rounded-md border border-border px-5 py-3 text-sm font-medium text-muted-foreground transition hover:border-primary hover:text-primary">
               <FileText className="h-4 w-4" /> Download CV
             </a>
           </div>
