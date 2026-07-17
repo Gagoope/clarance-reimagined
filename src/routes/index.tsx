@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import cvAsset from "@/assets/cv.pdf.asset.json";
+import { CvPreviewButton } from "@/components/CvPreview";
+import { LoadingSplash } from "@/components/LoadingSplash";
 import {
   ArrowUpRight,
   Database,
@@ -16,7 +17,6 @@ import {
   Mail,
   Github,
   MessageCircle,
-  FileText,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -178,6 +178,7 @@ function SectionHeader({ num, title, kicker }: { num: string; title: string; kic
 function Portfolio() {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <LoadingSplash />
       {/* Nav */}
       <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
@@ -229,9 +230,8 @@ function Portfolio() {
             <a href="#contact" className="inline-flex items-center gap-2 rounded-md border border-border px-5 py-3 text-sm font-medium text-foreground transition hover:border-primary hover:text-primary">
               Get in Touch
             </a>
-            <a href={cvAsset.url} target="_blank" rel="noreferrer" download className="inline-flex items-center gap-2 rounded-md border border-border px-5 py-3 text-sm font-medium text-muted-foreground transition hover:border-primary hover:text-primary">
-              <FileText className="h-4 w-4" /> Download CV
-            </a>
+            <CvPreviewButton label="Preview CV" />
+
           </div>
 
           {/* Meta card */}
