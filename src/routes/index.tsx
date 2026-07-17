@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import cvAsset from "@/assets/cv.pdf.asset.json";
+import { CvPreviewButton } from "@/components/CvPreview";
+import { LoadingSplash } from "@/components/LoadingSplash";
 import {
   ArrowUpRight,
   Database,
@@ -229,9 +231,8 @@ function Portfolio() {
             <a href="#contact" className="inline-flex items-center gap-2 rounded-md border border-border px-5 py-3 text-sm font-medium text-foreground transition hover:border-primary hover:text-primary">
               Get in Touch
             </a>
-            <a href={cvAsset.url} target="_blank" rel="noreferrer" download className="inline-flex items-center gap-2 rounded-md border border-border px-5 py-3 text-sm font-medium text-muted-foreground transition hover:border-primary hover:text-primary">
-              <FileText className="h-4 w-4" /> Download CV
-            </a>
+            <CvPreviewButton label="Preview CV" />
+
           </div>
 
           {/* Meta card */}
