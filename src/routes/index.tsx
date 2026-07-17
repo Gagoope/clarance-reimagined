@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import cvAsset from "@/assets/cv.pdf.asset.json";
 import { CvPreviewButton } from "@/components/CvPreview";
 import { LoadingSplash } from "@/components/LoadingSplash";
 import {
@@ -18,7 +17,6 @@ import {
   Mail,
   Github,
   MessageCircle,
-  FileText,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -180,6 +178,7 @@ function SectionHeader({ num, title, kicker }: { num: string; title: string; kic
 function Portfolio() {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <LoadingSplash />
       {/* Nav */}
       <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
