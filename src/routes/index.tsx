@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CvPreviewButton } from "@/components/CvPreview";
 import { LoadingSplash } from "@/components/LoadingSplash";
+import profileAsset from "@/assets/gcm-profile.jpeg.asset.json";
 import {
   ArrowRight,
   Database,
@@ -397,8 +398,8 @@ function Portfolio() {
                 {t.label}
               </div>
             ))}
-            <div className="absolute left-1/2 top-1/2 grid h-24 w-24 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-primary/50 bg-primary/10 font-display text-2xl font-bold text-primary glow-primary">
-              GC
+            <div className="absolute left-1/2 top-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full border-2 border-primary/60 bg-primary/10 glow-primary">
+              <img src={profileAsset.url} alt="Gagoope Clarance Merafhe" className="h-full w-full object-cover" />
             </div>
           </div>
         </div>
