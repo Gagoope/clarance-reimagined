@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CvPreviewButton } from "@/components/CvPreview";
 import { LoadingSplash } from "@/components/LoadingSplash";
-import profileAsset from "@/assets/gcm-profile.jpeg.asset.json";
+const profileAsset = { url: "/assets/gcm-profile.jpeg" };
 import {
   ArrowRight,
   Database,
