@@ -1,0 +1,7 @@
+# Gagoope Clarance Merafhe — GCM
+
+> Portfolio of Gagoope Clarance Merafhe, an SAP Business One and full-stack web developer based in Botswana. Builds SAP B1 add-ons, ERP integrations, and database-driven web apps.
+
+## Pages
+
+- [Home](/): Overview of services, experience, projects, and contact details.
