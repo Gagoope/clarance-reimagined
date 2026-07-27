@@ -46,7 +46,44 @@ export const Route = createFileRoute("/")({
           "SAP Business One, PHP/IIS web apps, SQL Server and IDuela HR & Payroll implementations delivered end-to-end.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "/" },
       { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Person",
+              name: "Gagoope Clarance Merafhe",
+              jobTitle: "SAP Business One & Web Developer",
+              worksFor: { "@type": "Organization", name: "RPC Data" },
+              email: "meragcm@gmail.com",
+              telephone: "+267 77447823",
+              address: { "@type": "PostalAddress", addressCountry: "BW" },
+              knowsAbout: [
+                "SAP Business One",
+                "SAP B1 SDK",
+                "PHP",
+                "SQL Server",
+                "IIS",
+                "IDuela HR & Payroll",
+              ],
+            },
+            {
+              "@type": "ProfessionalService",
+              name: "GCM — SAP B1 & Web Development",
+              description:
+                "SAP Business One add-on development, ERP integrations, and database-driven web applications.",
+              areaServed: "Botswana",
+              provider: { "@type": "Person", name: "Gagoope Clarance Merafhe" },
+            },
+          ],
+        }),
+      },
     ],
   }),
 });
