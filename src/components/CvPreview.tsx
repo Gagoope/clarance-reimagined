@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { X, Download, FileText } from "lucide-react";
-import cvAsset from "@/assets/cv.pdf.asset.json";
+const cvAsset = { url: "/assets/Gagoope_Clarance_Merafhe_CV.pdf" };
 
 export function CvPreviewButton({
   className,
