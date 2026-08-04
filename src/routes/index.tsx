@@ -4,29 +4,24 @@ import { LoadingSplash } from "@/components/LoadingSplash";
 const profileAsset = { url: "/assets/gcm-profile.jpeg" };
 import {
   ArrowRight,
-  Database,
   Server,
   Globe,
-  Wrench,
-  Rocket,
-  Monitor,
-  Cpu,
+  Database,
   Code2,
   Layers,
-  ShieldCheck,
+  Cpu,
   Sparkles,
-  CheckCircle2,
-  Clock,
-  Tag,
-  Star,
+  Rocket,
+  ClipboardList,
+  Users,
+  Zap,
+  ShieldCheck,
+  Monitor,
   Phone,
   Mail,
   Github,
   MessageCircle,
   MapPin,
-  Zap,
-  ClipboardList,
-  Users,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -102,15 +97,6 @@ const navLinks = [
 ];
 
 const coreExpertise = ["SAP B1", "PHP / IIS", "SQL Server", "IDuela HR"];
-
-const floatingTech = [
-  { label: "SAP", top: "8%", left: "62%", tone: "primary" },
-  { label: "SQL", top: "22%", left: "88%", tone: "muted" },
-  { label: "PHP", top: "48%", left: "58%", tone: "muted" },
-  { label: "JS", top: "62%", left: "92%", tone: "primary" },
-  { label: "PY", top: "78%", left: "64%", tone: "muted" },
-  { label: "C#", top: "90%", left: "82%", tone: "primary" },
-];
 
 const services = [
   {
@@ -266,9 +252,9 @@ const projects = [
 ];
 
 const flagshipStats = [
-  { n: "500+", label: "Journals / batch" },
-  { n: "1+ yr", label: "SAP B1 delivery" },
-  { n: "100%", label: "Client deployments" },
+  { n: "500", label: "Journals posted per batch" },
+  { n: "0", label: "Posting errors in production" },
+  { n: "1+ yr", label: "SAP B1 delivery experience" },
 ];
 
 const strengths = [
@@ -303,22 +289,39 @@ const education = [
 
 /* ————————————————— UI helpers ————————————————— */
 
-function Pill({ children }: { children: React.ReactNode }) {
+const btnPrimary =
+  "inline-flex items-center gap-2 rounded-sm bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition hover:opacity-90";
+const btnOutline =
+  "inline-flex items-center gap-2 rounded-sm border border-border px-5 py-3 text-sm font-medium text-foreground transition hover:border-primary hover:text-primary";
+
+function Label({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-4 py-1.5 font-mono text-[11px] uppercase tracking-widest text-primary">
-      <Star className="h-3 w-3 fill-primary" />
+    <div className="text-[11px] font-medium uppercase tracking-[0.2em] text-muted-foreground">
       {children}
-    </span>
+    </div>
   );
 }
 
-function SectionKicker({ label, title, sub }: { label: string; title: React.ReactNode; sub?: string }) {
+function SectionHead({ label, title, sub }: { label: string; title: string; sub?: string }) {
   return (
-    <div className="mb-14 max-w-3xl">
-      <div className="mb-4 font-mono text-[11px] uppercase tracking-[0.25em] text-primary">{label}</div>
-      <h2 className="font-display text-4xl font-bold tracking-tight sm:text-5xl">{title}</h2>
-      {sub && <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">{sub}</p>}
+    <div className="mb-12 max-w-2xl border-b border-border pb-6">
+      <Label>{label}</Label>
+      <h2 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">{title}</h2>
+      {sub && <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">{sub}</p>}
     </div>
+  );
+}
+
+function Meta({ items }: { items: [string, string][] }) {
+  return (
+    <dl className="space-y-1.5 text-sm">
+      {items.map(([k, v]) => (
+        <div key={k} className="flex gap-2">
+          <dt className="w-24 shrink-0 text-muted-foreground">{k}</dt>
+          <dd className="text-foreground">{v}</dd>
+        </div>
+      ))}
+    </dl>
   );
 }
 
@@ -326,158 +329,106 @@ function SectionKicker({ label, title, sub }: { label: string; title: React.Reac
 
 function Portfolio() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background font-sans text-foreground">
       <LoadingSplash />
 
       {/* Nav */}
-      <header className="sticky top-4 z-50 mx-auto max-w-6xl px-4">
-        <div className="flex items-center justify-between rounded-2xl border border-border/70 bg-surface/70 px-4 py-3 backdrop-blur-xl sm:px-6">
-          <a href="#top" className="font-display text-lg font-bold tracking-tight">
-            GAGOOPE<span className="text-primary">MERAFHE</span>
+      <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur">
+        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+          <a href="#top" className="text-sm font-semibold tracking-tight">
+            Gagoope Merafhe
           </a>
-          <nav className="hidden items-center gap-1 md:flex">
-            {navLinks.map((l, i) => (
+          <nav className="hidden items-center gap-6 md:flex">
+            {navLinks.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
-                className={`rounded-full px-4 py-2 font-mono text-[11px] uppercase tracking-widest transition ${
-                  i === 0
-                    ? "bg-primary/15 text-primary"
-                    : "text-muted-foreground hover:bg-surface-elevated hover:text-foreground"
-                }`}
+                className="text-sm text-muted-foreground transition hover:text-foreground"
               >
                 {l.label}
               </a>
             ))}
           </nav>
-          <div className="flex items-center gap-2">
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground transition hover:opacity-90"
-            >
-              Hire Me
-            </a>
-            <span className="hidden h-9 w-9 place-items-center rounded-full border border-primary/40 bg-primary/10 font-mono text-xs text-primary sm:grid">
-              GC
-            </span>
-          </div>
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-sm border border-primary px-4 py-2 text-sm font-medium text-primary transition hover:bg-primary hover:text-primary-foreground"
+          >
+            Hire Me
+          </a>
         </div>
       </header>
 
       {/* Hero */}
-      <section id="top" className="relative overflow-hidden">
-        <div className="absolute inset-0 grid-bg opacity-30" />
-        <div className="absolute left-1/2 top-40 h-[520px] w-[900px] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
-        <div className="relative mx-auto grid max-w-6xl gap-12 px-6 py-24 sm:py-32 lg:grid-cols-[1.15fr_0.85fr] lg:gap-8">
+      <section id="top" className="border-b border-border">
+        <div className="mx-auto grid max-w-5xl gap-10 px-6 py-20 sm:py-24 lg:grid-cols-[1.4fr_0.6fr] lg:items-start">
           <div>
-            <Pill>IT Systems Developer · Botswana</Pill>
-            <h1 className="mt-8 font-display text-5xl font-bold leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl">
-              Gagoope Merafhe
-              <br />
-              <span className="text-primary">SAP B1 Developer</span>
-              <br />
-              & Web Engineer.
+            <Label>IT Systems Developer · Botswana</Label>
+            <h1 className="mt-5 max-w-2xl text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
+              Gagoope Merafhe — SAP Business One developer and web engineer.
             </h1>
+            <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground">
+              I build SAP B1 add-ons, internal web applications and the databases behind them. Most of my work
+              replaces manual, error-prone processes with something that runs on its own.
+            </p>
 
-            <div className="mt-10 flex flex-wrap items-center gap-3">
-              <a
-                href="#contact"
-                className="group inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-4 text-sm font-semibold text-primary-foreground transition hover:opacity-90"
-              >
-                Contact Me
-                <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <a href="#contact" className={btnPrimary}>
+                Contact Me <ArrowRight className="h-4 w-4" />
               </a>
-              <a
-                href="#projects"
-                className="inline-flex items-center gap-2 rounded-xl border border-border bg-surface/60 px-6 py-4 text-sm font-semibold text-foreground transition hover:border-primary hover:text-primary"
-              >
+              <a href="#projects" className={btnOutline}>
                 Explore My Work
               </a>
-              <CvPreviewButton
-                label="Preview CV"
-                className="inline-flex items-center gap-2 rounded-xl border border-border bg-surface/60 px-6 py-4 text-sm font-semibold text-foreground transition hover:border-primary hover:text-primary"
-              />
+              <CvPreviewButton label="Preview CV" className={btnOutline} />
             </div>
 
-            <div className="mt-14">
-              <div className="mb-4 font-mono text-[11px] uppercase tracking-[0.25em] text-muted-foreground">
-                Core Expertise:
-              </div>
-              <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
-                {coreExpertise.map((e, i) => (
-                  <span key={e} className="flex items-center gap-5">
-                    <span className={i === coreExpertise.length - 1 ? "text-primary font-semibold" : "font-semibold text-foreground"}>
-                      {e}
-                    </span>
-                    {i < coreExpertise.length - 1 && <span className="text-primary">•</span>}
-                  </span>
-                ))}
-              </div>
+            <div className="mt-12 border-t border-border pt-6">
+              <Label>Core expertise</Label>
+              <p className="mt-2 text-sm text-foreground">{coreExpertise.join(" · ")}</p>
             </div>
           </div>
 
-          {/* Floating tech constellation */}
-          <div className="relative hidden min-h-[520px] lg:block">
-            <div className="absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full border border-primary/20" />
-            <div className="absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full border border-primary/10" />
-            {floatingTech.map((t) => (
-              <div
-                key={t.label}
-                style={{ top: t.top, left: t.left }}
-                className={`absolute grid h-16 w-16 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-2xl border font-mono text-xs backdrop-blur-md ${
-                  t.tone === "primary"
-                    ? "border-primary/60 bg-primary/15 text-primary glow-primary"
-                    : "border-border bg-surface/70 text-muted-foreground"
-                }`}
-              >
-                {t.label}
-              </div>
-            ))}
-            <div className="absolute left-1/2 top-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full border-2 border-primary/60 bg-primary/10 glow-primary">
-              <img src={profileAsset.url} alt="Gagoope Clarance Merafhe" className="h-full w-full object-cover" />
-            </div>
+          <div className="lg:pt-2">
+            <img
+              src={profileAsset.url}
+              alt="Gagoope Clarance Merafhe"
+              className="aspect-[4/5] w-full max-w-[240px] rounded-sm border border-border object-cover"
+            />
+            <p className="mt-3 max-w-[240px] text-xs leading-relaxed text-muted-foreground">
+              Based in Nata / Gaborone, Botswana. Available for full-time roles, contracts and remote work.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Services */}
-      <section id="services" className="mx-auto max-w-6xl px-6 py-24">
-        <SectionKicker
-          label="Productized Services"
-          title={<>Fixed-scope solutions <span className="text-primary">built to ship.</span></>}
-          sub="Scoped engagements designed for speed and reliability across SAP, web and database work."
+      {/* Services — single column list */}
+      <section id="services" className="mx-auto max-w-5xl px-6 py-20">
+        <SectionHead
+          label="Services"
+          title="What I do"
+          sub="Three kinds of work I take on, with the typical time each one needs."
         />
-        <div className="grid gap-5 md:grid-cols-3">
+        <div className="divide-y divide-border border-y border-border">
           {services.map((s) => {
             const Icon = s.icon;
             return (
-              <div
-                key={s.title}
-                className="group flex flex-col rounded-2xl border border-border bg-surface/50 p-7 transition hover:border-primary/60 hover:bg-surface"
-              >
-                <span className="mb-6 grid h-12 w-12 place-items-center rounded-xl border border-primary/40 bg-primary/10 text-primary">
-                  <Icon className="h-6 w-6" />
-                </span>
-                <h3 className="font-display text-2xl font-bold">{s.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
-                <div className="mt-5 grid grid-cols-2 gap-2">
-                  {s.features.map((f) => (
-                    <div key={f} className="flex items-center gap-2 text-xs text-foreground">
-                      <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-primary" />
-                      {f}
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-6 flex items-center justify-between border-t border-border pt-5 font-mono text-[11px] uppercase tracking-widest">
-                  <div>
-                    <div className="text-muted-foreground">Timeline</div>
-                    <div className="mt-1 text-sm font-semibold text-foreground">{s.timeline}</div>
+              <div key={s.title} className="grid gap-6 py-8 md:grid-cols-[1fr_1fr]">
+                <div>
+                  <div className="flex items-center gap-3">
+                    <Icon className="h-5 w-5 text-primary" />
+                    <h3 className="text-lg font-semibold">{s.title}</h3>
                   </div>
-                  <div className="text-right">
-                    <div className="text-muted-foreground">Pricing</div>
-                    <div className="mt-1 text-sm font-semibold text-primary">{s.price}</div>
+                  <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
+                </div>
+                <div className="md:pl-6">
+                  <ul className="space-y-1.5 text-sm text-foreground">
+                    {s.features.map((f) => (
+                      <li key={f}>— {f}</li>
+                    ))}
+                  </ul>
+                  <div className="mt-5">
+                    <Meta items={[["Timeline", s.timeline], ["Pricing", s.price]]} />
                   </div>
                 </div>
               </div>
@@ -486,377 +437,281 @@ function Portfolio() {
         </div>
       </section>
 
-      {/* Build Paths */}
-      <section className="mx-auto max-w-6xl px-6 py-24">
-        <SectionKicker
-          label="Choose Your Build Path"
-          title={<>Tailored technical <span className="text-primary">solutions.</span></>}
-          sub="Different domains, one delivery style — clear scope, working software, no drama."
-        />
-        <div className="grid gap-5 lg:grid-cols-3">
-          {buildPaths.map((p) => (
-            <article
-              key={p.title}
-              className="flex flex-col rounded-2xl border border-border bg-surface/40 p-7 transition hover:border-primary/60"
-            >
-              <div className="font-mono text-[11px] uppercase tracking-widest text-primary">{p.tag}</div>
-              <h3 className="mt-2 font-display text-2xl font-bold">{p.title}</h3>
-              <div className="mt-5">
-                <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">Core Stack</div>
-                <div className="mt-2 flex flex-wrap gap-2">
-                  {p.stack.map((s) => (
-                    <span key={s} className="rounded-md border border-border bg-background px-2.5 py-1 font-mono text-[11px] text-muted-foreground">
-                      {s}
-                    </span>
-                  ))}
+      {/* Build paths — plain list */}
+      <section className="border-y border-border bg-surface/30">
+        <div className="mx-auto max-w-5xl px-6 py-20">
+          <SectionHead
+            label="Engagements"
+            title="Ways we can work together"
+            sub="Different domains, one delivery style — clear scope, working software."
+          />
+          <div className="space-y-10">
+            {buildPaths.map((p) => (
+              <article key={p.title} className="grid gap-6 border-t border-border pt-8 md:grid-cols-[0.9fr_1.1fr]">
+                <div>
+                  <Label>{p.tag}</Label>
+                  <h3 className="mt-2 text-lg font-semibold">{p.title}</h3>
+                  <div className="mt-4">
+                    <Meta
+                      items={[
+                        ["Stack", p.stack.join(", ")],
+                        ["Timeline", p.timeline],
+                        ["Pricing", p.price],
+                      ]}
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="mt-5">
-                <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">Key Features</div>
-                <ul className="mt-3 space-y-2">
-                  {p.features.map((f) => (
-                    <li key={f} className="flex items-center gap-2 text-sm text-foreground">
-                      <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="mt-6 grid grid-cols-2 gap-3 border-t border-border pt-5 text-xs">
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <Clock className="h-3.5 w-3.5 text-primary" /> {p.timeline}
+                <div>
+                  <ul className="space-y-1.5 text-sm text-foreground">
+                    {p.features.map((f) => (
+                      <li key={f}>— {f}</li>
+                    ))}
+                  </ul>
+                  <a
+                    href="#contact"
+                    className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
+                  >
+                    Request a quote <ArrowRight className="h-4 w-4" />
+                  </a>
                 </div>
-                <div className="flex items-center justify-end gap-2 text-muted-foreground">
-                  <Tag className="h-3.5 w-3.5 text-primary" /> {p.price}
-                </div>
-              </div>
-              <a
-                href="#contact"
-                className="mt-6 inline-flex items-center justify-center gap-2 rounded-xl border border-primary/50 bg-primary/10 px-4 py-3 text-sm font-semibold text-primary transition hover:bg-primary hover:text-primary-foreground"
-              >
-                Request Quote <ArrowRight className="h-4 w-4" />
-              </a>
-            </article>
-          ))}
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Process */}
-      <section id="process" className="mx-auto max-w-6xl px-6 py-24">
-        <SectionKicker
-          label="My Design-to-Code Process"
-          title={<>A streamlined workflow for <span className="text-primary">on-time delivery.</span></>}
-        />
-        <div className="grid gap-5 md:grid-cols-3">
+      {/* Process — numbered list, single column */}
+      <section id="process" className="mx-auto max-w-5xl px-6 py-20">
+        <SectionHead label="Process" title="How a project runs" />
+        <ol className="max-w-2xl divide-y divide-border border-y border-border">
           {process.map((p) => {
             const Icon = p.icon;
             return (
-              <div key={p.n} className="relative rounded-2xl border border-border bg-surface/40 p-7">
-                <div className="absolute right-6 top-6 font-display text-5xl font-bold text-primary/15">{p.n}</div>
-                <span className="mb-5 grid h-11 w-11 place-items-center rounded-xl border border-primary/40 bg-primary/10 text-primary">
-                  <Icon className="h-5 w-5" />
-                </span>
-                <h3 className="font-display text-xl font-bold">{p.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
-              </div>
+              <li key={p.n} className="flex gap-5 py-6">
+                <span className="w-8 shrink-0 text-sm text-muted-foreground">{p.n}</span>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <Icon className="h-4 w-4 text-primary" />
+                    <h3 className="text-base font-semibold">{p.title}</h3>
+                  </div>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
+                </div>
+              </li>
             );
           })}
-        </div>
+        </ol>
       </section>
 
-      {/* Projects / Recent Work */}
-      <section id="projects" className="mx-auto max-w-6xl px-6 py-24">
-        <div className="mb-14 flex flex-wrap items-end justify-between gap-6">
-          <div className="max-w-2xl">
-            <div className="mb-4 font-mono text-[11px] uppercase tracking-[0.25em] text-primary">Recent Work</div>
-            <h2 className="font-display text-4xl font-bold tracking-tight sm:text-5xl">
-              Solving business problems with <span className="text-primary">clean, scalable software.</span>
-            </h2>
-          </div>
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/60 px-5 py-2.5 font-mono text-[11px] uppercase tracking-widest text-muted-foreground transition hover:border-primary hover:text-primary"
-          >
-            See All Case Studies <ArrowRight className="h-3.5 w-3.5" />
-          </a>
-        </div>
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {projects.map((p) => {
-            const Icon = p.icon;
-            return (
-              <article
-                key={p.id}
-                className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface/40 transition hover:border-primary/60"
-              >
-                <div className="relative aspect-[16/10] overflow-hidden border-b border-border bg-gradient-to-br from-surface-elevated via-surface to-background">
-                  <div className="absolute inset-0 grid-bg opacity-40" />
-                  <div className="absolute inset-0 grid place-items-center">
-                    <Icon className="h-16 w-16 text-primary/70 transition group-hover:scale-110" />
-                  </div>
-                  <span className="absolute left-4 top-4 rounded-full border border-primary/40 bg-background/80 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-primary backdrop-blur">
-                    {p.kind}
-                  </span>
-                  <span className="absolute right-4 top-4 rounded-full bg-background/80 px-3 py-1 font-mono text-[10px] text-muted-foreground backdrop-blur">
-                    {p.id}
-                  </span>
-                </div>
-                <div className="flex flex-1 flex-col p-6">
-                  <h3 className="font-display text-lg font-bold leading-snug">{p.title}</h3>
-                  <div className="mt-1.5 font-mono text-xs text-muted-foreground">
-                    <span className="text-primary">◆</span> {p.client} · {p.period}
-                  </div>
-                  <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
-                  <div className="mt-4 flex flex-wrap gap-1.5">
-                    {p.stack.map((s) => (
-                      <span key={s} className="rounded-md border border-border px-2 py-0.5 font-mono text-[10px] text-muted-foreground">
-                        {s}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </article>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* Flagship case study */}
-      <section className="relative overflow-hidden border-y border-border bg-surface/30">
-        <div className="absolute inset-0 grid-bg opacity-20" />
-        <div className="relative mx-auto grid max-w-6xl gap-12 px-6 py-24 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-          <div className="relative">
-            <div className="relative overflow-hidden rounded-3xl border border-primary/40 bg-surface p-8 glow-primary">
-              <div className="absolute inset-0 grid-bg opacity-30" />
-              <div className="relative">
-                <div className="mb-3 font-mono text-[11px] uppercase tracking-widest text-primary">Live Deployment</div>
-                <div className="mb-8 font-display text-3xl font-bold">SAP B1 · Journal Automation</div>
-                <div className="grid grid-cols-3 gap-4">
-                  {flagshipStats.map((s) => (
-                    <div key={s.label} className="rounded-xl border border-border bg-background/60 p-4 text-center">
-                      <div className="font-display text-2xl font-bold text-primary">{s.n}</div>
-                      <div className="mt-1 font-mono text-[9px] uppercase tracking-widest text-muted-foreground">{s.label}</div>
+      {/* Projects — editorial table-like list */}
+      <section id="projects" className="border-y border-border">
+        <div className="mx-auto max-w-5xl px-6 py-20">
+          <SectionHead
+            label="Recent work"
+            title="Projects I've shipped"
+            sub="Systems built for finance, operations and HR teams in Botswana."
+          />
+          <div className="divide-y divide-border border-y border-border">
+            {projects.map((p) => {
+              const Icon = p.icon;
+              return (
+                <article key={p.id} className="grid gap-4 py-8 md:grid-cols-[0.85fr_1.15fr]">
+                  <div>
+                    <div className="flex items-center gap-3">
+                      <Icon className="h-4 w-4 text-primary" />
+                      <Label>{p.kind}</Label>
                     </div>
-                  ))}
-                </div>
-                <div className="mt-6 rounded-xl border border-border bg-background/60 p-4 font-mono text-[11px] text-muted-foreground">
-                  <div className="text-primary">▸ posting batch...</div>
-                  <div className="mt-1">✓ 500/500 journals · 0 errors</div>
-                  <div className="mt-1">✓ committed to SAP B1</div>
-                </div>
+                    <h3 className="mt-2 text-lg font-semibold leading-snug">{p.title}</h3>
+                  </div>
+                  <div>
+                    <p className="text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
+                    <div className="mt-4">
+                      <Meta
+                        items={[
+                          ["Client", p.client],
+                          ["Period", p.period],
+                          ["Stack", p.stack.join(", ")],
+                        ]}
+                      />
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Flagship case study — single column, plain stats */}
+      <section className="mx-auto max-w-5xl px-6 py-20">
+        <SectionHead label="Case study" title="SAP B1 CSV journal automation" />
+        <div className="max-w-3xl">
+          <p className="text-base leading-relaxed text-muted-foreground">
+            A SAP Business One add-on engineered to automate posting of up to 500 journal entries at once. Built with
+            PHP and the SAP DI API, with CSV validation, field mapping to SAP journal structures and reliable batch
+            execution — cutting a routine month-end task from hours to minutes.
+          </p>
+          <div className="mt-10 grid gap-8 border-y border-border py-8 sm:grid-cols-3">
+            {flagshipStats.map((s) => (
+              <div key={s.label}>
+                <div className="text-3xl font-semibold text-primary">{s.n}</div>
+                <div className="mt-1 text-sm text-muted-foreground">{s.label}</div>
               </div>
-            </div>
+            ))}
+          </div>
+          <ul className="mt-8 space-y-4 text-sm leading-relaxed text-muted-foreground">
+            <li>
+              <span className="font-semibold text-foreground">Batch execution:</span> validates and posts hundreds of
+              journals in a single run against a live SAP B1 environment.
+            </li>
+            <li>
+              <span className="font-semibold text-foreground">Reliable mapping:</span> CSV fields mapped to SAP journal
+              structures with strict validation to protect ledger integrity.
+            </li>
+            <li>
+              <span className="font-semibold text-foreground">Operational win:</span> reduced manual data entry and cut
+              down human error during month-end processing.
+            </li>
+          </ul>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className={btnPrimary}>
+              <MessageCircle className="h-4 w-4" /> Discuss a similar build
+            </a>
+            <CvPreviewButton label="View Full CV" className={btnOutline} />
+          </div>
+        </div>
+      </section>
+
+      {/* Strengths — plain list */}
+      <section className="border-y border-border bg-surface/30">
+        <div className="mx-auto max-w-5xl px-6 py-20">
+          <SectionHead
+            label="Strengths"
+            title="How I work"
+            sub="Beyond code — the habits that make delivery reliable."
+          />
+          <dl className="max-w-2xl divide-y divide-border border-y border-border">
+            {strengths.map((s) => {
+              const Icon = s.icon;
+              return (
+                <div key={s.title} className="py-6">
+                  <dt className="flex items-center gap-2 text-base font-semibold">
+                    <Icon className="h-4 w-4 text-primary" />
+                    {s.title}
+                  </dt>
+                  <dd className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.body}</dd>
+                </div>
+              );
+            })}
+          </dl>
+        </div>
+      </section>
+
+      {/* Consult */}
+      <section className="mx-auto max-w-5xl px-6 py-20">
+        <SectionHead
+          label="Free consult"
+          title="Free SAP or web system review"
+          sub="Thinking of extending SAP B1 or an internal web app? I'll review your setup for bottlenecks, data integrity risks and quick wins — free, no sales pitch."
+        />
+        <div className="grid gap-10 border-y border-border py-8 md:grid-cols-2">
+          <div>
+            <Label>What I look at</Label>
+            <ul className="mt-3 space-y-1.5 text-sm text-foreground">
+              {[
+                "SAP add-on & integration review",
+                "SQL / schema health check",
+                "Approval & workflow gaps",
+                "Actionable summary",
+              ].map((f) => (
+                <li key={f}>— {f}</li>
+              ))}
+            </ul>
           </div>
           <div>
-            <div className="mb-3 font-mono text-[11px] uppercase tracking-widest text-primary">Flagship SAP Deployment</div>
-            <h2 className="font-display text-4xl font-bold tracking-tight sm:text-5xl">
-              SAP B1 CSV Journal <span className="text-primary">— case study.</span>
-            </h2>
-            <p className="mt-5 text-base leading-relaxed text-muted-foreground">
-              A SAP Business One add-on engineered to automate posting of up to 500 journal entries at once. Built with
-              PHP and the SAP DI API, with CSV validation, field mapping to SAP journal structures and reliable batch
-              execution — cutting a routine month-end task from hours to minutes.
-            </p>
-            <ul className="mt-6 space-y-3 text-sm text-muted-foreground">
-              <li>
-                <span className="font-semibold text-foreground">Batch execution:</span> validates and posts hundreds of
-                journals in a single run against a live SAP B1 environment.
-              </li>
-              <li>
-                <span className="font-semibold text-foreground">Reliable mapping:</span> CSV fields mapped to SAP journal
-                structures with strict validation to protect ledger integrity.
-              </li>
-              <li>
-                <span className="font-semibold text-foreground">Operational win:</span> reduced manual data entry and
-                cut down human error during month-end processing.
-              </li>
+            <Label>What you get</Label>
+            <ul className="mt-3 space-y-1.5 text-sm text-foreground">
+              <li>— One hour, one-on-one technical consult</li>
+              <li>— No credit card required</li>
+              <li>— Summary report afterwards</li>
             </ul>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition hover:opacity-90"
-              >
-                <MessageCircle className="h-4 w-4" /> Discuss a similar build
-              </a>
-              <CvPreviewButton
-                label="View Full CV"
-                className="inline-flex items-center gap-2 rounded-xl border border-border bg-surface/60 px-5 py-3 text-sm font-semibold text-foreground transition hover:border-primary hover:text-primary"
-              />
-            </div>
+            <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className={`${btnPrimary} mt-6`}>
+              Book a slot <ArrowRight className="h-4 w-4" />
+            </a>
           </div>
         </div>
       </section>
 
-      {/* Strengths */}
-      <section className="mx-auto max-w-6xl px-6 py-24">
-        <SectionKicker
-          label="What I Bring"
-          title={<>Core <span className="text-primary">strengths.</span></>}
-          sub="Beyond code — the operational habits that make delivery reliable."
-        />
-        <div className="grid gap-5 md:grid-cols-3">
-          {strengths.map((s) => {
-            const Icon = s.icon;
-            return (
-              <div key={s.title} className="rounded-2xl border border-border bg-surface/40 p-7">
-                <span className="mb-5 grid h-11 w-11 place-items-center rounded-xl border border-primary/40 bg-primary/10 text-primary">
-                  <Icon className="h-5 w-5" />
-                </span>
-                <h3 className="font-display text-lg font-bold">{s.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
-              </div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* Audit CTA */}
-      <section className="mx-auto max-w-6xl px-6 py-24">
-        <div className="relative overflow-hidden rounded-3xl border border-primary/40 bg-surface/60 p-10 sm:p-14">
-          <div className="absolute inset-0 grid-bg opacity-30" />
-          <div className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-primary/20 blur-3xl" />
-          <div className="relative grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-center">
-            <div>
-              <div className="mb-4 font-mono text-[11px] uppercase tracking-widest text-primary">Free 1-Hour Consult</div>
-              <h2 className="font-display text-4xl font-bold tracking-tight sm:text-5xl">
-                Free SAP or Web <span className="text-primary">System Review.</span>
-              </h2>
-              <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-                Thinking of extending SAP B1 or an internal web app? I'll review your setup for bottlenecks, data
-                integrity risks and quick wins — completely free, no sales pitch.
-              </p>
-              <div className="mt-8 grid gap-3 sm:grid-cols-2">
-                {[
-                  "SAP add-on & integration review",
-                  "SQL / schema health check",
-                  "Approval & workflow gaps",
-                  "Actionable summary",
-                ].map((f) => (
-                  <div key={f} className="flex items-center gap-2 text-sm text-foreground">
-                    <CheckCircle2 className="h-4 w-4 text-primary" /> {f}
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="rounded-2xl border border-border bg-background/60 p-6 backdrop-blur">
-              <div className="mb-2 font-mono text-[11px] uppercase tracking-widest text-primary">Book Your Slot</div>
-              <div className="font-display text-2xl font-bold">Let's screen-share and dig in.</div>
-              <ul className="mt-5 space-y-3 text-sm text-muted-foreground">
-                <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary" /> 1-on-1 technical consult</li>
-                <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary" /> No credit card required</li>
-                <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary" /> Summary report after</li>
-              </ul>
-              <a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3.5 text-sm font-semibold text-primary-foreground transition hover:opacity-90"
-              >
-                Claim Free Consult <ArrowRight className="h-4 w-4" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="mx-auto max-w-6xl px-6 py-24">
-        <SectionKicker
-          label="Client Outcomes"
-          title={<>What clients <span className="text-primary">say.</span></>}
-          sub="A word from people I've built systems and add-ons for."
-        />
-        <div className="grid gap-5 md:grid-cols-2">
+      {/* Testimonials — plain quotes */}
+      <section className="mx-auto max-w-5xl px-6 py-20">
+        <SectionHead label="Clients" title="What clients say" />
+        <div className="max-w-3xl space-y-12">
           {testimonials.map((t) => (
-            <div key={t.role} className="flex flex-col rounded-2xl border border-border bg-surface/40 p-7">
-              <div className="mb-4 flex gap-1 text-primary">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="h-4 w-4 fill-primary" />
-                ))}
-              </div>
-              <p className="flex-1 text-base leading-relaxed text-foreground">"{t.quote}"</p>
-              <div className="mt-6 grid grid-cols-2 gap-4 border-t border-border pt-5">
-                <div>
-                  <div className="text-sm font-semibold text-foreground">{t.role}</div>
-                  <div className="mt-0.5 text-xs text-muted-foreground">{t.where}</div>
-                </div>
-                <div className="text-right">
-                  <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">Project</div>
-                  <div className="mt-0.5 text-xs text-primary">{t.project}</div>
-                </div>
-              </div>
-            </div>
+            <blockquote key={t.role}>
+              <p className="text-lg leading-relaxed text-foreground">“{t.quote}”</p>
+              <footer className="mt-4 text-sm text-muted-foreground">
+                {t.role}, {t.where} — {t.project}
+              </footer>
+            </blockquote>
           ))}
         </div>
       </section>
 
       {/* Education */}
-      <section id="about" className="mx-auto max-w-6xl px-6 py-24">
-        <SectionKicker
-          label="Background"
-          title={<>Education & <span className="text-primary">training.</span></>}
-        />
-        <div className="grid gap-5 md:grid-cols-2">
-          {education.map((e) => (
-            <div key={e.id} className="rounded-2xl border border-border bg-surface/40 p-6">
-              <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-widest">
-                <span className="text-primary">{e.id}</span>
-                <span className="text-muted-foreground">{e.kind}</span>
+      <section id="about" className="border-y border-border">
+        <div className="mx-auto max-w-5xl px-6 py-20">
+          <SectionHead label="Background" title="Education & training" />
+          <div className="max-w-3xl divide-y divide-border border-y border-border">
+            {education.map((e) => (
+              <div key={e.id} className="grid gap-2 py-6 sm:grid-cols-[180px_1fr]">
+                <div className="text-sm text-muted-foreground">{e.kind}</div>
+                <div>
+                  <h3 className="text-base font-semibold">{e.title}</h3>
+                  <p className="mt-1 text-sm text-muted-foreground">{e.sub}</p>
+                </div>
               </div>
-              <h3 className="mt-3 font-display text-lg font-bold">{e.title}</h3>
-              <p className="mt-1 text-sm text-muted-foreground">{e.sub}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Contact */}
-      <section id="contact" className="relative overflow-hidden border-t border-border">
-        <div className="absolute inset-0 grid-bg opacity-30" />
-        <div className="relative mx-auto max-w-6xl px-6 py-24">
-          <SectionKicker
-            label="Get In Touch"
-            title={<>Let's build something <span className="text-primary">together.</span></>}
-            sub="Open to full-time roles, contracts and collaborative projects across Botswana and remote."
-          />
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            <a href={WHATSAPP_URL} target="_blank" rel="noreferrer"
-              className="group rounded-2xl border border-border bg-surface/40 p-6 transition hover:border-primary hover:glow-primary">
-              <MessageCircle className="mb-4 h-6 w-6 text-primary" />
-              <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">WhatsApp</div>
-              <div className="mt-1 text-sm font-semibold">+267 {WHATSAPP}</div>
-            </a>
-            <a href={`tel:+267${WHATSAPP}`}
-              className="group rounded-2xl border border-border bg-surface/40 p-6 transition hover:border-primary hover:glow-primary">
-              <Phone className="mb-4 h-6 w-6 text-primary" />
-              <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">Phone</div>
-              <div className="mt-1 text-sm font-semibold">+267 {WHATSAPP}</div>
-            </a>
-            <a href={`mailto:${EMAIL}`}
-              className="group rounded-2xl border border-border bg-surface/40 p-6 transition hover:border-primary hover:glow-primary">
-              <Mail className="mb-4 h-6 w-6 text-primary" />
-              <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">Email</div>
-              <div className="mt-1 break-all text-sm font-semibold">{EMAIL}</div>
-            </a>
-            <a href="https://github.com/Gagoope" target="_blank" rel="noreferrer"
-              className="group rounded-2xl border border-border bg-surface/40 p-6 transition hover:border-primary hover:glow-primary">
-              <Github className="mb-4 h-6 w-6 text-primary" />
-              <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">GitHub</div>
-              <div className="mt-1 text-sm font-semibold">github.com/Gagoope</div>
-            </a>
-          </div>
-
-          <p className="mt-12 flex items-center gap-2 text-sm text-muted-foreground">
-            <MapPin className="h-4 w-4 text-primary" /> Nata / Gaborone, Botswana · Open to remote & on-site.
-          </p>
+      <section id="contact" className="mx-auto max-w-5xl px-6 py-20">
+        <SectionHead
+          label="Contact"
+          title="Get in touch"
+          sub="Open to full-time roles, contracts and collaborative projects across Botswana and remote."
+        />
+        <div className="max-w-3xl divide-y divide-border border-y border-border">
+          {[
+            { icon: MessageCircle, label: "WhatsApp", value: `+267 ${WHATSAPP}`, href: WHATSAPP_URL, ext: true },
+            { icon: Phone, label: "Phone", value: `+267 ${WHATSAPP}`, href: `tel:+267${WHATSAPP}` },
+            { icon: Mail, label: "Email", value: EMAIL, href: `mailto:${EMAIL}` },
+            { icon: Github, label: "GitHub", value: "github.com/Gagoope", href: "https://github.com/Gagoope", ext: true },
+          ].map((c) => {
+            const Icon = c.icon;
+            return (
+              <a
+                key={c.label}
+                href={c.href}
+                {...(c.ext ? { target: "_blank", rel: "noreferrer" } : {})}
+                className="flex items-center gap-4 py-5 transition hover:text-primary"
+              >
+                <Icon className="h-4 w-4 text-primary" />
+                <span className="w-28 shrink-0 text-sm text-muted-foreground">{c.label}</span>
+                <span className="break-all text-sm font-medium">{c.value}</span>
+              </a>
+            );
+          })}
         </div>
+        <p className="mt-10 flex items-center gap-2 text-sm text-muted-foreground">
+          <MapPin className="h-4 w-4 text-primary" /> Nata / Gaborone, Botswana · Open to remote & on-site.
+        </p>
       </section>
 
       <footer className="border-t border-border">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-8 font-mono text-xs text-muted-foreground">
+        <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3 px-6 py-8 text-xs text-muted-foreground">
           <div>© {new Date().getFullYear()} Gagoope Clarance Merafhe · All rights reserved</div>
-          <div className="flex items-center gap-2"><Wrench className="h-3 w-3 text-primary" /> Designed & built in Botswana 🇧🇼</div>
+          <div>Designed &amp; built in Botswana</div>
         </div>
       </footer>
     </div>
