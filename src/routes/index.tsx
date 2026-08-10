@@ -326,7 +326,7 @@ function Portfolio() {
         {/* ————— Hero ————— */}
         <section id="top" className="ambient relative overflow-hidden pt-28 sm:pt-36">
           <div className="pointer-events-none absolute inset-0 -z-10 grid-bg opacity-40 [mask-image:radial-gradient(70%_55%_at_50%_0%,black,transparent)]" />
-          <div className={`${shell} pb-16 sm:pb-24`}>
+          <div className={`${shell} pb-10 sm:pb-14`}>
             <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
               <Reveal>
                 <Badge tone="success">
@@ -433,7 +433,7 @@ function Portfolio() {
                     </div>
                   </div>
 
-                  <div className="float-slow absolute -bottom-6 -left-3 hidden w-44 rounded-2xl glass p-4 shadow-lift sm:block">
+                  <div className="float-slow absolute -bottom-12 -left-6 hidden w-44 rounded-2xl glass p-4 shadow-lift sm:block">
                     <div className="font-mono text-[10px] uppercase tracking-widest text-primary">
                       Month-end
                     </div>
