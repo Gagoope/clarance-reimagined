@@ -11,7 +11,6 @@ function apply(mode: Mode) {
   const root = document.documentElement;
   root.classList.toggle("light", !dark);
   root.classList.toggle("dark", dark);
-  root.style.colorScheme = dark ? "dark" : "light";
 }
 
 const options: { mode: Mode; icon: typeof Sun; label: string }[] = [
