@@ -1,6 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CvPreviewButton } from "@/components/CvPreview";
 import { LoadingSplash } from "@/components/LoadingSplash";
+import { SiteNav } from "@/components/SiteNav";
+import { Reveal } from "@/components/Reveal";
+import {
+  Badge,
+  Card,
+  CheckList,
+  Eyebrow,
+  IconTile,
+  MetaList,
+  SectionHead,
+  Stat,
+  btnGhost,
+  btnPrimary,
+  btnSecondary,
+} from "@/components/ui-kit";
 const profileAsset = { url: "/assets/gcm-profile.jpeg" };
 import {
   ArrowRight,
@@ -22,6 +37,8 @@ import {
   Github,
   MessageCircle,
   MapPin,
+  CheckCircle2,
+  Quote,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -287,429 +304,537 @@ const education = [
   { id: "EDU-004", kind: "Secondary · 2017", title: "BGCSE", sub: "Botswana General Certificate — Nata" },
 ];
 
-/* ————————————————— UI helpers ————————————————— */
+const contactChannels = [
+  { icon: MessageCircle, label: "WhatsApp", value: `+267 ${WHATSAPP}`, href: WHATSAPP_URL, ext: true },
+  { icon: Phone, label: "Phone", value: `+267 ${WHATSAPP}`, href: `tel:+267${WHATSAPP}` },
+  { icon: Mail, label: "Email", value: EMAIL, href: `mailto:${EMAIL}` },
+  { icon: Github, label: "GitHub", value: "github.com/Gagoope", href: "https://github.com/Gagoope", ext: true },
+];
 
-const btnPrimary =
-  "inline-flex items-center gap-2 rounded-sm bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition hover:opacity-90";
-const btnOutline =
-  "inline-flex items-center gap-2 rounded-sm border border-border px-5 py-3 text-sm font-medium text-foreground transition hover:border-primary hover:text-primary";
-
-function Label({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="text-[11px] font-medium uppercase tracking-[0.2em] text-muted-foreground">
-      {children}
-    </div>
-  );
-}
-
-function SectionHead({ label, title, sub }: { label: string; title: string; sub?: string }) {
-  return (
-    <div className="mb-12 max-w-2xl border-b border-border pb-6">
-      <Label>{label}</Label>
-      <h2 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">{title}</h2>
-      {sub && <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">{sub}</p>}
-    </div>
-  );
-}
-
-function Meta({ items }: { items: [string, string][] }) {
-  return (
-    <dl className="space-y-1.5 text-sm">
-      {items.map(([k, v]) => (
-        <div key={k} className="flex gap-2">
-          <dt className="w-24 shrink-0 text-muted-foreground">{k}</dt>
-          <dd className="text-foreground">{v}</dd>
-        </div>
-      ))}
-    </dl>
-  );
-}
+const shell = "mx-auto w-full max-w-6xl px-4 sm:px-6";
+const section = "py-16 sm:py-24";
 
 /* ————————————————— Page ————————————————— */
 
 function Portfolio() {
   return (
-    <div className="min-h-screen bg-background font-sans text-foreground">
+    <div className="min-h-dvh overflow-x-hidden bg-background font-sans text-foreground">
       <LoadingSplash />
+      <SiteNav links={navLinks} whatsappUrl={WHATSAPP_URL} />
 
-      {/* Nav */}
-      <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-          <a href="#top" className="text-sm font-semibold tracking-tight">
-            Gagoope Merafhe
-          </a>
-          <nav className="hidden items-center gap-6 md:flex">
-            {navLinks.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                className="text-sm text-muted-foreground transition hover:text-foreground"
-              >
-                {l.label}
-              </a>
-            ))}
-          </nav>
-          <a
-            href={WHATSAPP_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="rounded-sm border border-primary px-4 py-2 text-sm font-medium text-primary transition hover:bg-primary hover:text-primary-foreground"
-          >
-            Hire Me
-          </a>
-        </div>
-      </header>
+      <main id="main" className="pb-28 sm:pb-0">
+        {/* ————— Hero ————— */}
+        <section id="top" className="ambient relative overflow-hidden pt-28 sm:pt-36">
+          <div className="pointer-events-none absolute inset-0 -z-10 grid-bg opacity-40 [mask-image:radial-gradient(70%_55%_at_50%_0%,black,transparent)]" />
+          <div className={`${shell} pb-16 sm:pb-24`}>
+            <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
+              <Reveal>
+                <Badge tone="success">
+                  <span className="pulse-dot h-1.5 w-1.5 rounded-full text-success" />
+                  Available for new work
+                </Badge>
+                <h1 className="mt-6 text-[2.1rem] font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.4rem]">
+                  SAP Business One systems and web apps that{" "}
+                  <span className="text-primary">run themselves.</span>
+                </h1>
+                <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+                  I&apos;m Gagoope Merafhe — an IT systems developer in Botswana. I build SAP B1
+                  add-ons, internal web applications and the databases behind them, replacing
+                  manual, error-prone processes with software that runs on its own.
+                </p>
 
-      {/* Hero */}
-      <section id="top" className="border-b border-border">
-        <div className="mx-auto grid max-w-5xl gap-10 px-6 py-20 sm:py-24 lg:grid-cols-[1.4fr_0.6fr] lg:items-start">
-          <div>
-            <Label>IT Systems Developer · Botswana</Label>
-            <h1 className="mt-5 max-w-2xl text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
-              Gagoope Merafhe — SAP Business One developer and web engineer.
-            </h1>
-            <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground">
-              I build SAP B1 add-ons, internal web applications and the databases behind them. Most of my work
-              replaces manual, error-prone processes with something that runs on its own.
-            </p>
-
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <a href="#contact" className={btnPrimary}>
-                Contact Me <ArrowRight className="h-4 w-4" />
-              </a>
-              <a href="#projects" className={btnOutline}>
-                Explore My Work
-              </a>
-              <CvPreviewButton label="Preview CV" className={btnOutline} />
-            </div>
-
-            <div className="mt-12 border-t border-border pt-6">
-              <Label>Core expertise</Label>
-              <p className="mt-2 text-sm text-foreground">{coreExpertise.join(" · ")}</p>
-            </div>
-          </div>
-
-          <div className="lg:pt-2">
-            <img
-              src={profileAsset.url}
-              alt="Gagoope Clarance Merafhe"
-              className="aspect-[4/5] w-full max-w-[240px] rounded-sm border border-border object-cover"
-            />
-            <p className="mt-3 max-w-[240px] text-xs leading-relaxed text-muted-foreground">
-              Based in Nata / Gaborone, Botswana. Available for full-time roles, contracts and remote work.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Services — single column list */}
-      <section id="services" className="mx-auto max-w-5xl px-6 py-20">
-        <SectionHead
-          label="Services"
-          title="What I do"
-          sub="Three kinds of work I take on, with the typical time each one needs."
-        />
-        <div className="divide-y divide-border border-y border-border">
-          {services.map((s) => {
-            const Icon = s.icon;
-            return (
-              <div key={s.title} className="grid gap-6 py-8 md:grid-cols-[1fr_1fr]">
-                <div>
-                  <div className="flex items-center gap-3">
-                    <Icon className="h-5 w-5 text-primary" />
-                    <h3 className="text-lg font-semibold">{s.title}</h3>
-                  </div>
-                  <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
-                </div>
-                <div className="md:pl-6">
-                  <ul className="space-y-1.5 text-sm text-foreground">
-                    {s.features.map((f) => (
-                      <li key={f}>— {f}</li>
-                    ))}
-                  </ul>
-                  <div className="mt-5">
-                    <Meta items={[["Timeline", s.timeline], ["Pricing", s.price]]} />
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* Build paths — plain list */}
-      <section className="border-y border-border bg-surface/30">
-        <div className="mx-auto max-w-5xl px-6 py-20">
-          <SectionHead
-            label="Engagements"
-            title="Ways we can work together"
-            sub="Different domains, one delivery style — clear scope, working software."
-          />
-          <div className="space-y-10">
-            {buildPaths.map((p) => (
-              <article key={p.title} className="grid gap-6 border-t border-border pt-8 md:grid-cols-[0.9fr_1.1fr]">
-                <div>
-                  <Label>{p.tag}</Label>
-                  <h3 className="mt-2 text-lg font-semibold">{p.title}</h3>
-                  <div className="mt-4">
-                    <Meta
-                      items={[
-                        ["Stack", p.stack.join(", ")],
-                        ["Timeline", p.timeline],
-                        ["Pricing", p.price],
-                      ]}
-                    />
-                  </div>
-                </div>
-                <div>
-                  <ul className="space-y-1.5 text-sm text-foreground">
-                    {p.features.map((f) => (
-                      <li key={f}>— {f}</li>
-                    ))}
-                  </ul>
-                  <a
-                    href="#contact"
-                    className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
-                  >
-                    Request a quote <ArrowRight className="h-4 w-4" />
+                <div className="mt-9 flex flex-wrap items-center gap-3">
+                  <a href="#contact" className={btnPrimary}>
+                    Start a project
+                    <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
                   </a>
+                  <a href="#projects" className={btnSecondary}>
+                    Explore my work
+                  </a>
+                  <CvPreviewButton label="Preview CV" className={btnGhost} />
                 </div>
-              </article>
+
+                <dl className="mt-12 grid max-w-lg grid-cols-2 gap-x-6 gap-y-6 border-t border-border pt-8 sm:grid-cols-4">
+                  {coreExpertise.map((c) => (
+                    <div key={c}>
+                      <dt className="text-sm font-medium text-foreground">{c}</dt>
+                      <dd className="mt-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                        Core
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </Reveal>
+
+              {/* Product preview */}
+              <Reveal delay={120} className="relative">
+                <div className="relative mx-auto max-w-md lg:max-w-none">
+                  <div className="card-surface overflow-hidden p-0">
+                    <div className="flex items-center gap-2 border-b border-border bg-surface-elevated/60 px-4 py-3">
+                      <span className="h-2.5 w-2.5 rounded-full bg-destructive/70" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-warning/70" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-success/70" />
+                      <span className="ml-3 truncate font-mono text-[10px] text-muted-foreground">
+                        sap-b1 · journal-batch · live
+                      </span>
+                    </div>
+
+                    <div className="grid gap-4 p-5 sm:p-6">
+                      <div className="flex items-center gap-4">
+                        <img
+                          src={profileAsset.url}
+                          alt="Gagoope Clarance Merafhe"
+                          loading="lazy"
+                          decoding="async"
+                          className="h-16 w-16 shrink-0 rounded-2xl border border-border object-cover"
+                        />
+                        <div className="min-w-0">
+                          <div className="truncate text-sm font-semibold">
+                            Gagoope Clarance Merafhe
+                          </div>
+                          <div className="truncate text-xs text-muted-foreground">
+                            IT Systems Developer · RPC Data
+                          </div>
+                          <div className="mt-1.5 flex items-center gap-1.5 text-[11px] text-muted-foreground">
+                            <MapPin className="h-3 w-3 text-primary" aria-hidden />
+                            Nata / Gaborone, Botswana
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-3 gap-3">
+                        {flagshipStats.map((s) => (
+                          <div
+                            key={s.label}
+                            className="rounded-xl border border-border bg-background/40 p-3"
+                          >
+                            <div className="text-lg font-semibold tracking-tight sm:text-xl">
+                              {s.n}
+                            </div>
+                            <div className="mt-1 text-[10px] leading-snug text-muted-foreground">
+                              {s.label}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="grid gap-2 rounded-xl border border-border bg-background/40 p-4">
+                        {[
+                          "CSV validated · 500 rows",
+                          "Mapped to SAP journal structure",
+                          "Batch posted · 0 errors",
+                        ].map((row) => (
+                          <div key={row} className="flex items-center gap-2 text-xs">
+                            <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-success" aria-hidden />
+                            <span className="truncate text-muted-foreground">{row}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="float-slow absolute -bottom-6 -left-3 hidden w-44 rounded-2xl glass p-4 shadow-lift sm:block">
+                    <div className="font-mono text-[10px] uppercase tracking-widest text-primary">
+                      Month-end
+                    </div>
+                    <div className="mt-1 text-sm font-semibold">Hours → minutes</div>
+                    <div className="mt-1 text-[11px] text-muted-foreground">
+                      Manual entry removed
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </section>
+
+        {/* ————— Services ————— */}
+        <section id="services" className={`${shell} ${section}`}>
+          <Reveal>
+            <SectionHead
+              label="Services"
+              title="What I do"
+              sub="Three kinds of work I take on, with the typical time each one needs."
+            />
+          </Reveal>
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {services.map((s, i) => (
+              <Reveal key={s.title} delay={i * 90}>
+                <Card className="group flex h-full flex-col">
+                  <IconTile icon={s.icon} />
+                  <h3 className="mt-5 text-lg font-semibold tracking-tight">{s.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
+                  <div className="mt-5">
+                    <CheckList items={s.features} />
+                  </div>
+                  <div className="mt-6 flex flex-wrap items-center gap-2 border-t border-border pt-5">
+                    <Badge tone="primary">{s.timeline}</Badge>
+                    <Badge>{s.price}</Badge>
+                  </div>
+                </Card>
+              </Reveal>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Process — numbered list, single column */}
-      <section id="process" className="mx-auto max-w-5xl px-6 py-20">
-        <SectionHead label="Process" title="How a project runs" />
-        <ol className="max-w-2xl divide-y divide-border border-y border-border">
-          {process.map((p) => {
-            const Icon = p.icon;
-            return (
-              <li key={p.n} className="flex gap-5 py-6">
-                <span className="w-8 shrink-0 text-sm text-muted-foreground">{p.n}</span>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <Icon className="h-4 w-4 text-primary" />
-                    <h3 className="text-base font-semibold">{p.title}</h3>
-                  </div>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
-                </div>
-              </li>
-            );
-          })}
-        </ol>
-      </section>
+        {/* ————— Engagements ————— */}
+        <section className="border-y border-border bg-surface/30">
+          <div className={`${shell} ${section}`}>
+            <Reveal>
+              <SectionHead
+                label="Engagements"
+                title="Ways we can work together"
+                sub="Different domains, one delivery style — clear scope, working software."
+              />
+            </Reveal>
+            <div className="grid gap-5 lg:grid-cols-3">
+              {buildPaths.map((p, i) => (
+                <Reveal key={p.title} delay={i * 90}>
+                  <Card className="group flex h-full flex-col">
+                    <Eyebrow>{p.tag}</Eyebrow>
+                    <h3 className="mt-4 text-xl font-semibold tracking-tight">{p.title}</h3>
+                    <div className="mt-4 flex flex-wrap gap-1.5">
+                      {p.stack.map((t) => (
+                        <Badge key={t}>{t}</Badge>
+                      ))}
+                    </div>
+                    <div className="mt-6 flex-1">
+                      <CheckList items={p.features} />
+                    </div>
+                    <div className="mt-6 border-t border-border pt-5">
+                      <MetaList
+                        items={[
+                          ["Timeline", p.timeline],
+                          ["Pricing", p.price],
+                        ]}
+                      />
+                      <a
+                        href="#contact"
+                        className="group/link mt-5 inline-flex items-center gap-2 text-sm font-medium text-primary"
+                      >
+                        Request a quote
+                        <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-1" />
+                      </a>
+                    </div>
+                  </Card>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
 
-      {/* Projects — editorial table-like list */}
-      <section id="projects" className="border-y border-border">
-        <div className="mx-auto max-w-5xl px-6 py-20">
-          <SectionHead
-            label="Recent work"
-            title="Projects I've shipped"
-            sub="Systems built for finance, operations and HR teams in Botswana."
-          />
-          <div className="divide-y divide-border border-y border-border">
-            {projects.map((p) => {
+        {/* ————— Process ————— */}
+        <section id="process" className={`${shell} ${section}`}>
+          <Reveal>
+            <SectionHead label="Process" title="How a project runs" />
+          </Reveal>
+          <ol className="grid gap-5 md:grid-cols-3">
+            {process.map((p, i) => {
               const Icon = p.icon;
               return (
-                <article key={p.id} className="grid gap-4 py-8 md:grid-cols-[0.85fr_1.15fr]">
-                  <div>
-                    <div className="flex items-center gap-3">
-                      <Icon className="h-4 w-4 text-primary" />
-                      <Label>{p.kind}</Label>
+                <Reveal as="li" key={p.n} delay={i * 90} className="list-none">
+                  <Card className="group h-full">
+                    <div className="flex items-center justify-between">
+                      <IconTile icon={Icon} />
+                      <span className="font-mono text-2xl font-semibold text-border-strong">
+                        {p.n}
+                      </span>
                     </div>
-                    <h3 className="mt-2 text-lg font-semibold leading-snug">{p.title}</h3>
+                    <h3 className="mt-5 text-lg font-semibold tracking-tight">{p.title}</h3>
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
+                  </Card>
+                </Reveal>
+              );
+            })}
+          </ol>
+        </section>
+
+        {/* ————— Projects ————— */}
+        <section id="projects" className="border-y border-border">
+          <div className={`${shell} ${section}`}>
+            <Reveal>
+              <SectionHead
+                label="Recent work"
+                title="Projects I've shipped"
+                sub="Systems built for finance, operations and HR teams in Botswana."
+              />
+            </Reveal>
+            <div className="grid gap-5 md:grid-cols-2">
+              {projects.map((p, i) => {
+                const Icon = p.icon;
+                return (
+                  <Reveal as="article" key={p.id} delay={(i % 2) * 90}>
+                    <Card className="group flex h-full flex-col">
+                      <div className="flex items-start justify-between gap-4">
+                        <IconTile icon={Icon} />
+                        <Badge tone="primary">{p.kind}</Badge>
+                      </div>
+                      <h3 className="mt-5 text-lg font-semibold leading-snug tracking-tight">
+                        {p.title}
+                      </h3>
+                      <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+                        {p.desc}
+                      </p>
+                      <div className="mt-6 border-t border-border pt-5">
+                        <MetaList
+                          items={[
+                            ["Client", p.client],
+                            ["Period", p.period],
+                          ]}
+                        />
+                        <div className="mt-4 flex flex-wrap gap-1.5">
+                          {p.stack.map((t) => (
+                            <Badge key={t}>{t}</Badge>
+                          ))}
+                        </div>
+                      </div>
+                    </Card>
+                  </Reveal>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* ————— Case study ————— */}
+        <section className={`${shell} ${section}`}>
+          <Reveal>
+            <Card interactive={false} className="p-6 sm:p-10">
+              <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+                <div>
+                  <Eyebrow>Case study</Eyebrow>
+                  <h2 className="mt-4 text-2xl font-semibold tracking-tight sm:text-3xl">
+                    SAP B1 CSV journal automation
+                  </h2>
+                  <p className="mt-5 text-[0.95rem] leading-relaxed text-muted-foreground sm:text-base">
+                    A SAP Business One add-on engineered to automate posting of up to 500 journal
+                    entries at once. Built with PHP and the SAP DI API, with CSV validation, field
+                    mapping to SAP journal structures and reliable batch execution — cutting a
+                    routine month-end task from hours to minutes.
+                  </p>
+                  <ul className="mt-8 grid gap-4 text-sm leading-relaxed text-muted-foreground">
+                    <li>
+                      <span className="font-semibold text-foreground">Batch execution:</span>{" "}
+                      validates and posts hundreds of journals in a single run against a live SAP B1
+                      environment.
+                    </li>
+                    <li>
+                      <span className="font-semibold text-foreground">Reliable mapping:</span> CSV
+                      fields mapped to SAP journal structures with strict validation to protect
+                      ledger integrity.
+                    </li>
+                    <li>
+                      <span className="font-semibold text-foreground">Operational win:</span>{" "}
+                      reduced manual data entry and cut down human error during month-end
+                      processing.
+                    </li>
+                  </ul>
+                  <div className="mt-9 flex flex-wrap gap-3">
+                    <a
+                      href={WHATSAPP_URL}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={btnPrimary}
+                    >
+                      <MessageCircle className="h-4 w-4" aria-hidden /> Discuss a similar build
+                    </a>
+                    <CvPreviewButton label="View full CV" className={btnSecondary} />
                   </div>
-                  <div>
-                    <p className="text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
+                </div>
+
+                <div className="grid content-start gap-4 rounded-2xl border border-border bg-background/40 p-6">
+                  {flagshipStats.map((s, i) => (
+                    <div
+                      key={s.label}
+                      className={i > 0 ? "border-t border-border pt-4" : undefined}
+                    >
+                      <Stat value={s.n} label={s.label} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Card>
+          </Reveal>
+        </section>
+
+        {/* ————— Strengths ————— */}
+        <section className="border-y border-border bg-surface/30">
+          <div className={`${shell} ${section}`}>
+            <Reveal>
+              <SectionHead
+                label="Strengths"
+                title="How I work"
+                sub="Beyond code — the habits that make delivery reliable."
+              />
+            </Reveal>
+            <div className="grid gap-5 md:grid-cols-3">
+              {strengths.map((s, i) => (
+                <Reveal key={s.title} delay={i * 90}>
+                  <Card className="group h-full">
+                    <IconTile icon={s.icon} />
+                    <h3 className="mt-5 text-base font-semibold tracking-tight">{s.title}</h3>
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
+                  </Card>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ————— Free consult ————— */}
+        <section className={`${shell} ${section}`}>
+          <Reveal>
+            <div className="ambient card-surface relative overflow-hidden p-6 sm:p-10">
+              <div className="grid gap-10 lg:grid-cols-2">
+                <div>
+                  <Eyebrow>Free consult</Eyebrow>
+                  <h2 className="mt-4 text-2xl font-semibold tracking-tight sm:text-3xl">
+                    Free SAP or web system review
+                  </h2>
+                  <p className="mt-5 text-[0.95rem] leading-relaxed text-muted-foreground">
+                    Thinking of extending SAP B1 or an internal web app? I&apos;ll review your setup
+                    for bottlenecks, data integrity risks and quick wins — free, no sales pitch.
+                  </p>
+                  <a
+                    href={WHATSAPP_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={`${btnPrimary} mt-8`}
+                  >
+                    Book a slot
+                    <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+                  </a>
+                </div>
+                <div className="grid gap-6 sm:grid-cols-2">
+                  <div className="rounded-2xl border border-border bg-background/40 p-5">
+                    <div className="font-mono text-[10px] uppercase tracking-widest text-primary">
+                      What I look at
+                    </div>
                     <div className="mt-4">
-                      <Meta
+                      <CheckList
                         items={[
-                          ["Client", p.client],
-                          ["Period", p.period],
-                          ["Stack", p.stack.join(", ")],
+                          "SAP add-on & integration review",
+                          "SQL / schema health check",
+                          "Approval & workflow gaps",
+                          "Actionable summary",
                         ]}
                       />
                     </div>
                   </div>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Flagship case study — single column, plain stats */}
-      <section className="mx-auto max-w-5xl px-6 py-20">
-        <SectionHead label="Case study" title="SAP B1 CSV journal automation" />
-        <div className="max-w-3xl">
-          <p className="text-base leading-relaxed text-muted-foreground">
-            A SAP Business One add-on engineered to automate posting of up to 500 journal entries at once. Built with
-            PHP and the SAP DI API, with CSV validation, field mapping to SAP journal structures and reliable batch
-            execution — cutting a routine month-end task from hours to minutes.
-          </p>
-          <div className="mt-10 grid gap-8 border-y border-border py-8 sm:grid-cols-3">
-            {flagshipStats.map((s) => (
-              <div key={s.label}>
-                <div className="text-3xl font-semibold text-primary">{s.n}</div>
-                <div className="mt-1 text-sm text-muted-foreground">{s.label}</div>
-              </div>
-            ))}
-          </div>
-          <ul className="mt-8 space-y-4 text-sm leading-relaxed text-muted-foreground">
-            <li>
-              <span className="font-semibold text-foreground">Batch execution:</span> validates and posts hundreds of
-              journals in a single run against a live SAP B1 environment.
-            </li>
-            <li>
-              <span className="font-semibold text-foreground">Reliable mapping:</span> CSV fields mapped to SAP journal
-              structures with strict validation to protect ledger integrity.
-            </li>
-            <li>
-              <span className="font-semibold text-foreground">Operational win:</span> reduced manual data entry and cut
-              down human error during month-end processing.
-            </li>
-          </ul>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className={btnPrimary}>
-              <MessageCircle className="h-4 w-4" /> Discuss a similar build
-            </a>
-            <CvPreviewButton label="View Full CV" className={btnOutline} />
-          </div>
-        </div>
-      </section>
-
-      {/* Strengths — plain list */}
-      <section className="border-y border-border bg-surface/30">
-        <div className="mx-auto max-w-5xl px-6 py-20">
-          <SectionHead
-            label="Strengths"
-            title="How I work"
-            sub="Beyond code — the habits that make delivery reliable."
-          />
-          <dl className="max-w-2xl divide-y divide-border border-y border-border">
-            {strengths.map((s) => {
-              const Icon = s.icon;
-              return (
-                <div key={s.title} className="py-6">
-                  <dt className="flex items-center gap-2 text-base font-semibold">
-                    <Icon className="h-4 w-4 text-primary" />
-                    {s.title}
-                  </dt>
-                  <dd className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.body}</dd>
+                  <div className="rounded-2xl border border-border bg-background/40 p-5">
+                    <div className="font-mono text-[10px] uppercase tracking-widest text-primary">
+                      What you get
+                    </div>
+                    <div className="mt-4">
+                      <CheckList
+                        items={[
+                          "One hour, one-on-one technical consult",
+                          "No credit card required",
+                          "Summary report afterwards",
+                        ]}
+                      />
+                    </div>
+                  </div>
                 </div>
-              );
-            })}
-          </dl>
-        </div>
-      </section>
+              </div>
+            </div>
+          </Reveal>
+        </section>
 
-      {/* Consult */}
-      <section className="mx-auto max-w-5xl px-6 py-20">
-        <SectionHead
-          label="Free consult"
-          title="Free SAP or web system review"
-          sub="Thinking of extending SAP B1 or an internal web app? I'll review your setup for bottlenecks, data integrity risks and quick wins — free, no sales pitch."
-        />
-        <div className="grid gap-10 border-y border-border py-8 md:grid-cols-2">
-          <div>
-            <Label>What I look at</Label>
-            <ul className="mt-3 space-y-1.5 text-sm text-foreground">
-              {[
-                "SAP add-on & integration review",
-                "SQL / schema health check",
-                "Approval & workflow gaps",
-                "Actionable summary",
-              ].map((f) => (
-                <li key={f}>— {f}</li>
+        {/* ————— Testimonials ————— */}
+        <section className="border-y border-border">
+          <div className={`${shell} ${section}`}>
+            <Reveal>
+              <SectionHead label="Clients" title="What clients say" />
+            </Reveal>
+            <div className="grid gap-5 md:grid-cols-2">
+              {testimonials.map((t, i) => (
+                <Reveal key={t.role} delay={i * 90}>
+                  <Card className="group flex h-full flex-col">
+                    <Quote className="h-6 w-6 text-primary/40" aria-hidden />
+                    <blockquote className="mt-4 flex-1 text-base leading-relaxed text-foreground">
+                      “{t.quote}”
+                    </blockquote>
+                    <footer className="mt-6 border-t border-border pt-5 text-sm">
+                      <div className="font-medium text-foreground">{t.role}</div>
+                      <div className="mt-1 text-muted-foreground">{t.where}</div>
+                      <div className="mt-2 font-mono text-[10px] uppercase tracking-widest text-primary">
+                        {t.project}
+                      </div>
+                    </footer>
+                  </Card>
+                </Reveal>
               ))}
-            </ul>
+            </div>
           </div>
-          <div>
-            <Label>What you get</Label>
-            <ul className="mt-3 space-y-1.5 text-sm text-foreground">
-              <li>— One hour, one-on-one technical consult</li>
-              <li>— No credit card required</li>
-              <li>— Summary report afterwards</li>
-            </ul>
-            <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className={`${btnPrimary} mt-6`}>
-              Book a slot <ArrowRight className="h-4 w-4" />
-            </a>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Testimonials — plain quotes */}
-      <section className="mx-auto max-w-5xl px-6 py-20">
-        <SectionHead label="Clients" title="What clients say" />
-        <div className="max-w-3xl space-y-12">
-          {testimonials.map((t) => (
-            <blockquote key={t.role}>
-              <p className="text-lg leading-relaxed text-foreground">“{t.quote}”</p>
-              <footer className="mt-4 text-sm text-muted-foreground">
-                {t.role}, {t.where} — {t.project}
-              </footer>
-            </blockquote>
-          ))}
-        </div>
-      </section>
-
-      {/* Education */}
-      <section id="about" className="border-y border-border">
-        <div className="mx-auto max-w-5xl px-6 py-20">
-          <SectionHead label="Background" title="Education & training" />
-          <div className="max-w-3xl divide-y divide-border border-y border-border">
-            {education.map((e) => (
-              <div key={e.id} className="grid gap-2 py-6 sm:grid-cols-[180px_1fr]">
-                <div className="text-sm text-muted-foreground">{e.kind}</div>
-                <div>
-                  <h3 className="text-base font-semibold">{e.title}</h3>
-                  <p className="mt-1 text-sm text-muted-foreground">{e.sub}</p>
-                </div>
-              </div>
+        {/* ————— Education ————— */}
+        <section id="about" className={`${shell} ${section}`}>
+          <Reveal>
+            <SectionHead label="Background" title="Education & training" />
+          </Reveal>
+          <div className="grid gap-4 md:grid-cols-2">
+            {education.map((e, i) => (
+              <Reveal key={e.id} delay={(i % 2) * 90}>
+                <Card className="group h-full">
+                  <Badge>{e.kind}</Badge>
+                  <h3 className="mt-4 text-base font-semibold tracking-tight">{e.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{e.sub}</p>
+                </Card>
+              </Reveal>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Contact */}
-      <section id="contact" className="mx-auto max-w-5xl px-6 py-20">
-        <SectionHead
-          label="Contact"
-          title="Get in touch"
-          sub="Open to full-time roles, contracts and collaborative projects across Botswana and remote."
-        />
-        <div className="max-w-3xl divide-y divide-border border-y border-border">
-          {[
-            { icon: MessageCircle, label: "WhatsApp", value: `+267 ${WHATSAPP}`, href: WHATSAPP_URL, ext: true },
-            { icon: Phone, label: "Phone", value: `+267 ${WHATSAPP}`, href: `tel:+267${WHATSAPP}` },
-            { icon: Mail, label: "Email", value: EMAIL, href: `mailto:${EMAIL}` },
-            { icon: Github, label: "GitHub", value: "github.com/Gagoope", href: "https://github.com/Gagoope", ext: true },
-          ].map((c) => {
-            const Icon = c.icon;
-            return (
-              <a
-                key={c.label}
-                href={c.href}
-                {...(c.ext ? { target: "_blank", rel: "noreferrer" } : {})}
-                className="flex items-center gap-4 py-5 transition hover:text-primary"
-              >
-                <Icon className="h-4 w-4 text-primary" />
-                <span className="w-28 shrink-0 text-sm text-muted-foreground">{c.label}</span>
-                <span className="break-all text-sm font-medium">{c.value}</span>
-              </a>
-            );
-          })}
-        </div>
-        <p className="mt-10 flex items-center gap-2 text-sm text-muted-foreground">
-          <MapPin className="h-4 w-4 text-primary" /> Nata / Gaborone, Botswana · Open to remote & on-site.
-        </p>
-      </section>
+        {/* ————— Contact ————— */}
+        <section id="contact" className="border-t border-border bg-surface/30">
+          <div className={`${shell} ${section}`}>
+            <Reveal>
+              <SectionHead
+                label="Contact"
+                title="Get in touch"
+                sub="Open to full-time roles, contracts and collaborative projects across Botswana and remote."
+              />
+            </Reveal>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {contactChannels.map((c, i) => {
+                const Icon = c.icon;
+                return (
+                  <Reveal key={c.label} delay={(i % 2) * 90}>
+                    <a
+                      href={c.href}
+                      {...(c.ext ? { target: "_blank", rel: "noreferrer" } : {})}
+                      className="card-surface hairline-top group flex min-h-11 items-center gap-4 p-5"
+                    >
+                      <IconTile icon={Icon} />
+                      <span className="min-w-0 flex-1">
+                        <span className="block font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                          {c.label}
+                        </span>
+                        <span className="mt-1 block break-all text-sm font-medium">{c.value}</span>
+                      </span>
+                      <ArrowRight
+                        className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-300 group-hover:translate-x-1 group-hover:text-primary"
+                        aria-hidden
+                      />
+                    </a>
+                  </Reveal>
+                );
+              })}
+            </div>
+            <p className="mt-10 flex items-center gap-2 text-sm text-muted-foreground">
+              <MapPin className="h-4 w-4 shrink-0 text-primary" aria-hidden /> Nata / Gaborone,
+              Botswana · Open to remote &amp; on-site.
+            </p>
+          </div>
+        </section>
+      </main>
 
-      <footer className="border-t border-border">
-        <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3 px-6 py-8 text-xs text-muted-foreground">
+      <footer className="border-t border-border pb-28 sm:pb-0">
+        <div
+          className={`${shell} flex flex-wrap items-center justify-between gap-3 py-8 text-xs text-muted-foreground`}
+        >
           <div>© {new Date().getFullYear()} Gagoope Clarance Merafhe · All rights reserved</div>
           <div>Designed &amp; built in Botswana</div>
         </div>
