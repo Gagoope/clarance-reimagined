@@ -284,7 +284,7 @@ const projects = [
 ];
 
 const flagshipStats = [
-  { n: "500", label: "Journals posted per batch" },
+  { n: "3", label: "Projects Completed" },
   { n: "0", label: "Posting errors in production" },
   { n: "1+ yr", label: "SAP B1 delivery experience" },
 ];
@@ -299,8 +299,8 @@ const testimonials = [
   {
     quote:
       "Delivered our SAP journal automation on time and made a real dent in month-end processing. Communication was crisp throughout.",
-    role: "Finance Team Lead",
-    where: "BOMRA · Botswana",
+    role: "Supervisor",
+    where: "RPC Data · Botswana",
     project: "SAP B1 CSV Journal Entry Add-On",
   },
   {
