@@ -39,6 +39,9 @@ import {
   MapPin,
   CheckCircle2,
   Quote,
+  ShoppingCart,
+  HeartHandshake,
+  ExternalLink,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -207,10 +210,22 @@ const process = [
 
 const projects = [
   {
+    id: "PRJ-000",
+    kind: "Personal Product",
+    title: "Point of Sale Platform",
+    client: "Personal Project",
+    period: "Jul 2026 – Aug 2026",
+    desc: "Architected and deployed a full point of sale platform — optimised checkout workflows with real-time inventory and transaction synchronisation. Live demo available (visitor account is read-only).",
+    stack: ["PHP", "MySQL", "Real-time inventory"],
+    icon: ShoppingCart,
+    link: "https://motswedi.liveblog365.com/login.php",
+    demo: "Demo login — username: visitor · password: Visitor@123",
+  },
+  {
     id: "PRJ-001",
     kind: "SAP Add-On",
     title: "SAP B1 CSV Multiple Journal Entry Add-On",
-    client: "BOMRA",
+    client: "RPC Data Limited",
     period: "Apr 2026 – Jul 2026",
     desc: "Automated posting of up to 500 SAP journal entries at once via PHP + SAP DI API, with CSV validation and field mapping.",
     stack: ["SAP DI API", "PHP", "SQL Server"],
@@ -298,11 +313,29 @@ const testimonials = [
 ];
 
 const education = [
-  { id: "EDU-001", kind: "Tertiary · 2024", title: "BEng (Hons) Computer Engineering", sub: "Minor in Computer Science · GPA 2.83" },
-  { id: "EDU-002", kind: "Coursework · 2023", title: "Automated Attendance Tracking", sub: "Botho University — Java & Arduino UNO" },
-  { id: "EDU-003", kind: "IT Attachment · 2022", title: "IT Support & Teaching Practice", sub: "Kutlwano JSS — OS install & server ops" },
-  { id: "EDU-004", kind: "Secondary · 2017", title: "BGCSE", sub: "Botswana General Certificate — Nata" },
+  { id: "EDU-001", kind: "Tertiary · 2024", title: "BEng (Hons) Computer Engineering", sub: "Minor in Computer Science · GPA 2.83 — Gaborone" },
+  { id: "EDU-002", kind: "Coursework · 2023", title: "Automated Attendance Tracking", sub: "Botho University — Java & Arduino UNO, keypad interfacing" },
+  { id: "EDU-003", kind: "IT Attachment · 2022", title: "IT Support & Teaching Practice", sub: "Kutlwano JSS — OS install, server management, computer basics" },
+  { id: "EDU-004", kind: "Secondary · 2017", title: "BGCSE", sub: "Botswana General Certificate of Secondary Education — Nata" },
+  { id: "EDU-005", kind: "Junior · 2015", title: "Junior Certificate", sub: "Gweta" },
+  { id: "EDU-006", kind: "Primary · 2012", title: "PSLE", sub: "Nata" },
 ];
+
+const skillGroups = [
+  { title: "Data Science & Analytics", items: "SQL · Statistical analysis · Python · R" },
+  { title: "Software Development", items: "Python · Java · C++ · JavaScript · Ruby · Swift · Kotlin · Data structures" },
+  { title: "Database Management", items: "Oracle · MySQL · SQL Server · PostgreSQL · Database design · Backup & recovery" },
+  { title: "IT Support", items: "Hardware & software troubleshooting · Windows · macOS · Linux" },
+];
+
+const volunteer = {
+  title: "Volunteer Coordinator — Village Clean-Up",
+  org: "Kgotla Community Initiative, Gabane Village, Botswana",
+  period: "May 2025 – Present",
+  body:
+    "Supported regular kgotla sessions mobilising community members for village-wide clean-ups — coordinating attendance, planning activities and communicating across communal areas.",
+};
+
 
 const contactChannels = [
   { icon: MessageCircle, label: "WhatsApp", value: `+267 ${WHATSAPP}`, href: WHATSAPP_URL, ext: true },
@@ -572,9 +605,25 @@ function Portfolio() {
                       <h3 className="mt-5 text-lg font-semibold leading-snug tracking-tight">
                         {p.title}
                       </h3>
-                      <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+                      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                         {p.desc}
                       </p>
+                      <div className="flex-1">
+                        {"link" in p && p.link ? (
+                          <div className="mt-4 space-y-2">
+                            <a
+                              href={p.link}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
+                            >
+                              View live demo <ExternalLink className="h-3.5 w-3.5" />
+                            </a>
+                            <p className="text-xs text-muted-foreground">{(p as { demo?: string }).demo}</p>
+                          </div>
+                        ) : null}
+                      </div>
+
                       <div className="mt-6 border-t border-border pt-5">
                         <MetaList
                           items={[
@@ -785,6 +834,41 @@ function Portfolio() {
               </Reveal>
             ))}
           </div>
+
+          <div className="mt-14">
+            <Reveal>
+              <SectionHead label="Toolkit" title="Skills & languages" />
+            </Reveal>
+            <div className="grid gap-4 md:grid-cols-2">
+              {skillGroups.map((g, i) => (
+                <Reveal key={g.title} delay={(i % 2) * 90}>
+                  <Card className="h-full">
+                    <h3 className="text-base font-semibold tracking-tight">{g.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{g.items}</p>
+                  </Card>
+                </Reveal>
+              ))}
+            </div>
+            <p className="mt-4 text-sm text-muted-foreground">Languages: English</p>
+          </div>
+
+          <div className="mt-14">
+            <Reveal>
+              <SectionHead label="Community" title="Volunteer work" />
+            </Reveal>
+            <Reveal>
+              <Card>
+                <div className="flex items-start justify-between gap-4">
+                  <IconTile icon={HeartHandshake} />
+                  <Badge tone="primary">{volunteer.period}</Badge>
+                </div>
+                <h3 className="mt-5 text-lg font-semibold leading-snug tracking-tight">{volunteer.title}</h3>
+                <p className="mt-1 text-sm text-muted-foreground">{volunteer.org}</p>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{volunteer.body}</p>
+              </Card>
+            </Reveal>
+          </div>
+
         </section>
 
         {/* ————— Contact ————— */}
