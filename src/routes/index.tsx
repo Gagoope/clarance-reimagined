@@ -39,6 +39,9 @@ import {
   MapPin,
   CheckCircle2,
   Quote,
+  ShoppingCart,
+  HeartHandshake,
+  ExternalLink,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -207,10 +210,22 @@ const process = [
 
 const projects = [
   {
+    id: "PRJ-000",
+    kind: "Personal Product",
+    title: "Point of Sale Platform",
+    client: "Personal Project",
+    period: "Jul 2026 – Aug 2026",
+    desc: "Architected and deployed a full point of sale platform — optimised checkout workflows with real-time inventory and transaction synchronisation. Live demo available (visitor account is read-only).",
+    stack: ["PHP", "MySQL", "Real-time inventory"],
+    icon: ShoppingCart,
+    link: "https://motswedi.liveblog365.com/login.php",
+    demo: "Demo login — username: visitor · password: Visitor@123",
+  },
+  {
     id: "PRJ-001",
     kind: "SAP Add-On",
     title: "SAP B1 CSV Multiple Journal Entry Add-On",
-    client: "BOMRA",
+    client: "RPC Data Limited",
     period: "Apr 2026 – Jul 2026",
     desc: "Automated posting of up to 500 SAP journal entries at once via PHP + SAP DI API, with CSV validation and field mapping.",
     stack: ["SAP DI API", "PHP", "SQL Server"],
@@ -298,11 +313,29 @@ const testimonials = [
 ];
 
 const education = [
-  { id: "EDU-001", kind: "Tertiary · 2024", title: "BEng (Hons) Computer Engineering", sub: "Minor in Computer Science · GPA 2.83" },
-  { id: "EDU-002", kind: "Coursework · 2023", title: "Automated Attendance Tracking", sub: "Botho University — Java & Arduino UNO" },
-  { id: "EDU-003", kind: "IT Attachment · 2022", title: "IT Support & Teaching Practice", sub: "Kutlwano JSS — OS install & server ops" },
-  { id: "EDU-004", kind: "Secondary · 2017", title: "BGCSE", sub: "Botswana General Certificate — Nata" },
+  { id: "EDU-001", kind: "Tertiary · 2024", title: "BEng (Hons) Computer Engineering", sub: "Minor in Computer Science · GPA 2.83 — Gaborone" },
+  { id: "EDU-002", kind: "Coursework · 2023", title: "Automated Attendance Tracking", sub: "Botho University — Java & Arduino UNO, keypad interfacing" },
+  { id: "EDU-003", kind: "IT Attachment · 2022", title: "IT Support & Teaching Practice", sub: "Kutlwano JSS — OS install, server management, computer basics" },
+  { id: "EDU-004", kind: "Secondary · 2017", title: "BGCSE", sub: "Botswana General Certificate of Secondary Education — Nata" },
+  { id: "EDU-005", kind: "Junior · 2015", title: "Junior Certificate", sub: "Gweta" },
+  { id: "EDU-006", kind: "Primary · 2012", title: "PSLE", sub: "Nata" },
 ];
+
+const skillGroups = [
+  { title: "Data Science & Analytics", items: "SQL · Statistical analysis · Python · R" },
+  { title: "Software Development", items: "Python · Java · C++ · JavaScript · Ruby · Swift · Kotlin · Data structures" },
+  { title: "Database Management", items: "Oracle · MySQL · SQL Server · PostgreSQL · Database design · Backup & recovery" },
+  { title: "IT Support", items: "Hardware & software troubleshooting · Windows · macOS · Linux" },
+];
+
+const volunteer = {
+  title: "Volunteer Coordinator — Village Clean-Up",
+  org: "Kgotla Community Initiative, Gabane Village, Botswana",
+  period: "May 2025 – Present",
+  body:
+    "Supported regular kgotla sessions mobilising community members for village-wide clean-ups — coordinating attendance, planning activities and communicating across communal areas.",
+};
+
 
 const contactChannels = [
   { icon: MessageCircle, label: "WhatsApp", value: `+267 ${WHATSAPP}`, href: WHATSAPP_URL, ext: true },
