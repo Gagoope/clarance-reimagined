@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { X, Download, FileText, Loader2 } from "lucide-react";
 const cvAsset = { url: "/assets/Gagoope_Clarance_Merafhe_CV.pdf" };
 
