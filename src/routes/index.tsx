@@ -605,9 +605,25 @@ function Portfolio() {
                       <h3 className="mt-5 text-lg font-semibold leading-snug tracking-tight">
                         {p.title}
                       </h3>
-                      <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+                      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                         {p.desc}
                       </p>
+                      <div className="flex-1">
+                        {"link" in p && p.link ? (
+                          <div className="mt-4 space-y-2">
+                            <a
+                              href={p.link}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
+                            >
+                              View live demo <ExternalLink className="h-3.5 w-3.5" />
+                            </a>
+                            <p className="text-xs text-muted-foreground">{(p as { demo?: string }).demo}</p>
+                          </div>
+                        ) : null}
+                      </div>
+
                       <div className="mt-6 border-t border-border pt-5">
                         <MetaList
                           items={[
@@ -818,6 +834,41 @@ function Portfolio() {
               </Reveal>
             ))}
           </div>
+
+          <div className="mt-14">
+            <Reveal>
+              <SectionHead label="Toolkit" title="Skills & languages" />
+            </Reveal>
+            <div className="grid gap-4 md:grid-cols-2">
+              {skillGroups.map((g, i) => (
+                <Reveal key={g.title} delay={(i % 2) * 90}>
+                  <Card className="h-full">
+                    <h3 className="text-base font-semibold tracking-tight">{g.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{g.items}</p>
+                  </Card>
+                </Reveal>
+              ))}
+            </div>
+            <p className="mt-4 text-sm text-muted-foreground">Languages: English</p>
+          </div>
+
+          <div className="mt-14">
+            <Reveal>
+              <SectionHead label="Community" title="Volunteer work" />
+            </Reveal>
+            <Reveal>
+              <Card>
+                <div className="flex items-start justify-between gap-4">
+                  <IconTile icon={HeartHandshake} />
+                  <Badge tone="primary">{volunteer.period}</Badge>
+                </div>
+                <h3 className="mt-5 text-lg font-semibold leading-snug tracking-tight">{volunteer.title}</h3>
+                <p className="mt-1 text-sm text-muted-foreground">{volunteer.org}</p>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{volunteer.body}</p>
+              </Card>
+            </Reveal>
+          </div>
+
         </section>
 
         {/* ————— Contact ————— */}
