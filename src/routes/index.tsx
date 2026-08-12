@@ -817,7 +817,7 @@ function Portfolio() {
                 Business Automation • Software Engineering
               </p>
               <p className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
-                <MapPin className="h-4 w-4 text-primary" aria-hidden /> Botswana 🇧🇼
+                <MapPin className="h-4 w-4 text-primary" aria-hidden /> Gaborone . Botswana 🇧🇼
               </p>
             </div>
 
