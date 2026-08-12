@@ -47,7 +47,7 @@ import {
 
 const TITLE = "Gagoope Merafhe | SAP Business One & Business Automation Engineer";
 const DESCRIPTION =
-  "SAP Business One developer and software engineer specialising in business automation, enterprise applications, APIs, databases and system integrations.";
+  "Web Developer and software engineer specialising in business automation, enterprise applications, APIs, databases and system integrations.";
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
