@@ -1,68 +1,67 @@
+import { useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
+import {
+  ArrowRight,
+  Download,
+  ExternalLink,
+  Github,
+  Linkedin,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Phone,
+} from "lucide-react";
 import { CvPreviewButton } from "@/components/CvPreview";
 import { LoadingSplash } from "@/components/LoadingSplash";
 import { SiteNav } from "@/components/SiteNav";
 import { Reveal } from "@/components/Reveal";
+import { CountUp } from "@/components/CountUp";
+import { FlowVisual } from "@/components/FlowVisual";
+import { ArchitectureDiagram } from "@/components/ArchitectureDiagram";
+import { ProjectModal } from "@/components/ProjectModal";
+import { ContactForm } from "@/components/ContactForm";
+import { WhatsAppFab } from "@/components/WhatsAppFab";
+import { CursorGlow } from "@/components/CursorGlow";
+import { btnPrimary, btnSecondary, btnGhost } from "@/components/ui-kit";
 import {
-  Badge,
-  Card,
-  CheckList,
-  Eyebrow,
-  IconTile,
-  MetaList,
-  SectionHead,
-  Stat,
-  btnGhost,
-  btnPrimary,
-  btnSecondary,
-} from "@/components/ui-kit";
-const profileAsset = { url: "/assets/gcm-profile.jpeg" };
-import {
-  ArrowRight,
-  Server,
-  Globe,
-  Database,
-  Code2,
-  Layers,
-  Cpu,
-  Sparkles,
-  Rocket,
-  ClipboardList,
-  Users,
-  Zap,
-  ShieldCheck,
-  Monitor,
-  Phone,
-  Mail,
-  Github,
-  MessageCircle,
-  MapPin,
-  CheckCircle2,
-  Quote,
-  ShoppingCart,
-  HeartHandshake,
-  ExternalLink,
-} from "lucide-react";
+  CV_PATH,
+  EMAIL,
+  GITHUB,
+  PROFILE_IMG,
+  WHATSAPP_LOCAL,
+  WHATSAPP_URL,
+  domains,
+  education,
+  filters,
+  heroTech,
+  metrics,
+  navLinks,
+  processSteps,
+  projects,
+  services,
+  techGroups,
+  volunteer,
+  whyWorkWithMe,
+  type Project,
+} from "@/data/portfolio";
+
+const TITLE = "Gagoope Merafhe | SAP Business One & Business Automation Engineer";
+const DESCRIPTION =
+  "SAP Business One developer and software engineer specialising in business automation, enterprise applications, APIs, databases and system integrations.";
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
   head: () => ({
     meta: [
-      { title: "Gagoope Clarance Merafhe — SAP B1 & Web Developer" },
-      {
-        name: "description",
-        content:
-          "SAP Business One add-on developer and full-stack web engineer based in Botswana. Building ERP integrations, internal tools and database-driven web apps.",
-      },
-      { property: "og:title", content: "Gagoope Clarance Merafhe — SAP B1 & Web Developer" },
-      {
-        property: "og:description",
-        content:
-          "SAP Business One, PHP/IIS web apps, SQL Server and IDuela HR & Payroll implementations delivered end-to-end.",
-      },
+      { title: TITLE },
+      { name: "description", content: DESCRIPTION },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: TITLE },
+      { name: "twitter:description", content: DESCRIPTION },
     ],
     links: [{ rel: "canonical", href: "/" }],
     scripts: [
@@ -74,25 +73,29 @@ export const Route = createFileRoute("/")({
             {
               "@type": "Person",
               name: "Gagoope Clarance Merafhe",
-              jobTitle: "SAP Business One & Web Developer",
+              jobTitle: "SAP Business One & Business Automation Engineer",
               worksFor: { "@type": "Organization", name: "RPC Data" },
-              email: "meragcm@gmail.com",
-              telephone: "+267 77447823",
+              email: EMAIL,
+              telephone: `+267 ${WHATSAPP_LOCAL}`,
               address: { "@type": "PostalAddress", addressCountry: "BW" },
+              alumniOf: { "@type": "CollegeOrUniversity", name: "Botho University" },
               knowsAbout: [
                 "SAP Business One",
-                "SAP B1 SDK",
+                "SAP DI API",
+                "Business process automation",
+                "C#",
+                ".NET",
                 "PHP",
                 "SQL Server",
+                "REST APIs",
                 "IIS",
-                "IDuela HR & Payroll",
               ],
+              sameAs: [GITHUB],
             },
             {
               "@type": "ProfessionalService",
-              name: "GCM — SAP B1 & Web Development",
-              description:
-                "SAP Business One add-on development, ERP integrations, and database-driven web applications.",
+              name: "Gagoope Merafhe — SAP B1 & Automation Engineering",
+              description: DESCRIPTION,
               areaServed: "Botswana",
               provider: { "@type": "Person", name: "Gagoope Clarance Merafhe" },
             },
@@ -103,541 +106,250 @@ export const Route = createFileRoute("/")({
   }),
 });
 
-const WHATSAPP = "77447823";
-const WHATSAPP_INTL = "26777447823";
-const EMAIL = "meragcm@gmail.com";
-const WHATSAPP_URL = `https://wa.me/${WHATSAPP_INTL}?text=Hi%20Clarance%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20connect!`;
-
-const navLinks = [
-  { label: "Home", href: "#top" },
-  { label: "Services", href: "#services" },
-  { label: "Work", href: "#projects" },
-  { label: "Process", href: "#process" },
-  { label: "About", href: "#about" },
-];
-
-const coreExpertise = ["SAP B1", "PHP / IIS", "SQL Server", "IDuela HR"];
-
-const services = [
-  {
-    icon: Server,
-    title: "SAP B1 Add-On Sprint",
-    desc: "Custom SAP Business One add-ons built with the DI/UI API to automate posting, validation and integrations.",
-    features: ["DI/UI API integration", "CSV / batch posting", "Validation rules", "Deployment support"],
-    timeline: "2–6 Weeks",
-    price: "Starts at scope",
-  },
-  {
-    icon: Globe,
-    title: "Internal Web App",
-    desc: "PHP / IIS internal tools with SQL Server and email workflow — request systems, approvals and reporting.",
-    features: ["Multi-level approvals", "Email notifications", "Role-based access", "Reporting"],
-    timeline: "3–8 Weeks",
-    price: "Starts at scope",
-  },
-  {
-    icon: Database,
-    title: "Database & Reporting",
-    desc: "Schema design, query optimisation and Crystal Reports / SQL reporting on top of existing SAP or MSSQL systems.",
-    features: ["Schema design", "Query tuning", "Crystal Reports", "Data migration"],
-    timeline: "1–4 Weeks",
-    price: "Starts at scope",
-  },
-];
-
-const buildPaths = [
-  {
-    tag: "SAP B1 · SDK · SQL",
-    title: "ERP Add-On Build",
-    stack: ["SAP DI API", "SAP UI API", "C# / PHP", "SQL Server"],
-    features: [
-      "Bespoke SAP B1 add-ons",
-      "CSV & bulk import tools",
-      "IDuela HR & Payroll config",
-      "End-to-end deployment",
-    ],
-    timeline: "2–8 Weeks",
-    price: "Scoped per project",
-  },
-  {
-    tag: "PHP · IIS · MySQL",
-    title: "Modern Web Platform",
-    stack: ["PHP", "IIS", "MySQL", "Mailtrap"],
-    features: [
-      "Request & approval systems",
-      "Email workflow integration",
-      "Responsive dashboards",
-      "Role-based access",
-    ],
-    timeline: "3–10 Weeks",
-    price: "Scoped per project",
-  },
-  {
-    tag: "Requirements · Reports",
-    title: "System Specification",
-    stack: ["Analysis", "SQL", "Crystal Reports", "Docs"],
-    features: [
-      "Requirements gathering",
-      "Functional specifications",
-      "Data model design",
-      "Reporting blueprints",
-    ],
-    timeline: "1–4 Weeks",
-    price: "Scoped per project",
-  },
-];
-
-const process = [
-  {
-    n: "01",
-    icon: ClipboardList,
-    title: "Discover",
-    body: "Dig into your goals, existing systems and technical constraints to define a clear, workable scope.",
-  },
-  {
-    n: "02",
-    icon: Code2,
-    title: "Build",
-    body: "Iterative development with regular check-ins — clean code, tested integrations and reliable data flows.",
-  },
-  {
-    n: "03",
-    icon: Rocket,
-    title: "Launch",
-    body: "Deploy to your SAP environment or web server, verify data integrity and hand over with documentation.",
-  },
-];
-
-const projects = [
-  {
-    id: "PRJ-000",
-    kind: "Personal Product",
-    title: "Point of Sale Platform",
-    client: "Personal Project",
-    period: "Jul 2026 – Aug 2026",
-    desc: "Architected and deployed a full point of sale platform — optimised checkout workflows with real-time inventory and transaction synchronisation. Live demo available (visitor account is read-only).",
-    stack: ["PHP", "MySQL", "Real-time inventory"],
-    icon: ShoppingCart,
-    link: "https://motswedi.liveblog365.com/login.php",
-    demo: "Demo login — username: visitor · password: Visitor@123",
-  },
-  {
-    id: "PRJ-001",
-    kind: "SAP Add-On",
-    title: "SAP B1 CSV Multiple Journal Entry Add-On",
-    client: "RPC Data Limited",
-    period: "Apr 2026 – Jul 2026",
-    desc: "Automated posting of up to 500 SAP journal entries at once via PHP + SAP DI API, with CSV validation and field mapping.",
-    stack: ["SAP DI API", "PHP", "SQL Server"],
-    icon: Server,
-  },
-  {
-    id: "PRJ-002",
-    kind: "Web App",
-    title: "Request & Approval System",
-    client: "NARDI",
-    period: "May 2025 – May 2026",
-    desc: "Multi-level Request and Approval System built with PHP + IIS and Mailtrap for reliable email notifications.",
-    stack: ["PHP", "IIS", "MySQL", "Mailtrap"],
-    icon: Layers,
-  },
-  {
-    id: "PRJ-003",
-    kind: "ERP Config",
-    title: "IDuela HR & Payroll Configuration",
-    client: "NARDI",
-    period: "Oct 2024 – Dec 2024",
-    desc: "Configured IDuela HR and Payroll modules and supported successful deployment aligned to operational requirements.",
-    stack: ["IDuela", "SAP B1", "HR & Payroll"],
-    icon: Users,
-  },
-  {
-    id: "PRJ-004",
-    kind: "Specification",
-    title: "Loan Management System",
-    client: "Thobela Pawn Shop",
-    period: "Jul 2024 – Dec 2024",
-    desc: "Defined specifications for a loan system covering origination, approval, repayment tracking and reporting.",
-    stack: ["SQL", "PHP", "Requirements"],
-    icon: ClipboardList,
-  },
-  {
-    id: "PRJ-005",
-    kind: "Embedded",
-    title: "Automated Attendance Tracking",
-    client: "Botho University",
-    period: "2023",
-    desc: "Integrated Java and Arduino UNO with keypad interfacing to automate attendance capture end-to-end.",
-    stack: ["Java", "Arduino", "Embedded"],
-    icon: Cpu,
-  },
-  {
-    id: "PRJ-006",
-    kind: "Personal",
-    title: "Developer Portfolio",
-    client: "Self",
-    period: "Jan 2026",
-    desc: "Responsive portfolio web app built with modern web technologies and delivered with performance in mind.",
-    stack: ["React", "TypeScript", "Tailwind"],
-    icon: Sparkles,
-  },
-];
-
-const flagshipStats = [
-  { n: "3", label: "Projects Completed" },
-  { n: "0", label: "Posting errors in production" },
-  { n: "1+ yr", label: "SAP B1 delivery experience" },
-];
-
-const strengths = [
-  { icon: Zap, title: "System Optimisation", body: "Refactor existing systems to remove bottlenecks and automate repetitive workflows." },
-  { icon: ShieldCheck, title: "Data Integrity", body: "Validation, reconciliation and safe migrations across SAP and SQL environments." },
-  { icon: Monitor, title: "Full-Stack Delivery", body: "From requirements through UI to database — one hand on the whole pipeline." },
-];
-
-const testimonials = [
-  {
-    quote:
-      "Delivered our SAP journal automation on time and made a real dent in month-end processing. Communication was crisp throughout.",
-    role: "Supervisor",
-    where: "RPC Data · Botswana",
-    project: "SAP B1 CSV Journal Entry Add-On",
-  },
-  {
-    quote:
-      "The approval system slotted straight into how we already worked. Email notifications and approvals just work — no friction.",
-    role: "Operations Manager",
-    where: "NARDI · Botswana",
-    project: "Request & Approval System",
-  },
-];
-
-const education = [
-  { id: "EDU-001", kind: "Tertiary · 2024", title: "BEng (Hons) Computer Engineering", sub: "Minor in Computer Science · GPA 2.83 — Gaborone" },
-  { id: "EDU-002", kind: "Coursework · 2023", title: "Automated Attendance Tracking", sub: "Botho University — Java & Arduino UNO, keypad interfacing" },
-  { id: "EDU-003", kind: "IT Attachment · 2022", title: "IT Support & Teaching Practice", sub: "Kutlwano JSS — OS install, server management, computer basics" },
-  { id: "EDU-004", kind: "Secondary · 2017", title: "BGCSE", sub: "Botswana General Certificate of Secondary Education — Nata" },
-  { id: "EDU-005", kind: "Junior · 2015", title: "Junior Certificate", sub: "Gweta" },
-  { id: "EDU-006", kind: "Primary · 2012", title: "PSLE", sub: "Nata" },
-];
-
-const skillGroups = [
-  { title: "Data Science & Analytics", items: "SQL · Statistical analysis · Python · R" },
-  { title: "Software Development", items: "Python · Java · C++ · JavaScript · Ruby · Swift · Kotlin · Data structures" },
-  { title: "Database Management", items: "Oracle · MySQL · SQL Server · PostgreSQL · Database design · Backup & recovery" },
-  { title: "IT Support", items: "Hardware & software troubleshooting · Windows · macOS · Linux" },
-];
-
-const volunteer = {
-  title: "Volunteer Coordinator — Village Clean-Up",
-  org: "Kgotla Community Initiative, Gabane Village, Botswana",
-  period: "May 2025 – Present",
-  body:
-    "Supported regular kgotla sessions mobilising community members for village-wide clean-ups — coordinating attendance, planning activities and communicating across communal areas.",
-};
-
-
-const contactChannels = [
-  { icon: MessageCircle, label: "WhatsApp", value: `+267 ${WHATSAPP}`, href: WHATSAPP_URL, ext: true },
-  { icon: Phone, label: "Phone", value: `+267 ${WHATSAPP}`, href: `tel:+267${WHATSAPP}` },
-  { icon: Mail, label: "Email", value: EMAIL, href: `mailto:${EMAIL}` },
-  { icon: Github, label: "GitHub", value: "github.com/Gagoope", href: "https://github.com/Gagoope", ext: true },
-];
-
 const shell = "mx-auto w-full max-w-6xl px-4 sm:px-6";
 const section = "py-16 sm:py-24";
 
-/* ————————————————— Page ————————————————— */
+function Label({ n, children }: { n: string; children: React.ReactNode }) {
+  return (
+    <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.3em] text-primary">
+      <span>{n}</span>
+      <span className="h-px w-8 bg-primary/50" aria-hidden />
+      <span className="text-muted-foreground">{children}</span>
+    </div>
+  );
+}
+
+function Head({
+  n,
+  label,
+  title,
+  sub,
+  center = false,
+}: {
+  n: string;
+  label: string;
+  title: string;
+  sub?: string;
+  center?: boolean;
+}) {
+  return (
+    <header className={`mb-10 max-w-2xl sm:mb-14 ${center ? "mx-auto text-center" : ""}`}>
+      <div className={center ? "flex justify-center" : ""}>
+        <Label n={n}>{label}</Label>
+      </div>
+      <h2 className="mt-5 text-[1.75rem] font-semibold leading-[1.12] tracking-tight sm:text-[2.5rem]">
+        {title}
+      </h2>
+      {sub && (
+        <p className="mt-4 text-[0.95rem] leading-relaxed text-muted-foreground sm:text-base">
+          {sub}
+        </p>
+      )}
+    </header>
+  );
+}
 
 function Portfolio() {
-  return (
-    <div className="min-h-dvh overflow-x-hidden bg-background font-sans text-foreground">
-      <LoadingSplash />
-      <SiteNav links={navLinks} whatsappUrl={WHATSAPP_URL} />
+  const [filter, setFilter] = useState<(typeof filters)[number]>("All");
+  const [open, setOpen] = useState<Project | null>(null);
 
-      <main id="main" className="pb-28 sm:pb-0">
-        {/* ————— Hero ————— */}
+  const visible = useMemo(
+    () => (filter === "All" ? projects : projects.filter((p) => p.category === filter)),
+    [filter],
+  );
+  const featured = projects.find((p) => p.featured)!;
+
+  return (
+    <div className="relative min-h-dvh overflow-x-hidden bg-background font-sans text-foreground">
+      <LoadingSplash />
+      <CursorGlow />
+      <SiteNav links={navLinks} whatsappUrl={WHATSAPP_URL} />
+      <WhatsAppFab />
+
+      <main id="main" className="relative z-10 pb-28 sm:pb-0">
+        {/* ————— 01 Hero ————— */}
         <section id="top" className="ambient relative overflow-hidden pt-28 sm:pt-36">
           <div className="pointer-events-none absolute inset-0 -z-10 grid-bg opacity-40 [mask-image:radial-gradient(70%_55%_at_50%_0%,black,transparent)]" />
-          <div className={`${shell} pb-10 sm:pb-14`}>
+          <div className={`${shell} pb-12 sm:pb-16`}>
             <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
               <Reveal>
-                <Badge tone="success">
-                  <span className="pulse-dot h-1.5 w-1.5 rounded-full text-success" />
-                  Available for new work
-                </Badge>
-                <h1 className="mt-6 text-[2.1rem] font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.4rem]">
-                  SAP Business One systems and web apps that{" "}
-                  <span className="text-primary">run themselves.</span>
+                <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-muted-foreground">
+                  <span className="inline-flex items-center gap-2">
+                    <MapPin className="h-3.5 w-3.5 text-primary" aria-hidden />
+                    Based in Botswana 🇧🇼
+                  </span>
+                  <span className="inline-flex items-center gap-2">
+                    <span className="pulse-dot h-1.5 w-1.5 rounded-full text-success" aria-hidden />
+                    Available for software engineering &amp; automation projects
+                  </span>
+                </div>
+
+                <h1 className="mt-6 text-[clamp(2rem,7vw,3.6rem)] font-semibold leading-[1.06] tracking-tight">
+                  SAP Business One &amp; Business Automation{" "}
+                  <span className="text-primary">Engineer</span>
                 </h1>
-                <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-                  I&apos;m Gagoope Merafhe — an IT systems developer in Botswana. I build SAP B1
-                  add-ons, internal web applications and the databases behind them, replacing
-                  manual, error-prone processes with software that runs on its own.
+                <p className="mt-5 text-lg font-medium sm:text-xl">
+                  I build software that eliminates manual work.
+                </p>
+                <p className="mt-4 max-w-xl text-[0.95rem] leading-relaxed text-muted-foreground sm:text-base">
+                  I design SAP Business One integrations, enterprise applications and automation
+                  systems that help organisations work faster, reduce errors and make better use of
+                  their data.
                 </p>
 
                 <div className="mt-9 flex flex-wrap items-center gap-3">
                   <a href="#contact" className={btnPrimary}>
-                    Start a project
-                    <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+                    Start a Project
+                    <ArrowRight
+                      className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
+                      aria-hidden
+                    />
                   </a>
-                  <a href="#projects" className={btnSecondary}>
-                    Explore my work
+                  <a href="#work" className={btnSecondary}>
+                    View My Work
                   </a>
-                  <CvPreviewButton label="Preview CV" className={btnGhost} />
+                  <a href={CV_PATH} download className={btnGhost}>
+                    <Download className="h-4 w-4" aria-hidden /> Download CV
+                  </a>
                 </div>
 
-                <dl className="mt-12 grid max-w-lg grid-cols-2 gap-x-6 gap-y-6 border-t border-border pt-8 sm:grid-cols-4">
-                  {coreExpertise.map((c) => (
-                    <div key={c}>
-                      <dt className="text-sm font-medium text-foreground">{c}</dt>
-                      <dd className="mt-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-                        Core
-                      </dd>
-                    </div>
+                <ul className="mt-11 flex flex-wrap gap-2 border-t border-border pt-8">
+                  {heroTech.map((t) => (
+                    <li
+                      key={t}
+                      className="rounded-full border border-border bg-surface/50 px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest text-muted-foreground transition duration-300 hover:border-primary/50 hover:text-primary"
+                    >
+                      {t}
+                    </li>
                   ))}
-                </dl>
+                </ul>
               </Reveal>
 
-              {/* Product preview */}
-              <Reveal delay={120} className="relative">
-                <div className="relative mx-auto max-w-md lg:max-w-none">
-                  <div className="card-surface overflow-hidden p-0">
-                    <div className="flex items-center gap-2 border-b border-border bg-surface-elevated/60 px-4 py-3">
-                      <span className="h-2.5 w-2.5 rounded-full bg-destructive/70" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-warning/70" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-success/70" />
-                      <span className="ml-3 truncate font-mono text-[10px] text-muted-foreground">
-                        sap-b1 · journal-batch · live
-                      </span>
-                    </div>
-
-                    <div className="grid gap-4 p-5 sm:p-6">
-                      <div className="flex items-center gap-4">
-                        <img
-                          src={profileAsset.url}
-                          alt="Gagoope Clarance Merafhe"
-                          loading="lazy"
-                          decoding="async"
-                          className="h-16 w-16 shrink-0 rounded-2xl border border-border object-cover"
-                        />
-                        <div className="min-w-0">
-                          <div className="truncate text-sm font-semibold">
-                            Gagoope Clarance Merafhe
-                          </div>
-                          <div className="truncate text-xs text-muted-foreground">
-                            IT Systems Developer · RPC Data
-                          </div>
-                          <div className="mt-1.5 flex items-center gap-1.5 text-[11px] text-muted-foreground">
-                            <MapPin className="h-3 w-3 text-primary" aria-hidden />
-                            Nata / Gaborone, Botswana
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-3 gap-3">
-                        {flagshipStats.map((s) => (
-                          <div
-                            key={s.label}
-                            className="rounded-xl border border-border bg-background/40 p-3"
-                          >
-                            <div className="text-lg font-semibold tracking-tight sm:text-xl">
-                              {s.n}
-                            </div>
-                            <div className="mt-1 text-[10px] leading-snug text-muted-foreground">
-                              {s.label}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-
-                      <div className="grid gap-2 rounded-xl border border-border bg-background/40 p-4">
-                        {[
-                          "CSV validated · 500 rows",
-                          "Mapped to SAP journal structure",
-                          "Batch posted · 0 errors",
-                        ].map((row) => (
-                          <div key={row} className="flex items-center gap-2 text-xs">
-                            <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-success" aria-hidden />
-                            <span className="truncate text-muted-foreground">{row}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="float-slow absolute -bottom-12 -left-6 hidden w-44 rounded-2xl glass p-4 shadow-lift sm:block">
-                    <div className="font-mono text-[10px] uppercase tracking-widest text-primary">
-                      Month-end
-                    </div>
-                    <div className="mt-1 text-sm font-semibold">Hours → minutes</div>
-                    <div className="mt-1 text-[11px] text-muted-foreground">
-                      Manual entry removed
-                    </div>
-                  </div>
-                </div>
+              <Reveal delay={120}>
+                <FlowVisual />
               </Reveal>
             </div>
           </div>
         </section>
 
-        {/* ————— Services ————— */}
-        <section id="services" className={`${shell} ${section}`}>
-          <Reveal>
-            <SectionHead
-              label="Services"
-              title="What I do"
-              sub="Three kinds of work I take on, with the typical time each one needs."
-            />
-          </Reveal>
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {services.map((s, i) => (
-              <Reveal key={s.title} delay={i * 90}>
-                <Card className="group flex h-full flex-col">
-                  <IconTile icon={s.icon} />
-                  <h3 className="mt-5 text-lg font-semibold tracking-tight">{s.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
-                  <div className="mt-5">
-                    <CheckList items={s.features} />
-                  </div>
-                  <div className="mt-6 flex flex-wrap items-center gap-2 border-t border-border pt-5">
-                    <Badge tone="primary">{s.timeline}</Badge>
-                    <Badge>{s.price}</Badge>
-                  </div>
-                </Card>
-              </Reveal>
-            ))}
-          </div>
-        </section>
-
-        {/* ————— Engagements ————— */}
+        {/* ————— 02 Metrics ————— */}
         <section className="border-y border-border bg-surface/30">
-          <div className={`${shell} ${section}`}>
-            <Reveal>
-              <SectionHead
-                label="Engagements"
-                title="Ways we can work together"
-                sub="Different domains, one delivery style — clear scope, working software."
-              />
-            </Reveal>
-            <div className="grid gap-5 lg:grid-cols-3">
-              {buildPaths.map((p, i) => (
-                <Reveal key={p.title} delay={i * 90}>
-                  <Card className="group flex h-full flex-col">
-                    <Eyebrow>{p.tag}</Eyebrow>
-                    <h3 className="mt-4 text-xl font-semibold tracking-tight">{p.title}</h3>
-                    <div className="mt-4 flex flex-wrap gap-1.5">
-                      {p.stack.map((t) => (
-                        <Badge key={t}>{t}</Badge>
-                      ))}
-                    </div>
-                    <div className="mt-6 flex-1">
-                      <CheckList items={p.features} />
-                    </div>
-                    <div className="mt-6 border-t border-border pt-5">
-                      <MetaList
-                        items={[
-                          ["Timeline", p.timeline],
-                          ["Pricing", p.price],
-                        ]}
+          <div className={`${shell} py-12 sm:py-16`}>
+            <dl className="grid grid-cols-2 gap-x-6 gap-y-9 lg:grid-cols-4">
+              {metrics.map((m, i) => (
+                <Reveal key={m.label} delay={i * 80}>
+                  <div className="border-l border-border pl-4 sm:pl-5">
+                    <dt className="sr-only">{m.label}</dt>
+                    <dd>
+                      <CountUp
+                        value={m.value}
+                        suffix={m.suffix}
+                        className="block text-[2rem] font-semibold tracking-tight sm:text-[2.75rem]"
                       />
-                      <a
-                        href="#contact"
-                        className="group/link mt-5 inline-flex items-center gap-2 text-sm font-medium text-primary"
-                      >
-                        Request a quote
-                        <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-1" />
-                      </a>
-                    </div>
-                  </Card>
+                      <span className="mt-2 block text-xs leading-snug text-muted-foreground sm:text-sm">
+                        {m.label}
+                      </span>
+                    </dd>
+                  </div>
                 </Reveal>
               ))}
-            </div>
+            </dl>
           </div>
         </section>
 
-        {/* ————— Process ————— */}
-        <section id="process" className={`${shell} ${section}`}>
+        {/* ————— 03 Problem → Solution ————— */}
+        <section className={`${shell} ${section}`}>
           <Reveal>
-            <SectionHead label="Process" title="How a project runs" />
+            <Head
+              n="03"
+              label="Business value"
+              title="Turn manual processes into intelligent systems."
+              sub="Technology should remove repetitive work, reduce errors and give teams better visibility."
+            />
           </Reveal>
-          <ol className="grid gap-5 md:grid-cols-3">
-            {process.map((p, i) => {
-              const Icon = p.icon;
+          <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+            {domains.map((d, i) => {
+              const Icon = d.icon;
               return (
-                <Reveal as="li" key={p.n} delay={i * 90} className="list-none">
-                  <Card className="group h-full">
-                    <div className="flex items-center justify-between">
-                      <IconTile icon={Icon} />
-                      <span className="font-mono text-2xl font-semibold text-border-strong">
-                        {p.n}
-                      </span>
-                    </div>
-                    <h3 className="mt-5 text-lg font-semibold tracking-tight">{p.title}</h3>
-                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
-                  </Card>
+                <Reveal key={d.label} delay={i * 80}>
+                  <article className="card-surface hairline-top group flex h-full flex-col p-6">
+                    <span className="grid h-11 w-11 place-items-center rounded-xl border border-primary/25 bg-primary/10 text-primary transition duration-300 group-hover:glow-primary">
+                      <Icon className="h-5 w-5" aria-hidden />
+                    </span>
+                    <h3 className="mt-5 font-mono text-[10px] uppercase tracking-[0.28em] text-primary">
+                      {d.label}
+                    </h3>
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{d.body}</p>
+                    <ul className="mt-5 flex-1 grid gap-2 text-sm">
+                      {d.items.map((it) => (
+                        <li key={it} className="flex items-start gap-2.5">
+                          <span
+                            className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-primary"
+                            aria-hidden
+                          />
+                          <span className="leading-relaxed">{it}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <ArrowRight
+                      className="mt-6 h-4 w-4 text-muted-foreground transition-transform duration-300 group-hover:translate-x-1 group-hover:text-primary"
+                      aria-hidden
+                    />
+                  </article>
                 </Reveal>
               );
             })}
-          </ol>
+          </div>
         </section>
 
-        {/* ————— Projects ————— */}
-        <section id="projects" className="border-y border-border">
+        {/* ————— 04 Services ————— */}
+        <section id="services" className="border-y border-border bg-surface/30">
           <div className={`${shell} ${section}`}>
             <Reveal>
-              <SectionHead
-                label="Recent work"
-                title="Projects I've shipped"
-                sub="Systems built for finance, operations and HR teams in Botswana."
+              <Head
+                n="04"
+                label="Services"
+                title="What I build"
+                sub="Six engagements covering enterprise systems end to end — from SAP integrations to reporting."
               />
             </Reveal>
-            <div className="grid gap-5 md:grid-cols-2">
-              {projects.map((p, i) => {
-                const Icon = p.icon;
+            <div className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2 xl:grid-cols-3">
+              {services.map((s, i) => {
+                const Icon = s.icon;
                 return (
-                  <Reveal as="article" key={p.id} delay={(i % 2) * 90}>
-                    <Card className="group flex h-full flex-col">
-                      <div className="flex items-start justify-between gap-4">
-                        <IconTile icon={Icon} />
-                        <Badge tone="primary">{p.kind}</Badge>
+                  <Reveal key={s.title} delay={(i % 3) * 80}>
+                    <article className="group flex h-full flex-col bg-background p-6 transition duration-300 hover:bg-surface sm:p-7">
+                      <div className="flex items-center justify-between">
+                        <span className="grid h-10 w-10 place-items-center rounded-xl border border-primary/25 bg-primary/10 text-primary">
+                          <Icon className="h-5 w-5" aria-hidden />
+                        </span>
+                        <span className="font-mono text-xs text-border-strong">{s.n}</span>
                       </div>
-                      <h3 className="mt-5 text-lg font-semibold leading-snug tracking-tight">
-                        {p.title}
-                      </h3>
-                      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                        {p.desc}
+                      <h3 className="mt-5 text-base font-semibold tracking-tight">{s.title}</h3>
+                      <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+                        {s.desc}
                       </p>
-                      <div className="flex-1">
-                        {"link" in p && p.link ? (
-                          <div className="mt-4 space-y-2">
-                            <a
-                              href={p.link}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
-                            >
-                              View live demo <ExternalLink className="h-3.5 w-3.5" />
-                            </a>
-                            <p className="text-xs text-muted-foreground">{(p as { demo?: string }).demo}</p>
-                          </div>
-                        ) : null}
+                      <div className="mt-5 flex flex-wrap gap-1.5">
+                        {s.tags.map((t) => (
+                          <span
+                            key={t}
+                            className="rounded-full border border-border px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground"
+                          >
+                            {t}
+                          </span>
+                        ))}
                       </div>
-
-                      <div className="mt-6 border-t border-border pt-5">
-                        <MetaList
-                          items={[
-                            ["Client", p.client],
-                            ["Period", p.period],
-                          ]}
+                      <a
+                        href="#contact"
+                        className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-primary"
+                      >
+                        Explore
+                        <ArrowRight
+                          className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                          aria-hidden
                         />
-                        <div className="mt-4 flex flex-wrap gap-1.5">
-                          {p.stack.map((t) => (
-                            <Badge key={t}>{t}</Badge>
-                          ))}
-                        </div>
-                      </div>
-                    </Card>
+                      </a>
+                    </article>
                   </Reveal>
                 );
               })}
@@ -645,284 +357,528 @@ function Portfolio() {
           </div>
         </section>
 
-        {/* ————— Case study ————— */}
+        {/* ————— 05 Featured case study ————— */}
         <section className={`${shell} ${section}`}>
           <Reveal>
-            <Card interactive={false} className="p-6 sm:p-10">
-              <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
-                <div>
-                  <Eyebrow>Case study</Eyebrow>
-                  <h2 className="mt-4 text-2xl font-semibold tracking-tight sm:text-3xl">
-                    SAP B1 CSV journal automation
-                  </h2>
-                  <p className="mt-5 text-[0.95rem] leading-relaxed text-muted-foreground sm:text-base">
-                    A SAP Business One add-on engineered to automate posting of up to 500 journal
-                    entries at once. Built with PHP and the SAP DI API, with CSV validation, field
-                    mapping to SAP journal structures and reliable batch execution — cutting a
-                    routine month-end task from hours to minutes.
-                  </p>
-                  <ul className="mt-8 grid gap-4 text-sm leading-relaxed text-muted-foreground">
-                    <li>
-                      <span className="font-semibold text-foreground">Batch execution:</span>{" "}
-                      validates and posts hundreds of journals in a single run against a live SAP B1
-                      environment.
-                    </li>
-                    <li>
-                      <span className="font-semibold text-foreground">Reliable mapping:</span> CSV
-                      fields mapped to SAP journal structures with strict validation to protect
-                      ledger integrity.
-                    </li>
-                    <li>
-                      <span className="font-semibold text-foreground">Operational win:</span>{" "}
-                      reduced manual data entry and cut down human error during month-end
-                      processing.
-                    </li>
-                  </ul>
-                  <div className="mt-9 flex flex-wrap gap-3">
-                    <a
-                      href={WHATSAPP_URL}
-                      target="_blank"
-                      rel="noreferrer"
-                      className={btnPrimary}
-                    >
-                      <MessageCircle className="h-4 w-4" aria-hidden /> Discuss a similar build
-                    </a>
-                    <CvPreviewButton label="View full CV" className={btnSecondary} />
+            <Head n="05" label="Featured case study" title={featured.title} />
+          </Reveal>
+          <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+            <Reveal>
+              <div className="grid gap-6">
+                {[
+                  ["Problem", featured.problem],
+                  ["Solution", featured.approach],
+                  ["Result", featured.result],
+                ].map(([k, v]) => (
+                  <div key={k} className="border-t border-border pt-5">
+                    <h3 className="font-mono text-[10px] uppercase tracking-[0.28em] text-primary">
+                      {k}
+                    </h3>
+                    <p className="mt-3 text-[0.95rem] leading-relaxed text-muted-foreground">{v}</p>
+                  </div>
+                ))}
+                <div className="border-t border-border pt-5">
+                  <h3 className="font-mono text-[10px] uppercase tracking-[0.28em] text-primary">
+                    Technology
+                  </h3>
+                  <div className="mt-3 flex flex-wrap gap-1.5">
+                    {featured.stack.map((t) => (
+                      <span
+                        key={t}
+                        className="rounded-full border border-border px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground"
+                      >
+                        {t}
+                      </span>
+                    ))}
                   </div>
                 </div>
-
-                <div className="grid content-start gap-4 rounded-2xl border border-border bg-background/40 p-6">
-                  {flagshipStats.map((s, i) => (
-                    <div
-                      key={s.label}
-                      className={i > 0 ? "border-t border-border pt-4" : undefined}
-                    >
-                      <Stat value={s.n} label={s.label} />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </Card>
-          </Reveal>
-        </section>
-
-        {/* ————— Strengths ————— */}
-        <section className="border-y border-border bg-surface/30">
-          <div className={`${shell} ${section}`}>
-            <Reveal>
-              <SectionHead
-                label="Strengths"
-                title="How I work"
-                sub="Beyond code — the habits that make delivery reliable."
-              />
-            </Reveal>
-            <div className="grid gap-5 md:grid-cols-3">
-              {strengths.map((s, i) => (
-                <Reveal key={s.title} delay={i * 90}>
-                  <Card className="group h-full">
-                    <IconTile icon={s.icon} />
-                    <h3 className="mt-5 text-base font-semibold tracking-tight">{s.title}</h3>
-                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
-                  </Card>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ————— Free consult ————— */}
-        <section className={`${shell} ${section}`}>
-          <Reveal>
-            <div className="ambient card-surface relative overflow-hidden p-6 sm:p-10">
-              <div className="grid gap-10 lg:grid-cols-2">
-                <div>
-                  <Eyebrow>Free consult</Eyebrow>
-                  <h2 className="mt-4 text-2xl font-semibold tracking-tight sm:text-3xl">
-                    Free SAP or web system review
-                  </h2>
-                  <p className="mt-5 text-[0.95rem] leading-relaxed text-muted-foreground">
-                    Thinking of extending SAP B1 or an internal web app? I&apos;ll review your setup
-                    for bottlenecks, data integrity risks and quick wins — free, no sales pitch.
-                  </p>
-                  <a
-                    href={WHATSAPP_URL}
-                    target="_blank"
-                    rel="noreferrer"
-                    className={`${btnPrimary} mt-8`}
-                  >
-                    Book a slot
-                    <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+                <div className="flex flex-wrap gap-3 pt-2">
+                  <button type="button" onClick={() => setOpen(featured)} className={btnPrimary}>
+                    View Case Study
+                    <ArrowRight className="h-4 w-4" aria-hidden />
+                  </button>
+                  <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className={btnSecondary}>
+                    <MessageCircle className="h-4 w-4" aria-hidden /> Discuss a similar build
                   </a>
                 </div>
-                <div className="grid gap-6 sm:grid-cols-2">
-                  <div className="rounded-2xl border border-border bg-background/40 p-5">
-                    <div className="font-mono text-[10px] uppercase tracking-widest text-primary">
-                      What I look at
-                    </div>
-                    <div className="mt-4">
-                      <CheckList
-                        items={[
-                          "SAP add-on & integration review",
-                          "SQL / schema health check",
-                          "Approval & workflow gaps",
-                          "Actionable summary",
-                        ]}
-                      />
-                    </div>
-                  </div>
-                  <div className="rounded-2xl border border-border bg-background/40 p-5">
-                    <div className="font-mono text-[10px] uppercase tracking-widest text-primary">
-                      What you get
-                    </div>
-                    <div className="mt-4">
-                      <CheckList
-                        items={[
-                          "One hour, one-on-one technical consult",
-                          "No credit card required",
-                          "Summary report afterwards",
-                        ]}
-                      />
-                    </div>
-                  </div>
-                </div>
               </div>
-            </div>
-          </Reveal>
+            </Reveal>
+
+            <Reveal delay={120}>
+              <div className="card-surface p-6">
+                <div className="font-mono text-[10px] uppercase tracking-[0.28em] text-primary">
+                  Workflow
+                </div>
+                <ol className="mt-5 grid gap-2">
+                  {featured.architecture.map((step, i) => (
+                    <li
+                      key={step}
+                      className="group flex items-center gap-3 rounded-xl border border-border bg-background/50 px-4 py-3 transition duration-300 hover:border-primary/40"
+                    >
+                      <span className="font-mono text-[10px] text-muted-foreground">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span className="min-w-0 flex-1 truncate text-sm font-medium">{step}</span>
+                      <ArrowRight
+                        className="h-3.5 w-3.5 shrink-0 text-border-strong transition duration-300 group-hover:text-primary"
+                        aria-hidden
+                      />
+                    </li>
+                  ))}
+                </ol>
+                <p className="mt-5 border-t border-border pt-5 text-[11px] leading-relaxed text-muted-foreground">
+                  Illustrative architecture diagram — not a production screenshot.
+                </p>
+              </div>
+            </Reveal>
+          </div>
         </section>
 
-        {/* ————— Testimonials ————— */}
-        <section className="border-y border-border">
+        {/* ————— 06 Work ————— */}
+        <section id="work" className="border-y border-border bg-surface/30">
           <div className={`${shell} ${section}`}>
             <Reveal>
-              <SectionHead label="Clients" title="What clients say" />
+              <Head
+                n="06"
+                label="Selected work"
+                title="Systems built for finance, operations and HR teams"
+                sub="Open any project for the full case study — problem, architecture, implementation and outcome."
+              />
             </Reveal>
-            <div className="grid gap-5 md:grid-cols-2">
-              {testimonials.map((t, i) => (
-                <Reveal key={t.role} delay={i * 90}>
-                  <Card className="group flex h-full flex-col">
-                    <Quote className="h-6 w-6 text-primary/40" aria-hidden />
-                    <blockquote className="mt-4 flex-1 text-base leading-relaxed text-foreground">
-                      “{t.quote}”
-                    </blockquote>
-                    <footer className="mt-6 border-t border-border pt-5 text-sm">
-                      <div className="font-medium text-foreground">{t.role}</div>
-                      <div className="mt-1 text-muted-foreground">{t.where}</div>
-                      <div className="mt-2 font-mono text-[10px] uppercase tracking-widest text-primary">
-                        {t.project}
-                      </div>
-                    </footer>
-                  </Card>
-                </Reveal>
+
+            <div className="mb-8 flex flex-wrap gap-2" role="group" aria-label="Filter projects">
+              {filters.map((f) => (
+                <button
+                  key={f}
+                  type="button"
+                  onClick={() => setFilter(f)}
+                  aria-pressed={filter === f}
+                  className={`min-h-11 rounded-full border px-4 text-sm transition duration-300 ${
+                    filter === f
+                      ? "border-primary bg-primary/10 text-primary"
+                      : "border-border text-muted-foreground hover:border-primary/40 hover:text-foreground"
+                  }`}
+                >
+                  {f}
+                </button>
               ))}
+            </div>
+
+            <div className="grid gap-5 md:grid-cols-2">
+              {visible.map((p, i) => {
+                const Icon = p.icon;
+                return (
+                  <Reveal as="article" key={p.id} delay={(i % 2) * 80}>
+                    <button
+                      type="button"
+                      onClick={() => setOpen(p)}
+                      className="card-surface hairline-top group flex h-full w-full flex-col p-6 text-left sm:p-7"
+                    >
+                      <div className="flex items-start justify-between gap-4">
+                        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-primary/25 bg-primary/10 text-primary transition duration-300 group-hover:scale-105">
+                          <Icon className="h-5 w-5" aria-hidden />
+                        </span>
+                        <span className="font-mono text-[10px] uppercase tracking-[0.28em] text-primary">
+                          {p.category}
+                        </span>
+                      </div>
+                      <h3 className="mt-5 text-lg font-semibold leading-snug tracking-tight">
+                        {p.title}
+                      </h3>
+                      <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+                        {p.short}
+                      </p>
+                      <div className="mt-5 flex flex-wrap gap-1.5 opacity-70 transition duration-300 group-hover:opacity-100">
+                        {p.stack.slice(0, 4).map((t) => (
+                          <span
+                            key={t}
+                            className="rounded-full border border-border px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground"
+                          >
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="mt-6 flex items-center justify-between gap-4 border-t border-border pt-5">
+                        <span className="min-w-0 truncate text-xs text-muted-foreground">
+                          {p.client} · {p.period}
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 text-sm font-medium text-primary">
+                          Case study
+                          <ArrowRight
+                            className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                            aria-hidden
+                          />
+                        </span>
+                      </div>
+                    </button>
+                  </Reveal>
+                );
+              })}
             </div>
           </div>
         </section>
 
-        {/* ————— Education ————— */}
-        <section id="about" className={`${shell} ${section}`}>
+        {/* ————— 07 Technology ————— */}
+        <section className={`${shell} ${section}`}>
           <Reveal>
-            <SectionHead label="Background" title="Education & training" />
+            <Head
+              n="07"
+              label="Stack"
+              title="Technology I work with"
+              sub="Hover or tap a technology to see how it shows up in the work."
+            />
           </Reveal>
-          <div className="grid gap-4 md:grid-cols-2">
-            {education.map((e, i) => (
-              <Reveal key={e.id} delay={(i % 2) * 90}>
-                <Card className="group h-full">
-                  <Badge>{e.kind}</Badge>
-                  <h3 className="mt-4 text-base font-semibold tracking-tight">{e.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{e.sub}</p>
-                </Card>
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {techGroups.map((g, i) => (
+              <Reveal key={g.group} delay={(i % 3) * 80}>
+                <div className="card-surface h-full p-6">
+                  <h3 className="font-mono text-[10px] uppercase tracking-[0.28em] text-primary">
+                    {g.group}
+                  </h3>
+                  <ul className="mt-5 grid gap-2">
+                    {g.items.map((it) => (
+                      <li
+                        key={it.name}
+                        className="group rounded-xl border border-border bg-background/40 px-3.5 py-2.5 transition duration-300 hover:border-primary/40"
+                      >
+                        <span className="text-sm font-medium">{it.name}</span>
+                        <span className="mt-0.5 block text-xs leading-relaxed text-muted-foreground opacity-80">
+                          {it.use}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </Reveal>
             ))}
           </div>
-
-          <div className="mt-14">
-            <Reveal>
-              <SectionHead label="Toolkit" title="Skills & languages" />
-            </Reveal>
-            <div className="grid gap-4 md:grid-cols-2">
-              {skillGroups.map((g, i) => (
-                <Reveal key={g.title} delay={(i % 2) * 90}>
-                  <Card className="h-full">
-                    <h3 className="text-base font-semibold tracking-tight">{g.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{g.items}</p>
-                  </Card>
-                </Reveal>
-              ))}
-            </div>
-            <p className="mt-4 text-sm text-muted-foreground">Languages: English</p>
-          </div>
-
-          <div className="mt-14">
-            <Reveal>
-              <SectionHead label="Community" title="Volunteer work" />
-            </Reveal>
-            <Reveal>
-              <Card>
-                <div className="flex items-start justify-between gap-4">
-                  <IconTile icon={HeartHandshake} />
-                  <Badge tone="primary">{volunteer.period}</Badge>
-                </div>
-                <h3 className="mt-5 text-lg font-semibold leading-snug tracking-tight">{volunteer.title}</h3>
-                <p className="mt-1 text-sm text-muted-foreground">{volunteer.org}</p>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{volunteer.body}</p>
-              </Card>
-            </Reveal>
-          </div>
-
         </section>
 
-        {/* ————— Contact ————— */}
-        <section id="contact" className="border-t border-border bg-surface/30">
+        {/* ————— 08 Architecture ————— */}
+        <section className="border-y border-border bg-surface/30">
           <div className={`${shell} ${section}`}>
             <Reveal>
-              <SectionHead
-                label="Contact"
-                title="Get in touch"
-                sub="Open to full-time roles, contracts and collaborative projects across Botswana and remote."
+              <Head
+                n="08"
+                label="Architecture"
+                title="From business process to production system."
+                sub="The same layered shape underpins every system I deliver."
               />
             </Reveal>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {contactChannels.map((c, i) => {
-                const Icon = c.icon;
-                return (
-                  <Reveal key={c.label} delay={(i % 2) * 90}>
+            <Reveal>
+              <ArchitectureDiagram />
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ————— 09 Process ————— */}
+        <section id="process" className={`${shell} ${section}`}>
+          <Reveal>
+            <Head n="09" label="Process" title="How I turn ideas into working systems." />
+          </Reveal>
+          <ol className="relative grid gap-0 border-l border-border pl-6 sm:pl-8">
+            {processSteps.map((p, i) => (
+              <Reveal as="li" key={p.n} delay={i * 70} className="list-none pb-8 last:pb-0">
+                <span
+                  className="absolute -left-[6.5px] mt-2 h-3 w-3 rounded-full border-2 border-primary bg-background"
+                  aria-hidden
+                />
+                <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+                  <span className="font-mono text-xs text-primary">{p.n}</span>
+                  <h3 className="text-lg font-semibold tracking-tight sm:text-xl">{p.title}</h3>
+                </div>
+                <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
+                  {p.body}
+                </p>
+              </Reveal>
+            ))}
+          </ol>
+        </section>
+
+        {/* ————— 10 About ————— */}
+        <section id="about" className="border-y border-border bg-surface/30">
+          <div className={`${shell} ${section}`}>
+            <Reveal>
+              <Head
+                n="10"
+                label="About"
+                title="Engineering systems that solve real business problems."
+              />
+            </Reveal>
+            <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+              <Reveal>
+                <figure className="card-surface overflow-hidden p-0">
+                  <img
+                    src={PROFILE_IMG}
+                    alt="Portrait of Gagoope Clarance Merafhe"
+                    loading="lazy"
+                    decoding="async"
+                    className="aspect-[4/5] w-full object-cover"
+                  />
+                  <figcaption className="border-t border-border p-5">
+                    <div className="text-sm font-semibold">Gagoope Clarance Merafhe</div>
+                    <div className="mt-1 text-xs text-muted-foreground">
+                      IT Systems Developer · RPC Data · Botswana
+                    </div>
+                  </figcaption>
+                </figure>
+              </Reveal>
+
+              <Reveal delay={100}>
+                <div className="grid gap-5 text-[0.95rem] leading-relaxed text-muted-foreground">
+                  <p>
+                    I&apos;m a Botswana-based developer working across SAP Business One, business
+                    automation, full-stack web applications, APIs and databases. Most of my work
+                    starts with a process that people are doing by hand — and ends with a system
+                    that does it for them, correctly, every time.
+                  </p>
+                  <p>
+                    My background is Computer Engineering, and I hold a Bachelor of Engineering
+                    (Honours) in Computer Engineering with a minor in Computer Science. Day to day
+                    that means SAP add-on development with the DI and UI APIs, internal applications
+                    on PHP/IIS, SQL Server and MySQL data models, and the reporting that finance and
+                    operations teams actually use.
+                  </p>
+                </div>
+
+                <div className="mt-9 grid gap-4 sm:grid-cols-2">
+                  {education.slice(0, 4).map((e) => (
+                    <div key={e.id} className="border-t border-border pt-4">
+                      <div className="font-mono text-[10px] uppercase tracking-widest text-primary">
+                        {e.kind}
+                      </div>
+                      <div className="mt-2 text-sm font-semibold">{e.title}</div>
+                      <div className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                        {e.sub}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-9 border-t border-border pt-6">
+                  <div className="font-mono text-[10px] uppercase tracking-widest text-primary">
+                    Community · {volunteer.period}
+                  </div>
+                  <h3 className="mt-3 text-base font-semibold tracking-tight">{volunteer.title}</h3>
+                  <p className="mt-1 text-xs text-muted-foreground">{volunteer.org}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {volunteer.body}
+                  </p>
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </section>
+
+        {/* ————— 11 Why work with me ————— */}
+        <section className={`${shell} ${section}`}>
+          <Reveal>
+            <Head
+              n="11"
+              label="Why work with me"
+              title="Built around real business needs"
+              sub="No borrowed testimonials — here's how I approach the work and what you can expect."
+            />
+          </Reveal>
+          <div className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2">
+            {whyWorkWithMe.map((w, i) => (
+              <Reveal key={w.label} delay={(i % 2) * 80}>
+                <div className="h-full bg-background p-6 transition duration-300 hover:bg-surface sm:p-8">
+                  <div className="font-mono text-[10px] uppercase tracking-[0.28em] text-primary">
+                    {w.label}
+                  </div>
+                  <p className="mt-4 text-[0.95rem] leading-relaxed text-muted-foreground">
+                    {w.body}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+
+        {/* ————— 12 CV ————— */}
+        <section className="border-y border-border bg-surface/30">
+          <div className={`${shell} py-14 sm:py-20`}>
+            <Reveal>
+              <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
+                <div>
+                  <Label n="12">Curriculum vitae</Label>
+                  <h2 className="mt-5 text-[1.75rem] font-semibold tracking-tight sm:text-[2.25rem]">
+                    Want the full story?
+                  </h2>
+                  <p className="mt-4 max-w-xl text-[0.95rem] leading-relaxed text-muted-foreground">
+                    Download my CV to explore my experience, technical skills and professional
+                    background.
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-3">
+                  <a href={CV_PATH} download className={btnPrimary}>
+                    <Download className="h-4 w-4" aria-hidden /> Download CV
+                  </a>
+                  <CvPreviewButton label="Preview CV" className={btnSecondary} />
+                  <a href={GITHUB} target="_blank" rel="noreferrer" className={btnGhost}>
+                    <Github className="h-4 w-4" aria-hidden /> GitHub
+                  </a>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ————— 13 Contact ————— */}
+        <section id="contact" className={`${shell} ${section}`}>
+          <Reveal>
+            <Head
+              n="13"
+              label="Contact"
+              title="Have a process that needs automation?"
+              sub="Let's turn the manual work into a reliable system."
+            />
+          </Reveal>
+          <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+            <Reveal>
+              <div className="grid gap-3">
+                {[
+                  {
+                    icon: MessageCircle,
+                    label: "WhatsApp",
+                    value: `+267 ${WHATSAPP_LOCAL}`,
+                    href: WHATSAPP_URL,
+                    ext: true,
+                  },
+                  {
+                    icon: Mail,
+                    label: "Email Me",
+                    value: EMAIL,
+                    href: `mailto:${EMAIL}`,
+                  },
+                  {
+                    icon: Phone,
+                    label: "Phone",
+                    value: `+267 ${WHATSAPP_LOCAL}`,
+                    href: `tel:+267${WHATSAPP_LOCAL}`,
+                  },
+                  {
+                    icon: Github,
+                    label: "GitHub",
+                    value: "github.com/Gagoope",
+                    href: GITHUB,
+                    ext: true,
+                  },
+                ].map((c) => {
+                  const Icon = c.icon;
+                  return (
                     <a
+                      key={c.label}
                       href={c.href}
                       {...(c.ext ? { target: "_blank", rel: "noreferrer" } : {})}
-                      className="card-surface hairline-top group flex min-h-11 items-center gap-4 p-5"
+                      className="card-surface group flex min-h-11 items-center gap-4 p-4 sm:p-5"
                     >
-                      <IconTile icon={Icon} />
+                      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-primary/25 bg-primary/10 text-primary">
+                        <Icon className="h-4.5 w-4.5" aria-hidden />
+                      </span>
                       <span className="min-w-0 flex-1">
                         <span className="block font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
                           {c.label}
                         </span>
-                        <span className="mt-1 block break-all text-sm font-medium">{c.value}</span>
+                        <span className="mt-0.5 block break-all text-sm font-medium">{c.value}</span>
                       </span>
                       <ArrowRight
                         className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-300 group-hover:translate-x-1 group-hover:text-primary"
                         aria-hidden
                       />
                     </a>
-                  </Reveal>
-                );
-              })}
-            </div>
-            <p className="mt-10 flex items-center gap-2 text-sm text-muted-foreground">
-              <MapPin className="h-4 w-4 shrink-0 text-primary" aria-hidden /> Nata / Gaborone,
-              Botswana · Open to remote &amp; on-site.
-            </p>
+                  );
+                })}
+                <p className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
+                  <MapPin className="h-4 w-4 shrink-0 text-primary" aria-hidden /> Nata / Gaborone,
+                  Botswana · remote &amp; on-site
+                </p>
+              </div>
+            </Reveal>
+            <Reveal delay={100}>
+              <ContactForm />
+            </Reveal>
           </div>
         </section>
       </main>
 
-      <footer className="border-t border-border pb-28 sm:pb-0">
-        <div
-          className={`${shell} flex flex-wrap items-center justify-between gap-3 py-8 text-xs text-muted-foreground`}
-        >
-          <div>© {new Date().getFullYear()} Gagoope Clarance Merafhe · All rights reserved</div>
-          <div>Designed &amp; built in Botswana</div>
+      <footer className="border-t border-border bg-surface/30 pb-28 sm:pb-0">
+        <div className={`${shell} py-12 sm:py-16`}>
+          <div className="grid gap-10 md:grid-cols-[1.3fr_1fr_1fr]">
+            <div>
+              <div className="flex items-center gap-2.5">
+                <span className="grid h-9 w-9 place-items-center rounded-xl border border-primary/30 bg-primary/10 font-mono text-xs font-bold text-primary">
+                  GCM
+                </span>
+                <span className="text-sm font-semibold tracking-tight">Gagoope Merafhe</span>
+              </div>
+              <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
+                SAP Business One • Business Automation • Software Engineering
+              </p>
+              <p className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
+                <MapPin className="h-4 w-4 text-primary" aria-hidden /> Botswana 🇧🇼
+              </p>
+            </div>
+
+            <nav aria-label="Footer navigation" className="grid content-start gap-2.5 text-sm">
+              <span className="font-mono text-[10px] uppercase tracking-widest text-primary">
+                Sections
+              </span>
+              {navLinks.map((l) => (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  className="text-muted-foreground transition hover:text-foreground"
+                >
+                  {l.label}
+                </a>
+              ))}
+            </nav>
+
+            <div className="grid content-start gap-2.5 text-sm">
+              <span className="font-mono text-[10px] uppercase tracking-widest text-primary">
+                Elsewhere
+              </span>
+              <a
+                href={GITHUB}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 text-muted-foreground transition hover:text-foreground"
+              >
+                <Github className="h-4 w-4" aria-hidden /> GitHub
+              </a>
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 text-muted-foreground transition hover:text-foreground"
+              >
+                <MessageCircle className="h-4 w-4" aria-hidden /> WhatsApp
+              </a>
+              <a
+                href={`mailto:${EMAIL}`}
+                className="inline-flex items-center gap-2 text-muted-foreground transition hover:text-foreground"
+              >
+                <Mail className="h-4 w-4" aria-hidden /> Email
+              </a>
+              <a
+                href={CV_PATH}
+                download
+                className="inline-flex items-center gap-2 text-muted-foreground transition hover:text-foreground"
+              >
+                <Download className="h-4 w-4" aria-hidden /> CV
+              </a>
+            </div>
+          </div>
+
+          <div className="mt-10 border-t border-border pt-6 text-xs text-muted-foreground">
+            © {new Date().getFullYear()} Gagoope Merafhe. All rights reserved.
+          </div>
         </div>
       </footer>
+
+      {open && <ProjectModal project={open} onClose={() => setOpen(null)} />}
     </div>
   );
 }
