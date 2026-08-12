@@ -185,14 +185,14 @@ function Portfolio() {
                 </div>
 
                 <h1 className="mt-6 text-[clamp(2rem,7vw,3.6rem)] font-semibold leading-[1.06] tracking-tight">
-                  SAP Business One &amp; Business Automation{" "}
+                  Web Development &amp; Business Automation{" "}
                   <span className="text-primary">Engineer</span>
                 </h1>
                 <p className="mt-5 text-lg font-medium sm:text-xl">
                   I build software that eliminates manual work.
                 </p>
                 <p className="mt-4 max-w-xl text-[0.95rem] leading-relaxed text-muted-foreground sm:text-base">
-                  I design SAP Business One integrations, enterprise applications and automation
+                  I design Web Applications, SAP Business One integrations, enterprise applications and automation
                   systems that help organisations work faster, reduce errors and make better use of
                   their data.
                 </p>
@@ -618,7 +618,7 @@ function Portfolio() {
                   <figcaption className="border-t border-border p-5">
                     <div className="text-sm font-semibold">Gagoope Clarance Merafhe</div>
                     <div className="mt-1 text-xs text-muted-foreground">
-                      IT Systems Developer · RPC Data · Botswana
+                      IT Systems Developer · Gaborone · Botswana
                     </div>
                   </figcaption>
                 </figure>
@@ -791,7 +791,7 @@ function Portfolio() {
                   );
                 })}
                 <p className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
-                  <MapPin className="h-4 w-4 shrink-0 text-primary" aria-hidden /> Nata / Gaborone,
+                  <MapPin className="h-4 w-4 shrink-0 text-primary" aria-hidden /> Gaborone,
                   Botswana · remote &amp; on-site
                 </p>
               </div>
@@ -814,7 +814,7 @@ function Portfolio() {
                 <span className="text-sm font-semibold tracking-tight">Gagoope Merafhe</span>
               </div>
               <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
-                SAP Business One • Business Automation • Software Engineering
+                Business Automation • Software Engineering
               </p>
               <p className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
                 <MapPin className="h-4 w-4 text-primary" aria-hidden /> Botswana 🇧🇼
