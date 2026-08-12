@@ -6,10 +6,11 @@ export type NavLink = { label: string; href: string };
 
 const mobileTabs = [
   { label: "Home", href: "#top", icon: Home },
+  { label: "Work", href: "#work", icon: Briefcase },
   { label: "Services", href: "#services", icon: Layers },
-  { label: "Work", href: "#projects", icon: Briefcase },
   { label: "About", href: "#about", icon: User },
 ];
+
 
 export function SiteNav({
   links,
@@ -118,7 +119,7 @@ export function SiteNav({
                 rel="noreferrer"
                 className="hidden min-h-10 items-center gap-2 rounded-full bg-primary px-4 text-sm font-medium text-primary-foreground shadow-soft transition duration-300 hover:shadow-lift hover:brightness-110 sm:inline-flex"
               >
-                <MessageCircle className="h-4 w-4" aria-hidden /> Hire Me
+                <MessageCircle className="h-4 w-4" aria-hidden /> Let&apos;s Talk
               </a>
 
               <button
