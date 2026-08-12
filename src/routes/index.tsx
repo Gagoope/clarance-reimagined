@@ -185,7 +185,7 @@ function Portfolio() {
                 </div>
 
                 <h1 className="mt-6 text-[clamp(2rem,7vw,3.6rem)] font-semibold leading-[1.06] tracking-tight">
-                  Web Development &amp; Business Automation{" "}
+                  Web Developer &amp; Business Automation{" "}
                   <span className="text-primary">Engineer</span>
                 </h1>
                 <p className="mt-5 text-lg font-medium sm:text-xl">
