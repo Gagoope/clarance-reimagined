@@ -65,8 +65,17 @@ export function ProjectModal({
         </header>
 
         <div className="min-h-0 flex-1 overflow-y-auto px-4 pb-10 sm:px-8">
+          {project.image && (
+            <div className="mt-4 overflow-hidden rounded-xl border border-border bg-surface/60">
+              <img
+                src={project.image}
+                alt={`${project.title} — project visual`}
+                className="aspect-[16/9] w-full object-cover"
+              />
+            </div>
+          )}
           {/* Mockup hero — representative, not a production screenshot */}
-          <div className="ambient relative overflow-hidden rounded-xl border border-border bg-surface/50 p-5">
+          <div className="ambient relative mt-4 overflow-hidden rounded-xl border border-border bg-surface/50 p-5">
             <div className="flex items-center gap-3">
               <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-primary/30 bg-primary/10 text-primary">
                 <Icon className="h-5 w-5" aria-hidden />
