@@ -472,8 +472,19 @@ function Portfolio() {
                     <button
                       type="button"
                       onClick={() => setOpen(p)}
-                      className="card-surface hairline-top group flex h-full w-full flex-col p-6 text-left sm:p-7"
+                      className="card-surface hairline-top group flex h-full w-full flex-col overflow-hidden p-0 text-left"
                     >
+                      {p.image && (
+                        <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-border bg-surface/60">
+                          <img
+                            src={p.image}
+                            alt={`${p.title} — project visual`}
+                            loading="lazy"
+                            className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+                          />
+                        </div>
+                      )}
+                      <div className="flex flex-1 flex-col p-6 sm:p-7">
                       <div className="flex items-start justify-between gap-4">
                         <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-primary/25 bg-primary/10 text-primary transition duration-300 group-hover:scale-105">
                           <Icon className="h-5 w-5" aria-hidden />
@@ -509,6 +520,7 @@ function Portfolio() {
                             aria-hidden
                           />
                         </span>
+                       </div>
                       </div>
                     </button>
                   </Reveal>
