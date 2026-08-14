@@ -520,6 +520,7 @@ function Portfolio() {
                             aria-hidden
                           />
                         </span>
+                       </div>
                       </div>
                     </button>
                   </Reveal>
