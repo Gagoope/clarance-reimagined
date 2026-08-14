@@ -475,12 +475,14 @@ function Portfolio() {
                       className="card-surface hairline-top group flex h-full w-full flex-col overflow-hidden p-0 text-left"
                     >
                       {p.image && (
-                        <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-border bg-surface/60">
+                        <div className="relative h-28 w-full overflow-hidden border-b border-border bg-surface/60 sm:h-32 lg:h-36">
                           <img
                             src={p.image}
                             alt={`${p.title} — project visual`}
                             loading="lazy"
-                            className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+                            decoding="async"
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                            className="h-full w-full object-cover object-center transition duration-500 group-hover:scale-[1.03]"
                           />
                         </div>
                       )}

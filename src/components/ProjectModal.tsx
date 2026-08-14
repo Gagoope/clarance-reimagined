@@ -66,11 +66,13 @@ export function ProjectModal({
 
         <div className="min-h-0 flex-1 overflow-y-auto px-4 pb-10 sm:px-8">
           {project.image && (
-            <div className="mt-4 overflow-hidden rounded-xl border border-border bg-surface/60">
+            <div className="mt-4 h-32 overflow-hidden rounded-xl border border-border bg-surface/60 sm:h-40 lg:h-48">
               <img
                 src={project.image}
                 alt={`${project.title} — project visual`}
-                className="aspect-[16/9] w-full object-cover"
+                decoding="async"
+                sizes="(max-width: 640px) 100vw, 640px"
+                className="h-full w-full object-cover object-center"
               />
             </div>
           )}
