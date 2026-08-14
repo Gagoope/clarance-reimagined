@@ -147,6 +147,7 @@ export type Project = {
   implementation: string[];
   result: string;
   impact: string;
+  image?: string;
   demoUrl?: string;
   featured?: boolean;
 };
@@ -154,6 +155,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     id: "sap-journal",
+    image: "/assets/work/JE.jpg",
     title: "SAP Business One Journal Automation",
     category: "SAP",
     client: "RPC Data Limited",
@@ -188,6 +190,7 @@ export const projects: Project[] = [
   },
   {
     id: "pos",
+    image: "/assets/work/pos.png",
     title: "Point of Sale Platform",
     category: "Web",
     client: "Personal product",
@@ -213,6 +216,7 @@ export const projects: Project[] = [
   },
   {
     id: "nardi-approvals",
+    image: "/assets/work/approved.jpg",
     title: "Request & Approval System",
     category: "Enterprise",
     client: "NARDI",
@@ -235,6 +239,7 @@ export const projects: Project[] = [
   },
   {
     id: "iduela",
+    image: "/assets/work/HR_and_payroll.jpg",
     title: "IDuela HR & Payroll Configuration",
     category: "Enterprise",
     client: "NARDI",
@@ -257,6 +262,7 @@ export const projects: Project[] = [
   },
   {
     id: "loan-system",
+    image: "/assets/work/Loan_MS.png",
     title: "Loan Management System Specification",
     category: "Data",
     client: "Thobela Pawn Shop",
@@ -280,6 +286,7 @@ export const projects: Project[] = [
   },
   {
     id: "attendance",
+    image: "/assets/work/Attendance_system.jpg",
     title: "Automated Attendance Tracking",
     category: "Automation",
     client: "Botho University",
@@ -301,6 +308,7 @@ export const projects: Project[] = [
   },
   {
     id: "portfolio",
+    image: "/assets/work/portfolio.jpg",
     title: "Developer Portfolio Platform",
     category: "Web",
     client: "Self",
