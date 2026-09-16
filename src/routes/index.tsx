@@ -27,6 +27,7 @@ import {
   CV_PATH,
   EMAIL,
   GITHUB,
+  LINKEDIN,
   PROFILE_IMG,
   WHATSAPP_LOCAL,
   WHATSAPP_URL,
@@ -90,7 +91,7 @@ export const Route = createFileRoute("/")({
                 "REST APIs",
                 "IIS",
               ],
-              sameAs: [GITHUB],
+              sameAs: [GITHUB, LINKEDIN],
             },
             {
               "@type": "ProfessionalService",
@@ -733,6 +734,9 @@ function Portfolio() {
                   <a href={GITHUB} target="_blank" rel="noreferrer" className={btnGhost}>
                     <Github className="h-4 w-4" aria-hidden /> GitHub
                   </a>
+                  <a href={LINKEDIN} target="_blank" rel="noreferrer" className={btnGhost}>
+                    <Linkedin className="h-4 w-4" aria-hidden /> LinkedIn
+                  </a>
                 </div>
               </div>
             </Reveal>
@@ -777,6 +781,13 @@ function Portfolio() {
                     label: "GitHub",
                     value: "github.com/Gagoope",
                     href: GITHUB,
+                    ext: true,
+                  },
+                  {
+                    icon: Linkedin,
+                    label: "LinkedIn",
+                    value: "linkedin.com/in/gagoope-merafhe",
+                    href: LINKEDIN,
                     ext: true,
                   },
                 ].map((c) => {
@@ -861,6 +872,14 @@ function Portfolio() {
                 className="inline-flex items-center gap-2 text-muted-foreground transition hover:text-foreground"
               >
                 <Github className="h-4 w-4" aria-hidden /> GitHub
+              </a>
+              <a
+                href={LINKEDIN}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 text-muted-foreground transition hover:text-foreground"
+              >
+                <Linkedin className="h-4 w-4" aria-hidden /> LinkedIn
               </a>
               <a
                 href={WHATSAPP_URL}

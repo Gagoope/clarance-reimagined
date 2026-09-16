@@ -20,6 +20,7 @@ export const WHATSAPP_LOCAL = "77447823";
 export const WHATSAPP_INTL = "26777447823";
 export const EMAIL = "meragcm@gmail.com";
 export const GITHUB = "https://github.com/Gagoope";
+export const LINKEDIN = "https://www.linkedin.com/in/gagoope-merafhe-7b5656437/";
 export const CV_PATH = "/assets/Gagoope_Clarance_Merafhe_CV.pdf";
 export const PROFILE_IMG = "/assets/gcm-profile.jpeg";
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_INTL}?text=Hi%20Gagoope%2C%20I%27d%20like%20to%20discuss%20a%20project.`;
@@ -149,6 +150,7 @@ export type Project = {
   impact: string;
   image?: string;
   demoUrl?: string;
+  demoCreds?: string;
   featured?: boolean;
 };
 
@@ -186,6 +188,8 @@ export const projects: Project[] = [
       "Up to 500 journal entries posted per batch with no posting errors recorded in production.",
     impact:
       "Month-end journal capture moved from repetitive manual entry to a reviewed, repeatable batch process.",
+    demoUrl: "https://pulsepoint.liveblog365.com",
+    demoCreds: "Username: visitor · Password: P@ssword1",
     featured: true,
   },
   {
@@ -213,6 +217,7 @@ export const projects: Project[] = [
     result: "Deployed and running as a live demo environment.",
     impact: "Shows end-to-end product delivery: data model, UI, deployment and access control.",
     demoUrl: "https://motswedi.liveblog365.com/login.php",
+    demoCreds: "Username: visitor · Password: Visitor@123 (read-only)",
   },
   {
     id: "nardi-approvals",
@@ -236,6 +241,71 @@ export const projects: Project[] = [
     ],
     result: "Requests and approvals handled in one system with a traceable audit trail.",
     impact: "Approval status became visible to everyone involved instead of living in inboxes.",
+    demoUrl: "https://request.liveblog365.com/auth/login.php",
+    demoCreds: "Username: visitor · Password: password1",
+  },
+  {
+    id: "loan-investment",
+    title: "Loan & Investment Management System",
+    category: "Enterprise",
+    client: "Personal product",
+    period: "Jan 2026 – Sep 2026",
+    icon: LineChart,
+    short:
+      "Lending platform covering customers, applications, loan terms, repayments, roles and admin configuration.",
+    problem:
+      "Lending operations spread across spreadsheets leave repayments, terms and approvals hard to track.",
+    approach:
+      "Built a single platform for the full lending lifecycle with role-based access and reporting.",
+    architecture: [
+      "Customer intake",
+      "Loan application",
+      "Terms & repayments",
+      "MySQL",
+      "Reporting",
+    ],
+    stack: ["PHP", "MySQL", "JavaScript", "HTML5", "CSS3"],
+    implementation: [
+      "Customer and loan application management",
+      "Loan terms and repayment tracking",
+      "User roles and permissions system",
+      "Administrative configuration and reporting tools",
+    ],
+    result: "Deployed as a working demo environment covering the full lending lifecycle.",
+    impact: "Lending operations, oversight and reporting run from one system.",
+    demoUrl: "https://motswedi.liveblog365.com/login.php",
+    demoCreds: "Username: admin · Password: Passw0rd!",
+  },
+  {
+    id: "hospital",
+    title: "Hospital Management System",
+    category: "Enterprise",
+    client: "Personal product",
+    period: "Apr 2026 – Sep 2026",
+    icon: ClipboardList,
+    short:
+      "Hospital platform managing patients, appointments, doctors, pharmacy, billing and medical records.",
+    problem:
+      "Clinics juggle patient records, scheduling, pharmacy and billing in disconnected tools.",
+    approach:
+      "Designed one platform where clinical, pharmacy and billing operations share the same records.",
+    architecture: [
+      "Patient records",
+      "Appointments",
+      "Pharmacy & billing",
+      "MySQL",
+      "Admin reporting",
+    ],
+    stack: ["PHP", "MySQL", "JavaScript", "HTML5", "CSS3"],
+    implementation: [
+      "Patient and appointment management",
+      "Doctor scheduling and clinical records",
+      "Pharmacy and billing modules",
+      "Administrative reporting and user management",
+    ],
+    result: "Working demo covering patient-to-billing operations end to end.",
+    impact: "Shows domain modelling across clinical, pharmacy and finance workflows.",
+    demoCreds: "Username: admin · Password: Passw0rd!",
   },
   {
     id: "iduela",
@@ -420,6 +490,12 @@ export const education = [
     kind: "Tertiary · 2024",
     title: "Bachelor of Engineering (Honours) in Computer Engineering",
     sub: "Minor in Computer Science · Gaborone, Botswana",
+  },
+  {
+    id: "EDU-007",
+    kind: "Certification · 2025",
+    title: "SAP Business One Functional Consultant",
+    sub: "RPC Data Limited — client installation, Crystal Reports, functional consulting",
   },
   {
     id: "EDU-002",
