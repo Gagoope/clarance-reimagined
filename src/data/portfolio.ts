@@ -514,6 +514,28 @@ export const education = [
   { id: "EDU-006", kind: "Primary · 2012", title: "PSLE", sub: "Nata, Botswana" },
 ];
 
+export const experience: {
+  role: string;
+  org: string;
+  period: string;
+  body: string;
+}[] = [
+  {
+    role: "IDuela Developer Trainee",
+    org: "RPC Data Limited — Gaborone",
+    period: "Apr 2024 – Mar 2025",
+    body:
+      "Analysed and finalised system requirements for technical implementations, engineered bespoke add-on solutions with the SAP SDK and supported configuration of IDuela HR and Payroll modules across end-to-end client deployments.",
+  },
+  {
+    role: "IT Assistant Officer",
+    org: "Kutlwano Junior Secondary School — Gweta",
+    period: "Jul 2022 – Nov 2022",
+    body:
+      "Provided technical support to staff and students, managed school-wide systems and improved web-based applications, overseeing data integrity and resolving support incidents to keep daily operations running.",
+  },
+];
+
 export const volunteer = {
   title: "Volunteer Coordinator — Village Clean-Up",
   org: "Kgotla Community Initiative, Gabane Village, Botswana",
