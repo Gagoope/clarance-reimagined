@@ -146,7 +146,13 @@ export function ProjectModal({
             <Block label="Impact">{project.impact}</Block>
           </div>
 
-          <div className="mt-9 flex flex-wrap gap-3">
+          {project.demoCreds && (
+            <p className="mt-8 font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+              Demo access — {project.demoCreds}
+            </p>
+          )}
+
+          <div className="mt-6 flex flex-wrap gap-3">
             <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className={btnPrimary}>
               Discuss a similar build
             </a>
