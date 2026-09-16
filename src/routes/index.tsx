@@ -656,6 +656,24 @@ function Portfolio() {
                   </p>
                 </div>
 
+                <div className="mt-9 grid gap-6">
+                  <div className="font-mono text-[10px] uppercase tracking-widest text-primary">
+                    Experience
+                  </div>
+                  {experience.map((x) => (
+                    <div key={x.role} className="border-t border-border pt-4">
+                      <div className="flex flex-wrap items-baseline justify-between gap-2">
+                        <h3 className="text-sm font-semibold tracking-tight">{x.role}</h3>
+                        <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                          {x.period}
+                        </span>
+                      </div>
+                      <p className="mt-1 text-xs text-muted-foreground">{x.org}</p>
+                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{x.body}</p>
+                    </div>
+                  ))}
+                </div>
+
                 <div className="mt-9 grid gap-4 sm:grid-cols-2">
                   {education.slice(0, 4).map((e) => (
                     <div key={e.id} className="border-t border-border pt-4">

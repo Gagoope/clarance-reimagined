@@ -273,8 +273,7 @@ export const projects: Project[] = [
     ],
     result: "Deployed as a working demo environment covering the full lending lifecycle.",
     impact: "Lending operations, oversight and reporting run from one system.",
-    demoUrl: "https://motswedi.liveblog365.com/login.php",
-    demoCreds: "Username: admin · Password: Passw0rd!",
+    demoCreds: "Username: admin · Password: Passw0rd! (on request)",
   },
   {
     id: "hospital",
@@ -301,11 +300,12 @@ export const projects: Project[] = [
       "Patient and appointment management",
       "Doctor scheduling and clinical records",
       "Pharmacy and billing modules",
+      "Medical records system",
       "Administrative reporting and user management",
     ],
     result: "Working demo covering patient-to-billing operations end to end.",
     impact: "Shows domain modelling across clinical, pharmacy and finance workflows.",
-    demoCreds: "Username: admin · Password: Passw0rd!",
+    demoCreds: "Username: admin · Password: Passw0rd! (on request)",
   },
   {
     id: "iduela",
@@ -381,8 +381,8 @@ export const projects: Project[] = [
     image: "/assets/work/portfolio.jpg",
     title: "Developer Portfolio Platform",
     category: "Web",
-    client: "Self",
-    period: "2026",
+    client: "My-Portfolio",
+    period: "Jan 2026",
     icon: Sparkles,
     short: "Responsive portfolio built with React and TypeScript, tuned for performance.",
     problem: "Technical work needed a presentation that stood on its own.",
@@ -512,6 +512,28 @@ export const education = [
   { id: "EDU-004", kind: "Secondary · 2017", title: "BGCSE", sub: "Nata, Botswana" },
   { id: "EDU-005", kind: "Junior · 2015", title: "Junior Certificate", sub: "Gweta, Botswana" },
   { id: "EDU-006", kind: "Primary · 2012", title: "PSLE", sub: "Nata, Botswana" },
+];
+
+export const experience: {
+  role: string;
+  org: string;
+  period: string;
+  body: string;
+}[] = [
+  {
+    role: "IDuela Developer Trainee",
+    org: "RPC Data Limited — Gaborone",
+    period: "Apr 2024 – Mar 2025",
+    body:
+      "Analysed and finalised system requirements for technical implementations, engineered bespoke add-on solutions with the SAP SDK and supported configuration of IDuela HR and Payroll modules across end-to-end client deployments.",
+  },
+  {
+    role: "IT Assistant Officer",
+    org: "Kutlwano Junior Secondary School — Gweta",
+    period: "Jul 2022 – Nov 2022",
+    body:
+      "Provided technical support to staff and students, managed school-wide systems and improved web-based applications, overseeing data integrity and resolving support incidents to keep daily operations running.",
+  },
 ];
 
 export const volunteer = {
