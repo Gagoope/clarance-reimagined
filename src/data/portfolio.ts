@@ -157,7 +157,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     id: "sap-journal",
-    image: "/assets/work/JE.jpg",
+    image: "/assets/work/sap-business-one-journal-addon.jpg",
     title: "SAP Business One Journal Automation",
     category: "SAP",
     client: "RPC Data Limited",
@@ -194,7 +194,7 @@ export const projects: Project[] = [
   },
   {
     id: "pos",
-    image: "/assets/work/pos.png",
+    image: "/assets/work/point-of-sale.jpg",
     title: "Point of Sale Platform",
     category: "Web",
     client: "Personal product",
@@ -221,7 +221,7 @@ export const projects: Project[] = [
   },
   {
     id: "nardi-approvals",
-    image: "/assets/work/approved.jpg",
+    image: "/assets/work/request-and-approval-system.png",
     title: "Request & Approval System",
     category: "Enterprise",
     client: "NARDI",
@@ -246,6 +246,7 @@ export const projects: Project[] = [
   },
   {
     id: "loan-investment",
+    image: "/assets/work/loan-investment-management.png",
     title: "Loan & Investment Management System",
     category: "Enterprise",
     client: "Personal product",
@@ -277,6 +278,7 @@ export const projects: Project[] = [
   },
   {
     id: "hospital",
+    image: "/assets/work/hospital-management-system.jpg",
     title: "Hospital Management System",
     category: "Enterprise",
     client: "Personal product",
@@ -309,7 +311,7 @@ export const projects: Project[] = [
   },
   {
     id: "iduela",
-    image: "/assets/work/HR_and_payroll.jpg",
+    image: "/assets/work/iduela-hr-payroll.png",
     title: "IDuela HR & Payroll Configuration",
     category: "Enterprise",
     client: "NARDI",
@@ -332,7 +334,7 @@ export const projects: Project[] = [
   },
   {
     id: "loan-system",
-    image: "/assets/work/Loan_MS.png",
+    image: "/assets/work/loan-management-system-spec.svg",
     title: "Loan Management System Specification",
     category: "Data",
     client: "Thobela Pawn Shop",
@@ -378,7 +380,7 @@ export const projects: Project[] = [
   },
   {
     id: "portfolio",
-    image: "/assets/work/portfolio.jpg",
+    image: "/assets/work/portfolio-website.png",
     title: "Developer Portfolio Platform",
     category: "Web",
     client: "My-Portfolio",
