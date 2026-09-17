@@ -33,6 +33,7 @@ import {
   WHATSAPP_URL,
   domains,
   education,
+  experience,
   filters,
   heroTech,
   metrics,
