@@ -735,20 +735,21 @@ function Portfolio() {
               sub="No borrowed testimonials — here's how I approach the work and what you can expect."
             />
           </Reveal>
-          <div className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2">
+          <div className="grid gap-5 sm:grid-cols-2 lg:gap-6">
             {whyWorkWithMe.map((w, i) => (
               <Reveal key={w.label} delay={(i % 2) * 80}>
-                <div className="h-full bg-background p-6 transition duration-300 hover:bg-surface sm:p-8">
-                  <div className="font-mono text-[10px] uppercase tracking-[0.28em] text-primary">
+                <div className="card-editorial h-full p-7 sm:p-9">
+                  <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-primary">
                     {w.label}
                   </div>
-                  <p className="mt-4 text-[0.95rem] leading-relaxed text-muted-foreground">
+                  <p className="mt-5 text-[0.95rem] leading-relaxed text-muted-foreground">
                     {w.body}
                   </p>
                 </div>
               </Reveal>
             ))}
           </div>
+
         </section>
 
         {/* ————— 12 CV ————— */}
