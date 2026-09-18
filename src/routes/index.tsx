@@ -295,7 +295,7 @@ function Portfolio() {
               const Icon = d.icon;
               return (
                 <Reveal key={d.label} delay={i * 80}>
-                  <article className="card-surface hairline-top group flex h-full flex-col p-6">
+                  <article className="card-editorial group flex h-full flex-col p-7 sm:p-8">
                     <span className="grid h-11 w-11 place-items-center rounded-xl border border-primary/25 bg-primary/10 text-primary transition duration-300 group-hover:glow-primary">
                       <Icon className="h-5 w-5" aria-hidden />
                     </span>
@@ -336,39 +336,40 @@ function Portfolio() {
                 sub="Six engagements covering enterprise systems end to end — from SAP integrations to reporting."
               />
             </Reveal>
-            <div className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2 xl:grid-cols-3">
+            <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
               {services.map((s, i) => {
                 const Icon = s.icon;
                 return (
                   <Reveal key={s.title} delay={(i % 3) * 80}>
-                    <article className="group flex h-full flex-col bg-background p-6 transition duration-300 hover:bg-surface sm:p-7">
-                      <div className="flex items-center justify-between">
-                        <span className="grid h-10 w-10 place-items-center rounded-xl border border-primary/25 bg-primary/10 text-primary">
+                    <article className="card-editorial group flex h-full flex-col p-7 sm:p-8">
+                      <div className="flex items-start justify-between">
+                        <span className="grid h-11 w-11 place-items-center rounded-2xl border border-border bg-background/60 text-primary">
                           <Icon className="h-5 w-5" aria-hidden />
                         </span>
-                        <span className="font-mono text-xs text-border-strong">{s.n}</span>
+                        <span className="font-mono text-[11px] tracking-widest text-border-strong">
+                          {s.n}
+                        </span>
                       </div>
-                      <h3 className="mt-5 text-base font-semibold tracking-tight">{s.title}</h3>
+                      <h3 className="mt-7 text-xl font-bold leading-tight tracking-[-0.03em] sm:text-[1.4rem]">
+                        {s.title}
+                      </h3>
                       <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
                         {s.desc}
                       </p>
-                      <div className="mt-5 flex flex-wrap gap-1.5">
+                      <div className="mt-6 flex flex-wrap gap-1.5">
                         {s.tags.map((t) => (
-                          <span
-                            key={t}
-                            className="rounded-full border border-border px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground"
-                          >
+                          <span key={t} className={tag}>
                             {t}
                           </span>
                         ))}
                       </div>
                       <a
                         href="#contact"
-                        className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-primary"
+                        className="mt-7 inline-flex items-center gap-2 border-t border-border pt-5 text-sm font-medium text-foreground"
                       >
                         Explore
                         <ArrowRight
-                          className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                          className="h-4 w-4 text-primary transition-transform duration-300 group-hover:translate-x-1.5"
                           aria-hidden
                         />
                       </a>
@@ -377,6 +378,7 @@ function Portfolio() {
                 );
               })}
             </div>
+
           </div>
         </section>
 
