@@ -88,7 +88,7 @@ export function Card({
 }) {
   return (
     <div
-      className={`card-surface overflow-hidden p-6 sm:p-7 ${
+      className={`card-editorial overflow-hidden p-7 sm:p-8 ${
         interactive ? "hairline-top" : ""
       } ${className}`}
     >

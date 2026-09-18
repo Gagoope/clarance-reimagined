@@ -110,14 +110,16 @@ export const Route = createFileRoute("/")({
 });
 
 const shell = "mx-auto w-full max-w-6xl px-4 sm:px-6";
-const section = "py-16 sm:py-24";
+const section = "py-20 sm:py-28 lg:py-36";
+const tag =
+  "rounded-full border border-border px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground";
 
 function Label({ n, children }: { n: string; children: React.ReactNode }) {
   return (
-    <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.3em] text-primary">
-      <span>{n}</span>
-      <span className="h-px w-8 bg-primary/50" aria-hidden />
-      <span className="text-muted-foreground">{children}</span>
+    <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.32em] text-muted-foreground">
+      <span className="text-primary">{n}</span>
+      <span className="h-px w-10 bg-border-strong" aria-hidden />
+      <span>{children}</span>
     </div>
   );
 }
@@ -136,21 +138,24 @@ function Head({
   center?: boolean;
 }) {
   return (
-    <header className={`mb-10 max-w-2xl sm:mb-14 ${center ? "mx-auto text-center" : ""}`}>
+    <header
+      className={`mb-12 max-w-3xl sm:mb-16 lg:mb-20 ${center ? "mx-auto text-center" : ""}`}
+    >
       <div className={center ? "flex justify-center" : ""}>
         <Label n={n}>{label}</Label>
       </div>
-      <h2 className="mt-5 text-[1.75rem] font-semibold leading-[1.12] tracking-tight sm:text-[2.5rem]">
+      <h2 className="mt-6 text-[clamp(2rem,5.5vw,3.4rem)] font-bold leading-[1.02] tracking-[-0.045em] text-balance">
         {title}
       </h2>
       {sub && (
-        <p className="mt-4 text-[0.95rem] leading-relaxed text-muted-foreground sm:text-base">
+        <p className="mt-5 max-w-xl text-[0.95rem] leading-relaxed text-muted-foreground sm:text-base">
           {sub}
         </p>
       )}
     </header>
   );
 }
+
 
 function Portfolio() {
   const [filter, setFilter] = useState<(typeof filters)[number]>("All");
@@ -290,7 +295,7 @@ function Portfolio() {
               const Icon = d.icon;
               return (
                 <Reveal key={d.label} delay={i * 80}>
-                  <article className="card-surface hairline-top group flex h-full flex-col p-6">
+                  <article className="card-editorial group flex h-full flex-col p-7 sm:p-8">
                     <span className="grid h-11 w-11 place-items-center rounded-xl border border-primary/25 bg-primary/10 text-primary transition duration-300 group-hover:glow-primary">
                       <Icon className="h-5 w-5" aria-hidden />
                     </span>
@@ -331,39 +336,40 @@ function Portfolio() {
                 sub="Six engagements covering enterprise systems end to end — from SAP integrations to reporting."
               />
             </Reveal>
-            <div className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2 xl:grid-cols-3">
+            <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
               {services.map((s, i) => {
                 const Icon = s.icon;
                 return (
                   <Reveal key={s.title} delay={(i % 3) * 80}>
-                    <article className="group flex h-full flex-col bg-background p-6 transition duration-300 hover:bg-surface sm:p-7">
-                      <div className="flex items-center justify-between">
-                        <span className="grid h-10 w-10 place-items-center rounded-xl border border-primary/25 bg-primary/10 text-primary">
+                    <article className="card-editorial group flex h-full flex-col p-7 sm:p-8">
+                      <div className="flex items-start justify-between">
+                        <span className="grid h-11 w-11 place-items-center rounded-2xl border border-border bg-background/60 text-primary">
                           <Icon className="h-5 w-5" aria-hidden />
                         </span>
-                        <span className="font-mono text-xs text-border-strong">{s.n}</span>
+                        <span className="font-mono text-[11px] tracking-widest text-border-strong">
+                          {s.n}
+                        </span>
                       </div>
-                      <h3 className="mt-5 text-base font-semibold tracking-tight">{s.title}</h3>
+                      <h3 className="mt-7 text-xl font-bold leading-tight tracking-[-0.03em] sm:text-[1.4rem]">
+                        {s.title}
+                      </h3>
                       <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
                         {s.desc}
                       </p>
-                      <div className="mt-5 flex flex-wrap gap-1.5">
+                      <div className="mt-6 flex flex-wrap gap-1.5">
                         {s.tags.map((t) => (
-                          <span
-                            key={t}
-                            className="rounded-full border border-border px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground"
-                          >
+                          <span key={t} className={tag}>
                             {t}
                           </span>
                         ))}
                       </div>
                       <a
                         href="#contact"
-                        className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-primary"
+                        className="mt-7 inline-flex items-center gap-2 border-t border-border pt-5 text-sm font-medium text-foreground"
                       >
                         Explore
                         <ArrowRight
-                          className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                          className="h-4 w-4 text-primary transition-transform duration-300 group-hover:translate-x-1.5"
                           aria-hidden
                         />
                       </a>
@@ -372,6 +378,7 @@ function Portfolio() {
                 );
               })}
             </div>
+
           </div>
         </section>
 
@@ -423,7 +430,7 @@ function Portfolio() {
             </Reveal>
 
             <Reveal delay={120}>
-              <div className="card-surface p-6">
+              <div className="card-editorial p-7 sm:p-8">
                 <div className="font-mono text-[10px] uppercase tracking-[0.28em] text-primary">
                   Workflow
                 </div>
@@ -482,7 +489,7 @@ function Portfolio() {
               ))}
             </div>
 
-            <div className="grid gap-5 md:grid-cols-2">
+            <div className="grid gap-6 md:grid-cols-2 lg:gap-8">
               {visible.map((p, i) => {
                 const Icon = p.icon;
                 return (
@@ -490,59 +497,57 @@ function Portfolio() {
                     <button
                       type="button"
                       onClick={() => setOpen(p)}
-                      className="card-surface hairline-top group flex h-full w-full flex-col overflow-hidden p-0 text-left"
+                      className="card-editorial group flex h-full w-full flex-col p-4 text-left sm:p-5"
                     >
                       {p.image && (
-                        <div className="relative h-28 w-full overflow-hidden border-b border-border bg-surface/60 sm:h-32 lg:h-36">
+                        <div className="media-frame relative h-48 w-full sm:h-56 lg:h-64">
                           <img
                             src={p.image}
                             alt={`${p.title} — project visual`}
                             loading="lazy"
                             decoding="async"
                             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                            className="h-full w-full object-cover object-center transition duration-500 group-hover:scale-[1.03]"
+                            className="h-full w-full object-cover object-center group-hover:scale-[1.06]"
                           />
                         </div>
                       )}
-                      <div className="flex flex-1 flex-col p-6 sm:p-7">
-                      <div className="flex items-start justify-between gap-4">
-                        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-primary/25 bg-primary/10 text-primary transition duration-300 group-hover:scale-105">
-                          <Icon className="h-5 w-5" aria-hidden />
-                        </span>
-                        <span className="font-mono text-[10px] uppercase tracking-[0.28em] text-primary">
-                          {p.category}
-                        </span>
-                      </div>
-                      <h3 className="mt-5 text-lg font-semibold leading-snug tracking-tight">
-                        {p.title}
-                      </h3>
-                      <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
-                        {p.short}
-                      </p>
-                      <div className="mt-5 flex flex-wrap gap-1.5 opacity-70 transition duration-300 group-hover:opacity-100">
-                        {p.stack.slice(0, 4).map((t) => (
-                          <span
-                            key={t}
-                            className="rounded-full border border-border px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground"
-                          >
-                            {t}
+                      <div className="flex flex-1 flex-col px-2 pb-1 pt-6 sm:px-3">
+                        <div className="flex items-center justify-between gap-4">
+                          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+                            {p.category}
                           </span>
-                        ))}
-                      </div>
-                      <div className="mt-6 flex items-center justify-between gap-4 border-t border-border pt-5">
-                        <span className="min-w-0 truncate text-xs text-muted-foreground">
-                          {p.client} · {p.period}
-                        </span>
-                        <span className="inline-flex items-center gap-1.5 text-sm font-medium text-primary">
-                          Case study
-                          <ArrowRight
-                            className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
-                            aria-hidden
-                          />
-                        </span>
-                       </div>
+                          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl border border-border bg-background/60 text-primary">
+                            <Icon className="h-4 w-4" aria-hidden />
+                          </span>
+                        </div>
+                        <h3 className="mt-4 text-[1.35rem] font-bold leading-[1.15] tracking-[-0.035em] sm:text-[1.6rem]">
+                          {p.title}
+                        </h3>
+                        <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+                          {p.short}
+                        </p>
+                        <div className="mt-6 flex flex-wrap gap-1.5">
+                          {p.stack.slice(0, 4).map((t) => (
+                            <span key={t} className={tag}>
+                              {t}
+                            </span>
+                          ))}
+                        </div>
+                        <div className="mt-7 flex items-center justify-between gap-4 border-t border-border pt-5">
+                          <span className="min-w-0 truncate text-xs text-muted-foreground">
+                            {p.client} · {p.period}
+                          </span>
+                          <span className="inline-flex shrink-0 items-center gap-1.5 text-sm font-medium">
+                            Case study
+                            <ArrowRight
+                              className="h-4 w-4 text-primary transition-transform duration-300 group-hover:translate-x-1.5"
+                              aria-hidden
+                            />
+                          </span>
+                        </div>
                       </div>
                     </button>
+
                   </Reveal>
                 );
               })}
@@ -563,7 +568,7 @@ function Portfolio() {
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {techGroups.map((g, i) => (
               <Reveal key={g.group} delay={(i % 3) * 80}>
-                <div className="card-surface h-full p-6">
+                <div className="card-editorial h-full p-7 sm:p-8">
                   <h3 className="font-mono text-[10px] uppercase tracking-[0.28em] text-primary">
                     {g.group}
                   </h3>
@@ -639,7 +644,7 @@ function Portfolio() {
             </Reveal>
             <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
               <Reveal>
-                <figure className="card-surface overflow-hidden p-0">
+                <figure className="card-editorial overflow-hidden p-0">
                   <img
                     src={PROFILE_IMG}
                     alt="Portrait of Gagoope Clarance Merafhe"
@@ -730,20 +735,21 @@ function Portfolio() {
               sub="No borrowed testimonials — here's how I approach the work and what you can expect."
             />
           </Reveal>
-          <div className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2">
+          <div className="grid gap-5 sm:grid-cols-2 lg:gap-6">
             {whyWorkWithMe.map((w, i) => (
               <Reveal key={w.label} delay={(i % 2) * 80}>
-                <div className="h-full bg-background p-6 transition duration-300 hover:bg-surface sm:p-8">
-                  <div className="font-mono text-[10px] uppercase tracking-[0.28em] text-primary">
+                <div className="card-editorial h-full p-7 sm:p-9">
+                  <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-primary">
                     {w.label}
                   </div>
-                  <p className="mt-4 text-[0.95rem] leading-relaxed text-muted-foreground">
+                  <p className="mt-5 text-[0.95rem] leading-relaxed text-muted-foreground">
                     {w.body}
                   </p>
                 </div>
               </Reveal>
             ))}
           </div>
+
         </section>
 
         {/* ————— 12 CV ————— */}
@@ -832,7 +838,7 @@ function Portfolio() {
                       key={c.label}
                       href={c.href}
                       {...(c.ext ? { target: "_blank", rel: "noreferrer" } : {})}
-                      className="card-surface group flex min-h-11 items-center gap-4 p-4 sm:p-5"
+                      className="card-editorial group flex min-h-11 items-center gap-4 p-4 sm:p-5"
                     >
                       <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-primary/25 bg-primary/10 text-primary">
                         <Icon className="h-4.5 w-4.5" aria-hidden />

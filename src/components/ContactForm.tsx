@@ -70,7 +70,7 @@ export function ContactForm() {
 
   if (state === "sent") {
     return (
-      <div className="card-surface p-6 sm:p-8" role="status">
+      <div className="card-editorial p-7 sm:p-9" role="status">
         <span className="grid h-11 w-11 place-items-center rounded-xl border border-success/40 bg-success/10 text-success">
           <Check className="h-5 w-5" aria-hidden />
         </span>
@@ -103,7 +103,7 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} noValidate className="card-surface grid gap-4 p-6 sm:p-8">
+    <form onSubmit={onSubmit} noValidate className="card-editorial grid gap-4 p-7 sm:p-9">
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="grid gap-1.5">
           <label htmlFor="cf-name" className="text-xs font-medium text-foreground">

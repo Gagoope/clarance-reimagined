@@ -54,7 +54,7 @@ export function ArchitectureDiagram() {
         })}
       </ol>
 
-      <aside className="card-surface p-6 lg:sticky lg:top-28">
+      <aside className="card-editorial p-7 sm:p-8 lg:sticky lg:top-28">
         <div className="font-mono text-[10px] uppercase tracking-[0.28em] text-primary">
           Layer {String(active + 1).padStart(2, "0")}
         </div>

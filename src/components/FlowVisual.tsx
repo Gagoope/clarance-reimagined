@@ -20,7 +20,7 @@ export function FlowVisual() {
   return (
     <div className="relative" aria-hidden>
       <div className="pointer-events-none absolute -inset-8 -z-10 opacity-70 [mask-image:radial-gradient(65%_65%_at_50%_45%,black,transparent)] grid-bg" />
-      <div className="card-surface glass relative overflow-hidden p-5 sm:p-6">
+      <div className="card-editorial relative overflow-hidden p-6 sm:p-7">
         <div className="flex items-center justify-between border-b border-border pb-4">
           <span className="font-mono text-[10px] uppercase tracking-[0.28em] text-primary">
             System flow
