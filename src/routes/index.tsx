@@ -430,7 +430,7 @@ function Portfolio() {
             </Reveal>
 
             <Reveal delay={120}>
-              <div className="card-surface p-6">
+              <div className="card-editorial p-7 sm:p-8">
                 <div className="font-mono text-[10px] uppercase tracking-[0.28em] text-primary">
                   Workflow
                 </div>
@@ -568,7 +568,7 @@ function Portfolio() {
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {techGroups.map((g, i) => (
               <Reveal key={g.group} delay={(i % 3) * 80}>
-                <div className="card-surface h-full p-6">
+                <div className="card-editorial h-full p-7 sm:p-8">
                   <h3 className="font-mono text-[10px] uppercase tracking-[0.28em] text-primary">
                     {g.group}
                   </h3>
@@ -644,7 +644,7 @@ function Portfolio() {
             </Reveal>
             <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
               <Reveal>
-                <figure className="card-surface overflow-hidden p-0">
+                <figure className="card-editorial overflow-hidden p-0">
                   <img
                     src={PROFILE_IMG}
                     alt="Portrait of Gagoope Clarance Merafhe"
@@ -837,7 +837,7 @@ function Portfolio() {
                       key={c.label}
                       href={c.href}
                       {...(c.ext ? { target: "_blank", rel: "noreferrer" } : {})}
-                      className="card-surface group flex min-h-11 items-center gap-4 p-4 sm:p-5"
+                      className="card-editorial group flex min-h-11 items-center gap-4 p-4 sm:p-5"
                     >
                       <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-primary/25 bg-primary/10 text-primary">
                         <Icon className="h-4.5 w-4.5" aria-hidden />
