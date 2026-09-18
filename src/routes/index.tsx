@@ -489,7 +489,7 @@ function Portfolio() {
               ))}
             </div>
 
-            <div className="grid gap-5 md:grid-cols-2">
+            <div className="grid gap-6 md:grid-cols-2 lg:gap-8">
               {visible.map((p, i) => {
                 const Icon = p.icon;
                 return (
@@ -497,59 +497,57 @@ function Portfolio() {
                     <button
                       type="button"
                       onClick={() => setOpen(p)}
-                      className="card-surface hairline-top group flex h-full w-full flex-col overflow-hidden p-0 text-left"
+                      className="card-editorial group flex h-full w-full flex-col p-4 text-left sm:p-5"
                     >
                       {p.image && (
-                        <div className="relative h-28 w-full overflow-hidden border-b border-border bg-surface/60 sm:h-32 lg:h-36">
+                        <div className="media-frame relative h-48 w-full sm:h-56 lg:h-64">
                           <img
                             src={p.image}
                             alt={`${p.title} — project visual`}
                             loading="lazy"
                             decoding="async"
                             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                            className="h-full w-full object-cover object-center transition duration-500 group-hover:scale-[1.03]"
+                            className="h-full w-full object-cover object-center group-hover:scale-[1.06]"
                           />
                         </div>
                       )}
-                      <div className="flex flex-1 flex-col p-6 sm:p-7">
-                      <div className="flex items-start justify-between gap-4">
-                        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-primary/25 bg-primary/10 text-primary transition duration-300 group-hover:scale-105">
-                          <Icon className="h-5 w-5" aria-hidden />
-                        </span>
-                        <span className="font-mono text-[10px] uppercase tracking-[0.28em] text-primary">
-                          {p.category}
-                        </span>
-                      </div>
-                      <h3 className="mt-5 text-lg font-semibold leading-snug tracking-tight">
-                        {p.title}
-                      </h3>
-                      <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
-                        {p.short}
-                      </p>
-                      <div className="mt-5 flex flex-wrap gap-1.5 opacity-70 transition duration-300 group-hover:opacity-100">
-                        {p.stack.slice(0, 4).map((t) => (
-                          <span
-                            key={t}
-                            className="rounded-full border border-border px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground"
-                          >
-                            {t}
+                      <div className="flex flex-1 flex-col px-2 pb-1 pt-6 sm:px-3">
+                        <div className="flex items-center justify-between gap-4">
+                          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+                            {p.category}
                           </span>
-                        ))}
-                      </div>
-                      <div className="mt-6 flex items-center justify-between gap-4 border-t border-border pt-5">
-                        <span className="min-w-0 truncate text-xs text-muted-foreground">
-                          {p.client} · {p.period}
-                        </span>
-                        <span className="inline-flex items-center gap-1.5 text-sm font-medium text-primary">
-                          Case study
-                          <ArrowRight
-                            className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
-                            aria-hidden
-                          />
-                        </span>
-                       </div>
+                          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl border border-border bg-background/60 text-primary">
+                            <Icon className="h-4 w-4" aria-hidden />
+                          </span>
+                        </div>
+                        <h3 className="mt-4 text-[1.35rem] font-bold leading-[1.15] tracking-[-0.035em] sm:text-[1.6rem]">
+                          {p.title}
+                        </h3>
+                        <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+                          {p.short}
+                        </p>
+                        <div className="mt-6 flex flex-wrap gap-1.5">
+                          {p.stack.slice(0, 4).map((t) => (
+                            <span key={t} className={tag}>
+                              {t}
+                            </span>
+                          ))}
+                        </div>
+                        <div className="mt-7 flex items-center justify-between gap-4 border-t border-border pt-5">
+                          <span className="min-w-0 truncate text-xs text-muted-foreground">
+                            {p.client} · {p.period}
+                          </span>
+                          <span className="inline-flex shrink-0 items-center gap-1.5 text-sm font-medium">
+                            Case study
+                            <ArrowRight
+                              className="h-4 w-4 text-primary transition-transform duration-300 group-hover:translate-x-1.5"
+                              aria-hidden
+                            />
+                          </span>
+                        </div>
                       </div>
                     </button>
+
                   </Reveal>
                 );
               })}
