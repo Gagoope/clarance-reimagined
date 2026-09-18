@@ -22,6 +22,7 @@ import { ProjectModal } from "@/components/ProjectModal";
 import { ContactForm } from "@/components/ContactForm";
 import { WhatsAppFab } from "@/components/WhatsAppFab";
 import { CursorGlow } from "@/components/CursorGlow";
+import heroImage from "@/assets/gcm-workstation-hero.jpg";
 import { btnPrimary, btnSecondary, btnGhost } from "@/components/ui-kit";
 import {
   CV_PATH,
@@ -170,10 +171,13 @@ function Portfolio() {
 
       <main id="main" className="relative z-10 pb-28 sm:pb-0">
         {/* ————— 01 Hero ————— */}
-        <section id="top" className="ambient relative overflow-hidden pt-28 sm:pt-36">
+        <section
+          id="top"
+          className="ambient relative overflow-hidden rounded-b-[2.5rem] border-b border-border bg-surface/20 pt-28 sm:pt-36"
+        >
           <div className="pointer-events-none absolute inset-0 -z-10 grid-bg opacity-40 [mask-image:radial-gradient(70%_55%_at_50%_0%,black,transparent)]" />
           <div className={`${shell} pb-12 sm:pb-16`}>
-            <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
+            <div className="grid items-center gap-12 lg:grid-cols-[1.02fr_0.98fr]">
               <Reveal>
                 <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-muted-foreground">
                   <span className="inline-flex items-center gap-2">
@@ -186,7 +190,7 @@ function Portfolio() {
                   </span>
                 </div>
 
-                <h1 className="mt-6 text-[clamp(2rem,7vw,3.6rem)] font-semibold leading-[1.06] tracking-tight">
+                <h1 className="mt-6 text-[clamp(2.25rem,7.5vw,3.9rem)] font-bold leading-[1.03] tracking-[-0.045em] text-balance">
                   Web Developer &amp; Business Automation{" "}
                   <span className="text-primary">Engineer</span>
                 </h1>
@@ -228,7 +232,19 @@ function Portfolio() {
               </Reveal>
 
               <Reveal delay={120}>
-                <FlowVisual />
+                <div className="grid gap-5">
+                  <div className="overflow-hidden rounded-[2rem] border border-border bg-surface/60 shadow-lift">
+                    <img
+                      src={heroImage}
+                      alt="Gagoope Merafhe's development workstation"
+                      loading="eager"
+                      decoding="async"
+                      sizes="(max-width: 1024px) 100vw, 560px"
+                      className="h-52 w-full object-cover object-center sm:h-64 lg:h-72"
+                    />
+                  </div>
+                  <FlowVisual />
+                </div>
               </Reveal>
             </div>
           </div>
