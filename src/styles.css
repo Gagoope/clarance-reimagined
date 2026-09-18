@@ -207,6 +207,33 @@ html.light {
   }
 }
 
+/* Editorial portfolio card: generous, image-led, quiet until hovered */
+@utility card-editorial {
+  position: relative;
+  border-radius: calc(var(--radius) + 0.5rem);
+  background: color-mix(in oklch, var(--color-surface) 96%, transparent);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.45s var(--ease-out), box-shadow 0.45s var(--ease-out),
+    border-color 0.45s var(--ease-out), background-color 0.45s var(--ease-out);
+  &:hover {
+    transform: translateY(-6px);
+    background: color-mix(in oklch, var(--color-surface-elevated) 90%, transparent);
+    box-shadow: var(--shadow-lift);
+    border-color: color-mix(in oklch, var(--color-border-strong) 90%, transparent);
+  }
+}
+
+/* Image well inside an editorial card */
+@utility media-frame {
+  overflow: hidden;
+  border-radius: calc(var(--radius) - 0.25rem);
+  background: color-mix(in oklch, var(--color-surface-elevated) 80%, transparent);
+  & img {
+    transition: transform 0.7s var(--ease-out);
+  }
+}
+
 @utility hairline-top {
   &::after {
     content: "";
@@ -224,6 +251,7 @@ html.light {
   }
   &:hover::after { opacity: 1; }
 }
+
 
 @utility pulse-dot {
   position: relative;

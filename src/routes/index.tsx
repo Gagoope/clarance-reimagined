@@ -110,14 +110,16 @@ export const Route = createFileRoute("/")({
 });
 
 const shell = "mx-auto w-full max-w-6xl px-4 sm:px-6";
-const section = "py-16 sm:py-24";
+const section = "py-20 sm:py-28 lg:py-36";
+const tag =
+  "rounded-full border border-border px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground";
 
 function Label({ n, children }: { n: string; children: React.ReactNode }) {
   return (
-    <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.3em] text-primary">
-      <span>{n}</span>
-      <span className="h-px w-8 bg-primary/50" aria-hidden />
-      <span className="text-muted-foreground">{children}</span>
+    <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.32em] text-muted-foreground">
+      <span className="text-primary">{n}</span>
+      <span className="h-px w-10 bg-border-strong" aria-hidden />
+      <span>{children}</span>
     </div>
   );
 }
@@ -136,21 +138,24 @@ function Head({
   center?: boolean;
 }) {
   return (
-    <header className={`mb-10 max-w-2xl sm:mb-14 ${center ? "mx-auto text-center" : ""}`}>
+    <header
+      className={`mb-12 max-w-3xl sm:mb-16 lg:mb-20 ${center ? "mx-auto text-center" : ""}`}
+    >
       <div className={center ? "flex justify-center" : ""}>
         <Label n={n}>{label}</Label>
       </div>
-      <h2 className="mt-5 text-[1.75rem] font-semibold leading-[1.12] tracking-tight sm:text-[2.5rem]">
+      <h2 className="mt-6 text-[clamp(2rem,5.5vw,3.4rem)] font-bold leading-[1.02] tracking-[-0.045em] text-balance">
         {title}
       </h2>
       {sub && (
-        <p className="mt-4 text-[0.95rem] leading-relaxed text-muted-foreground sm:text-base">
+        <p className="mt-5 max-w-xl text-[0.95rem] leading-relaxed text-muted-foreground sm:text-base">
           {sub}
         </p>
       )}
     </header>
   );
 }
+
 
 function Portfolio() {
   const [filter, setFilter] = useState<(typeof filters)[number]>("All");
