@@ -111,7 +111,7 @@ export function SiteNav({
                 })}
               </nav>
 
-              <ThemeToggle className="hidden sm:inline-flex" />
+              <div className="hidden sm:block"><ThemeToggle /></div>
 
               <a
                 href={whatsappUrl}
