@@ -1,5 +1,6 @@
-import type { ReactNode } from "react";
+import type { ReactNode, ButtonHTMLAttributes } from "react";
 import type { LucideIcon } from "lucide-react";
+import { twMerge } from "tailwind-merge";
 
 /* ————— Buttons ————— */
 
@@ -16,6 +17,11 @@ export const btnSecondary =
 
 export const btnGhost =
   `${btnBase} text-muted-foreground hover:bg-surface hover:text-foreground`;
+
+export function Button({ className = "", variant = "secondary", ...props }: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: "primary" | "secondary" | "ghost" }) {
+  const variants = { primary: btnPrimary, secondary: btnSecondary, ghost: btnGhost };
+  return <button {...props} className={twMerge(variants[variant], className)} />;
+}
 
 /* ————— Primitives ————— */
 

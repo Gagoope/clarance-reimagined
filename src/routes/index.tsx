@@ -1,52 +1,16 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import {
-  ArrowRight,
-  Download,
-  ExternalLink,
-  Github,
-  Linkedin,
-  Mail,
-  MapPin,
-  MessageCircle,
-  Phone,
-} from "lucide-react";
+import { ArrowRight, ArrowUpRight, ChevronDown, Download, Github, Linkedin, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { CvPreviewButton } from "@/components/CvPreview";
 import { LoadingSplash } from "@/components/LoadingSplash";
 import { SiteNav } from "@/components/SiteNav";
 import { Reveal } from "@/components/Reveal";
-import { CountUp } from "@/components/CountUp";
-import { FlowVisual } from "@/components/FlowVisual";
-import { ArchitectureDiagram } from "@/components/ArchitectureDiagram";
 import { ProjectModal } from "@/components/ProjectModal";
 import { ContactForm } from "@/components/ContactForm";
 import { WhatsAppFab } from "@/components/WhatsAppFab";
-import { CursorGlow } from "@/components/CursorGlow";
+import { Button, btnPrimary, btnSecondary, btnGhost } from "@/components/ui-kit";
 import heroImage from "@/assets/gcm-workstation-hero.jpg";
-import { btnPrimary, btnSecondary, btnGhost } from "@/components/ui-kit";
-import {
-  CV_PATH,
-  EMAIL,
-  GITHUB,
-  LINKEDIN,
-  PROFILE_IMG,
-  WHATSAPP_LOCAL,
-  WHATSAPP_URL,
-  domains,
-  education,
-  experience,
-  filters,
-  heroTech,
-  metrics,
-  navLinks,
-  processSteps,
-  projects,
-  services,
-  techGroups,
-  volunteer,
-  whyWorkWithMe,
-  type Project,
-} from "@/data/portfolio";
+import { CV_PATH, EMAIL, GITHUB, LINKEDIN, PROFILE_IMG, WHATSAPP_LOCAL, WHATSAPP_URL, education, experience, heroTech, processSteps, projects, services, techGroups, volunteer, type Project } from "@/data/portfolio";
 
 const TITLE = "Gagoope Merafhe | SAP Business One & Business Automation Engineer";
 const DESCRIPTION =
@@ -109,849 +73,98 @@ export const Route = createFileRoute("/")({
   }),
 });
 
-const shell = "mx-auto w-full max-w-6xl px-4 sm:px-6";
-const section = "py-20 sm:py-28 lg:py-36";
-const tag =
-  "rounded-full border border-border px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground";
+const shell = "mx-auto w-full max-w-6xl px-5 sm:px-8";
+const links = [
+  { label: "Work", href: "#work" },
+  { label: "Services", href: "#services" },
+  { label: "About", href: "#about" },
+  { label: "Contact", href: "#contact" },
+];
 
-function Label({ n, children }: { n: string; children: React.ReactNode }) {
-  return (
-    <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.32em] text-muted-foreground">
-      <span className="text-primary">{n}</span>
-      <span className="h-px w-10 bg-border-strong" aria-hidden />
-      <span>{children}</span>
-    </div>
-  );
+function SectionTitle({ label, title }: { label: string; title: string }) {
+  return <header className="mb-8"><p className="mb-3 font-mono text-xs text-primary">{label}</p><h2 className="text-3xl font-semibold leading-tight sm:text-4xl">{title}</h2></header>;
 }
-
-function Head({
-  n,
-  label,
-  title,
-  sub,
-  center = false,
-}: {
-  n: string;
-  label: string;
-  title: string;
-  sub?: string;
-  center?: boolean;
-}) {
-  return (
-    <header
-      className={`mb-12 max-w-3xl sm:mb-16 lg:mb-20 ${center ? "mx-auto text-center" : ""}`}
-    >
-      <div className={center ? "flex justify-center" : ""}>
-        <Label n={n}>{label}</Label>
-      </div>
-      <h2 className="mt-6 text-[clamp(2rem,5.5vw,3.4rem)] font-bold leading-[1.02] tracking-[-0.045em] text-balance">
-        {title}
-      </h2>
-      {sub && (
-        <p className="mt-5 max-w-xl text-[0.95rem] leading-relaxed text-muted-foreground sm:text-base">
-          {sub}
-        </p>
-      )}
-    </header>
-  );
-}
-
 
 function Portfolio() {
-  const [filter, setFilter] = useState<(typeof filters)[number]>("All");
   const [open, setOpen] = useState<Project | null>(null);
-
-  const visible = useMemo(
-    () => (filter === "All" ? projects : projects.filter((p) => p.category === filter)),
-    [filter],
-  );
-  const featured = projects.find((p) => p.featured)!;
+  const [allWork, setAllWork] = useState(false);
+  const visible = allWork ? projects : projects.slice(0, 3);
 
   return (
-    <div className="relative min-h-dvh overflow-x-hidden bg-background font-sans text-foreground">
+    <div className="min-h-dvh bg-background text-foreground">
       <LoadingSplash />
-      <CursorGlow />
-      <SiteNav links={navLinks} whatsappUrl={WHATSAPP_URL} />
+      <SiteNav links={links} whatsappUrl={WHATSAPP_URL} />
       <WhatsAppFab />
-
-      <main id="main" className="relative z-10 pb-28 sm:pb-0">
-        {/* ————— 01 Hero ————— */}
-        <section
-          id="top"
-          className="ambient relative overflow-hidden rounded-b-[2.5rem] border-b border-border bg-surface/20 pt-28 sm:pt-36"
-        >
-          <div className="pointer-events-none absolute inset-0 -z-10 grid-bg opacity-40 [mask-image:radial-gradient(70%_55%_at_50%_0%,black,transparent)]" />
-          <div className={`${shell} pb-12 sm:pb-16`}>
-            <div className="grid items-center gap-12 lg:grid-cols-[1.02fr_0.98fr]">
-              <Reveal>
-                <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-muted-foreground">
-                  <span className="inline-flex items-center gap-2">
-                    <MapPin className="h-3.5 w-3.5 text-primary" aria-hidden />
-                    Based in Botswana 🇧🇼
-                  </span>
-                  <span className="inline-flex items-center gap-2">
-                    <span className="pulse-dot h-1.5 w-1.5 rounded-full text-success" aria-hidden />
-                    Available for software engineering &amp; automation projects
-                  </span>
-                </div>
-
-                <h1 className="mt-6 text-[clamp(2.25rem,7.5vw,3.9rem)] font-bold leading-[1.03] tracking-[-0.045em] text-balance">
-                  Web Developer &amp; Business Automation{" "}
-                  <span className="text-primary">Engineer</span>
-                </h1>
-                <p className="mt-5 text-lg font-medium sm:text-xl">
-                  I build software that eliminates manual work.
-                </p>
-                <p className="mt-4 max-w-xl text-[0.95rem] leading-relaxed text-muted-foreground sm:text-base">
-                  I design Web Applications, SAP Business One integrations, enterprise applications and automation
-                  systems that help organisations work faster, reduce errors and make better use of
-                  their data.
-                </p>
-
-                <div className="mt-9 flex flex-wrap items-center gap-3">
-                  <a href="#contact" className={btnPrimary}>
-                    Start a Project
-                    <ArrowRight
-                      className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
-                      aria-hidden
-                    />
-                  </a>
-                  <a href="#work" className={btnSecondary}>
-                    View My Work
-                  </a>
-                  <a href={CV_PATH} download className={btnGhost}>
-                    <Download className="h-4 w-4" aria-hidden /> Download CV
-                  </a>
-                </div>
-
-                <ul className="mt-11 flex flex-wrap gap-2 border-t border-border pt-8">
-                  {heroTech.map((t) => (
-                    <li
-                      key={t}
-                      className="rounded-full border border-border bg-surface/50 px-3 py-1.5 font-mono text-[10px] uppercase tracking-widest text-muted-foreground transition duration-300 hover:border-primary/50 hover:text-primary"
-                    >
-                      {t}
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
-
-              <Reveal delay={120}>
-                <div className="grid gap-5">
-                  <div className="overflow-hidden rounded-[2rem] border border-border bg-surface/60 shadow-lift">
-                    <img
-                      src={heroImage}
-                      alt="Gagoope Merafhe's development workstation"
-                      loading="eager"
-                      decoding="async"
-                      sizes="(max-width: 1024px) 100vw, 560px"
-                      className="h-52 w-full object-cover object-center sm:h-64 lg:h-72"
-                    />
-                  </div>
-                  <FlowVisual />
-                </div>
-              </Reveal>
+      <main id="main">
+        <section id="top" className="portfolio-hero relative isolate overflow-hidden">
+          <img src={heroImage} alt="Software development workstation" decoding="async" fetchPriority="high" className="absolute inset-0 -z-20 h-full w-full object-cover object-center" />
+          <div className="hero-shade absolute inset-0 -z-10" />
+          <div className={`${shell} pb-10 pt-36 sm:pb-12 sm:pt-44`}>
+            <Reveal>
+              <p className="mb-6 flex items-center gap-2 text-sm text-hero-muted"><MapPin className="h-4 w-4" aria-hidden />Gaborone, Botswana</p>
+              <h1 className="max-w-3xl text-[2.5rem] font-semibold leading-[1.08] text-hero-foreground sm:text-6xl">Gagoope<br />Clarance Merafhe<span className="text-primary">.</span></h1>
+              <p className="mt-6 text-lg font-medium text-hero-foreground sm:text-xl">Web Developer &amp; Business Automation Engineer</p>
+              <p className="mt-3 max-w-lg text-sm leading-relaxed text-hero-muted sm:text-base">SAP Business One, web applications and connected systems. I build software that eliminates manual work.</p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a href="#work" className={btnPrimary}>Explore my work <ArrowUpRight className="h-4 w-4" aria-hidden /></a>
+                <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="hero-glass inline-flex min-h-11 items-center gap-2 rounded-full px-5 text-sm font-medium text-hero-foreground">Let’s talk <MessageCircle className="h-4 w-4" aria-hidden /></a>
+              </div>
+            </Reveal>
+            <div className="hero-proof hero-glass mt-14 grid gap-5 rounded-2xl px-6 py-5 sm:mt-16 sm:grid-cols-[1.3fr_1fr_1fr] sm:gap-8">
+              <div><span className="mb-2 block text-xs text-hero-muted">Specialising in</span><p className="text-sm font-medium text-hero-foreground">SAP Business One &amp; automation</p></div>
+              <div className="border-t border-hero-border pt-4 sm:border-l sm:border-t-0 sm:pl-8 sm:pt-0"><span className="mb-2 block text-xs text-hero-muted">From idea to delivery</span><p className="text-sm font-medium text-hero-foreground">Full-stack business applications</p></div>
+              <a href={CV_PATH} download className="flex items-center justify-between gap-4 border-t border-hero-border pt-4 text-sm font-medium text-hero-foreground sm:border-l sm:border-t-0 sm:pl-8 sm:pt-0">Download my CV <Download className="h-5 w-5 shrink-0" aria-hidden /></a>
             </div>
           </div>
         </section>
 
-        {/* ————— 02 Metrics ————— */}
-        <section className="border-y border-border bg-surface/30">
-          <div className={`${shell} py-12 sm:py-16`}>
-            <dl className="grid grid-cols-2 gap-x-6 gap-y-9 lg:grid-cols-4">
-              {metrics.map((m, i) => (
-                <Reveal key={m.label} delay={i * 80}>
-                  <div className="border-l border-border pl-4 sm:pl-5">
-                    <dt className="sr-only">{m.label}</dt>
-                    <dd>
-                      <CountUp
-                        value={m.value}
-                        suffix={m.suffix}
-                        className="block text-[2rem] font-semibold tracking-tight sm:text-[2.75rem]"
-                      />
-                      <span className="mt-2 block text-xs leading-snug text-muted-foreground sm:text-sm">
-                        {m.label}
-                      </span>
-                    </dd>
-                  </div>
-                </Reveal>
-              ))}
-            </dl>
-          </div>
-        </section>
-
-        {/* ————— 03 Problem → Solution ————— */}
-        <section className={`${shell} ${section}`}>
-          <Reveal>
-            <Head
-              n="03"
-              label="Business value"
-              title="Turn manual processes into intelligent systems."
-              sub="Technology should remove repetitive work, reduce errors and give teams better visibility."
-            />
-          </Reveal>
-          <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
-            {domains.map((d, i) => {
-              const Icon = d.icon;
-              return (
-                <Reveal key={d.label} delay={i * 80}>
-                  <article className="card-editorial group flex h-full flex-col p-7 sm:p-8">
-                    <span className="grid h-11 w-11 place-items-center rounded-xl border border-primary/25 bg-primary/10 text-primary transition duration-300 group-hover:glow-primary">
-                      <Icon className="h-5 w-5" aria-hidden />
-                    </span>
-                    <h3 className="mt-5 font-mono text-[10px] uppercase tracking-[0.28em] text-primary">
-                      {d.label}
-                    </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{d.body}</p>
-                    <ul className="mt-5 flex-1 grid gap-2 text-sm">
-                      {d.items.map((it) => (
-                        <li key={it} className="flex items-start gap-2.5">
-                          <span
-                            className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-primary"
-                            aria-hidden
-                          />
-                          <span className="leading-relaxed">{it}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <ArrowRight
-                      className="mt-6 h-4 w-4 text-muted-foreground transition-transform duration-300 group-hover:translate-x-1 group-hover:text-primary"
-                      aria-hidden
-                    />
-                  </article>
-                </Reveal>
-              );
+        <section id="work" className={`${shell} py-16 sm:py-20`}>
+          <div className="flex flex-wrap items-end justify-between gap-4"><SectionTitle label="Selected work" title="Built for the real world." /><span className="mb-8 text-sm text-muted-foreground">Finance · Operations · Enterprise</span></div>
+          <div className="grid gap-6 md:grid-cols-3">
+            {visible.map((p, i) => {
+              const Icon = p.icon;
+              return <Reveal key={p.id} delay={(i % 3) * 60}>
+                <article className="portfolio-project group h-full overflow-hidden rounded-2xl border border-border">
+                  <Button variant="ghost" onClick={() => setOpen(p)} aria-label={`View ${p.title}`} className="project-image-button relative block aspect-[4/3] w-full overflow-hidden rounded-none p-0">
+                    {p.image ? <img src={p.image} alt={p.title} loading="lazy" decoding="async" sizes="(max-width: 767px) 100vw, 33vw" className="h-full w-full object-contain object-center transition-transform duration-500 group-hover:scale-105" /> : <div className="grid h-full w-full place-items-center bg-surface"><Icon className="h-14 w-14 text-primary" aria-hidden /></div>}
+                    <span className="hero-glass absolute bottom-3 right-3 grid h-9 w-9 place-items-center rounded-full text-hero-foreground"><ArrowUpRight className="h-4 w-4" aria-hidden /></span>
+                  </Button>
+                  <div className="p-6"><p className="text-xs text-primary">{p.category} · {p.client}</p><h3 className="mt-3 text-xl font-semibold leading-snug"><Button variant="ghost" onClick={() => setOpen(p)} className="min-h-0 justify-start rounded-none p-0 text-left text-xl font-semibold leading-snug text-foreground hover:bg-transparent hover:text-primary">{p.title}</Button></h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.short}</p><p className="mt-5 border-t border-border pt-4 text-xs text-muted-foreground">{p.stack.slice(0, 3).join(" / ")}</p></div>
+                </article>
+              </Reveal>;
             })}
           </div>
+          <div className="mt-8 flex justify-center"><Button onClick={() => setAllWork(!allWork)} aria-expanded={allWork}>{allWork ? "Show selected work" : `View all ${projects.length} projects`}<ChevronDown className={`h-4 w-4 transition-transform ${allWork ? "rotate-180" : ""}`} aria-hidden /></Button></div>
         </section>
 
-        {/* ————— 04 Services ————— */}
         <section id="services" className="border-y border-border bg-surface/30">
-          <div className={`${shell} ${section}`}>
-            <Reveal>
-              <Head
-                n="04"
-                label="Services"
-                title="What I build"
-                sub="Six engagements covering enterprise systems end to end — from SAP integrations to reporting."
-              />
-            </Reveal>
-            <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-              {services.map((s, i) => {
-                const Icon = s.icon;
-                return (
-                  <Reveal key={s.title} delay={(i % 3) * 80}>
-                    <article className="card-editorial group flex h-full flex-col p-7 sm:p-8">
-                      <div className="flex items-start justify-between">
-                        <span className="grid h-11 w-11 place-items-center rounded-2xl border border-border bg-background/60 text-primary">
-                          <Icon className="h-5 w-5" aria-hidden />
-                        </span>
-                        <span className="font-mono text-[11px] tracking-widest text-border-strong">
-                          {s.n}
-                        </span>
-                      </div>
-                      <h3 className="mt-7 text-xl font-bold leading-tight tracking-[-0.03em] sm:text-[1.4rem]">
-                        {s.title}
-                      </h3>
-                      <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
-                        {s.desc}
-                      </p>
-                      <div className="mt-6 flex flex-wrap gap-1.5">
-                        {s.tags.map((t) => (
-                          <span key={t} className={tag}>
-                            {t}
-                          </span>
-                        ))}
-                      </div>
-                      <a
-                        href="#contact"
-                        className="mt-7 inline-flex items-center gap-2 border-t border-border pt-5 text-sm font-medium text-foreground"
-                      >
-                        Explore
-                        <ArrowRight
-                          className="h-4 w-4 text-primary transition-transform duration-300 group-hover:translate-x-1.5"
-                          aria-hidden
-                        />
-                      </a>
-                    </article>
-                  </Reveal>
-                );
-              })}
-            </div>
-
-          </div>
-        </section>
-
-        {/* ————— 05 Featured case study ————— */}
-        <section className={`${shell} ${section}`}>
-          <Reveal>
-            <Head n="05" label="Featured case study" title={featured.title} />
-          </Reveal>
-          <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
-            <Reveal>
-              <div className="grid gap-6">
-                {[
-                  ["Problem", featured.problem],
-                  ["Solution", featured.approach],
-                  ["Result", featured.result],
-                ].map(([k, v]) => (
-                  <div key={k} className="border-t border-border pt-5">
-                    <h3 className="font-mono text-[10px] uppercase tracking-[0.28em] text-primary">
-                      {k}
-                    </h3>
-                    <p className="mt-3 text-[0.95rem] leading-relaxed text-muted-foreground">{v}</p>
-                  </div>
-                ))}
-                <div className="border-t border-border pt-5">
-                  <h3 className="font-mono text-[10px] uppercase tracking-[0.28em] text-primary">
-                    Technology
-                  </h3>
-                  <div className="mt-3 flex flex-wrap gap-1.5">
-                    {featured.stack.map((t) => (
-                      <span
-                        key={t}
-                        className="rounded-full border border-border px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <div className="flex flex-wrap gap-3 pt-2">
-                  <button type="button" onClick={() => setOpen(featured)} className={btnPrimary}>
-                    View Case Study
-                    <ArrowRight className="h-4 w-4" aria-hidden />
-                  </button>
-                  <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className={btnSecondary}>
-                    <MessageCircle className="h-4 w-4" aria-hidden /> Discuss a similar build
-                  </a>
-                </div>
-              </div>
-            </Reveal>
-
-            <Reveal delay={120}>
-              <div className="card-editorial p-7 sm:p-8">
-                <div className="font-mono text-[10px] uppercase tracking-[0.28em] text-primary">
-                  Workflow
-                </div>
-                <ol className="mt-5 grid gap-2">
-                  {featured.architecture.map((step, i) => (
-                    <li
-                      key={step}
-                      className="group flex items-center gap-3 rounded-xl border border-border bg-background/50 px-4 py-3 transition duration-300 hover:border-primary/40"
-                    >
-                      <span className="font-mono text-[10px] text-muted-foreground">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <span className="min-w-0 flex-1 truncate text-sm font-medium">{step}</span>
-                      <ArrowRight
-                        className="h-3.5 w-3.5 shrink-0 text-border-strong transition duration-300 group-hover:text-primary"
-                        aria-hidden
-                      />
-                    </li>
-                  ))}
-                </ol>
-                <p className="mt-5 border-t border-border pt-5 text-[11px] leading-relaxed text-muted-foreground">
-                  Illustrative architecture diagram — not a production screenshot.
-                </p>
-              </div>
-            </Reveal>
-          </div>
-        </section>
-
-        {/* ————— 06 Work ————— */}
-        <section id="work" className="border-y border-border bg-surface/30">
-          <div className={`${shell} ${section}`}>
-            <Reveal>
-              <Head
-                n="06"
-                label="Selected work"
-                title="Systems built for finance, operations and HR teams"
-                sub="Open any project for the full case study — problem, architecture, implementation and outcome."
-              />
-            </Reveal>
-
-            <div className="mb-8 flex flex-wrap gap-2" role="group" aria-label="Filter projects">
-              {filters.map((f) => (
-                <button
-                  key={f}
-                  type="button"
-                  onClick={() => setFilter(f)}
-                  aria-pressed={filter === f}
-                  className={`min-h-11 rounded-full border px-4 text-sm transition duration-300 ${
-                    filter === f
-                      ? "border-primary bg-primary/10 text-primary"
-                      : "border-border text-muted-foreground hover:border-primary/40 hover:text-foreground"
-                  }`}
-                >
-                  {f}
-                </button>
-              ))}
-            </div>
-
-            <div className="grid gap-6 md:grid-cols-2 lg:gap-8">
-              {visible.map((p, i) => {
-                const Icon = p.icon;
-                return (
-                  <Reveal as="article" key={p.id} delay={(i % 2) * 80}>
-                    <button
-                      type="button"
-                      onClick={() => setOpen(p)}
-                      className="card-editorial group flex h-full w-full flex-col p-4 text-left sm:p-5"
-                    >
-                      {p.image && (
-                        <div className="media-frame relative h-48 w-full sm:h-56 lg:h-64">
-                          <img
-                            src={p.image}
-                            alt={`${p.title} — project visual`}
-                            loading="lazy"
-                            decoding="async"
-                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                            className="h-full w-full object-cover object-center group-hover:scale-[1.06]"
-                          />
-                        </div>
-                      )}
-                      <div className="flex flex-1 flex-col px-2 pb-1 pt-6 sm:px-3">
-                        <div className="flex items-center justify-between gap-4">
-                          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-                            {p.category}
-                          </span>
-                          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl border border-border bg-background/60 text-primary">
-                            <Icon className="h-4 w-4" aria-hidden />
-                          </span>
-                        </div>
-                        <h3 className="mt-4 text-[1.35rem] font-bold leading-[1.15] tracking-[-0.035em] sm:text-[1.6rem]">
-                          {p.title}
-                        </h3>
-                        <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
-                          {p.short}
-                        </p>
-                        <div className="mt-6 flex flex-wrap gap-1.5">
-                          {p.stack.slice(0, 4).map((t) => (
-                            <span key={t} className={tag}>
-                              {t}
-                            </span>
-                          ))}
-                        </div>
-                        <div className="mt-7 flex items-center justify-between gap-4 border-t border-border pt-5">
-                          <span className="min-w-0 truncate text-xs text-muted-foreground">
-                            {p.client} · {p.period}
-                          </span>
-                          <span className="inline-flex shrink-0 items-center gap-1.5 text-sm font-medium">
-                            Case study
-                            <ArrowRight
-                              className="h-4 w-4 text-primary transition-transform duration-300 group-hover:translate-x-1.5"
-                              aria-hidden
-                            />
-                          </span>
-                        </div>
-                      </div>
-                    </button>
-
-                  </Reveal>
-                );
-              })}
+          <div className={`${shell} py-14 sm:py-16`}>
+            <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+              <SectionTitle label="What I do" title="Less manual work. Better systems." />
+              <div className="grid gap-x-8 sm:grid-cols-2">{services.map(s => { const Icon = s.icon; return <a key={s.n} href="#contact" className="group flex gap-3 border-t border-border py-5"><Icon className="mt-1 h-5 w-5 shrink-0 text-primary" aria-hidden /><div><h3 className="text-sm font-semibold">{s.title}</h3><p className="mt-2 text-xs leading-relaxed text-muted-foreground">{s.desc}</p></div><ArrowUpRight className="mt-1 h-4 w-4 shrink-0 text-muted-foreground transition group-hover:text-primary" aria-hidden /></a>; })}</div>
             </div>
           </div>
         </section>
 
-        {/* ————— 07 Technology ————— */}
-        <section className={`${shell} ${section}`}>
-          <Reveal>
-            <Head
-              n="07"
-              label="Stack"
-              title="Technology I work with"
-              sub="Hover or tap a technology to see how it shows up in the work."
-            />
-          </Reveal>
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {techGroups.map((g, i) => (
-              <Reveal key={g.group} delay={(i % 3) * 80}>
-                <div className="card-editorial h-full p-7 sm:p-8">
-                  <h3 className="font-mono text-[10px] uppercase tracking-[0.28em] text-primary">
-                    {g.group}
-                  </h3>
-                  <ul className="mt-5 grid gap-2">
-                    {g.items.map((it) => (
-                      <li
-                        key={it.name}
-                        className="group rounded-xl border border-border bg-background/40 px-3.5 py-2.5 transition duration-300 hover:border-primary/40"
-                      >
-                        <span className="text-sm font-medium">{it.name}</span>
-                        <span className="mt-0.5 block text-xs leading-relaxed text-muted-foreground opacity-80">
-                          {it.use}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </section>
-
-        {/* ————— 08 Architecture ————— */}
-        <section className="border-y border-border bg-surface/30">
-          <div className={`${shell} ${section}`}>
-            <Reveal>
-              <Head
-                n="08"
-                label="Architecture"
-                title="From business process to production system."
-                sub="The same layered shape underpins every system I deliver."
-              />
-            </Reveal>
-            <Reveal>
-              <ArchitectureDiagram />
+        <section id="about" className={`${shell} py-16 sm:py-20`}>
+          <div className="grid items-center gap-10 md:grid-cols-[0.7fr_1.3fr] lg:gap-16">
+            <Reveal><figure className="relative overflow-hidden rounded-2xl"><img src={PROFILE_IMG} alt="Gagoope Clarance Merafhe" loading="lazy" className="aspect-[4/5] max-h-[420px] w-full object-cover object-top" /><figcaption className="hero-glass absolute inset-x-4 bottom-4 rounded-xl p-4 text-hero-foreground"><p className="text-sm font-medium">Gagoope Merafhe</p><p className="mt-1 text-xs text-hero-muted">IT Systems Developer · Botswana</p></figcaption></figure></Reveal>
+            <Reveal><SectionTitle label="A little about me" title="Technology with a purpose." /><p className="text-base leading-relaxed text-muted-foreground">I’m a Botswana-based developer working across SAP Business One, business automation, full-stack web applications, APIs and databases. My work starts with a real business problem — and ends with a system that solves it.</p><p className="mt-4 text-sm leading-relaxed text-muted-foreground">Bachelor of Engineering (Honours) in Computer Engineering, with a minor in Computer Science.</p><div className="mt-6 flex flex-wrap gap-x-4 gap-y-2 text-xs text-primary">{heroTech.map(t => <span key={t}>{t}</span>)}</div><div className="mt-7 flex flex-wrap gap-3"><a href={CV_PATH} download className={btnSecondary}><Download className="h-4 w-4" aria-hidden />Download CV</a><CvPreviewButton label="Preview CV" className={btnGhost} /></div>
             </Reveal>
           </div>
+          <details className="portfolio-details mt-10 border-y border-border"><summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-sm font-medium">Experience, education &amp; technical background<ChevronDown className="h-4 w-4 shrink-0 text-primary" aria-hidden /></summary><div className="grid gap-10 pb-8 md:grid-cols-2"><div><h3 className="mb-4 text-lg font-semibold">Experience</h3>{experience.map(x => <div key={x.role} className="mb-5"><h4 className="text-sm font-medium">{x.role}</h4><p className="mt-1 text-xs text-primary">{x.org} · {x.period}</p><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{x.body}</p></div>)}<h3 className="mb-4 mt-8 text-lg font-semibold">Education &amp; certifications</h3>{education.map(e => <div key={e.id} className="mb-4"><h4 className="text-sm font-medium">{e.title}</h4><p className="mt-1 text-xs leading-relaxed text-muted-foreground">{e.sub}</p></div>)}</div><div><h3 className="mb-4 text-lg font-semibold">Technical skills</h3>{techGroups.map(g => <div key={g.group} className="mb-4"><h4 className="text-sm font-medium">{g.group}</h4><p className="mt-1 text-sm leading-relaxed text-muted-foreground">{g.items.map(t => t.name).join(" · ")}</p></div>)}<h3 className="mb-3 mt-8 text-lg font-semibold">Community</h3><h4 className="text-sm font-medium">{volunteer.title}</h4><p className="mt-1 text-xs text-primary">{volunteer.org} · {volunteer.period}</p><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{volunteer.body}</p></div></div></details>
+          <details id="process" className="portfolio-details border-b border-border"><summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-sm font-medium">My approach<ChevronDown className="h-4 w-4 shrink-0 text-primary" aria-hidden /></summary><ol className="grid gap-6 pb-8 sm:grid-cols-2 lg:grid-cols-4">{processSteps.map(p => <li key={p.n}><p className="text-xs text-primary">{p.n}</p><h3 className="mt-2 text-sm font-semibold">{p.title}</h3><p className="mt-2 text-xs leading-relaxed text-muted-foreground">{p.body}</p></li>)}</ol></details>
         </section>
 
-        {/* ————— 09 Process ————— */}
-        <section id="process" className={`${shell} ${section}`}>
-          <Reveal>
-            <Head n="09" label="Process" title="How I turn ideas into working systems." />
-          </Reveal>
-          <ol className="relative grid gap-0 border-l border-border pl-6 sm:pl-8">
-            {processSteps.map((p, i) => (
-              <Reveal as="li" key={p.n} delay={i * 70} className="list-none pb-8 last:pb-0">
-                <span
-                  className="absolute -left-[6.5px] mt-2 h-3 w-3 rounded-full border-2 border-primary bg-background"
-                  aria-hidden
-                />
-                <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                  <span className="font-mono text-xs text-primary">{p.n}</span>
-                  <h3 className="text-lg font-semibold tracking-tight sm:text-xl">{p.title}</h3>
-                </div>
-                <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
-                  {p.body}
-                </p>
-              </Reveal>
-            ))}
-          </ol>
-        </section>
-
-        {/* ————— 10 About ————— */}
-        <section id="about" className="border-y border-border bg-surface/30">
-          <div className={`${shell} ${section}`}>
-            <Reveal>
-              <Head
-                n="10"
-                label="About"
-                title="Engineering systems that solve real business problems."
-              />
-            </Reveal>
-            <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-              <Reveal>
-                <figure className="card-editorial overflow-hidden p-0">
-                  <img
-                    src={PROFILE_IMG}
-                    alt="Portrait of Gagoope Clarance Merafhe"
-                    loading="lazy"
-                    decoding="async"
-                    className="aspect-[4/5] w-full object-cover"
-                  />
-                  <figcaption className="border-t border-border p-5">
-                    <div className="text-sm font-semibold">Gagoope Clarance Merafhe</div>
-                    <div className="mt-1 text-xs text-muted-foreground">
-                      IT Systems Developer · Gaborone · Botswana
-                    </div>
-                  </figcaption>
-                </figure>
-              </Reveal>
-
-              <Reveal delay={100}>
-                <div className="grid gap-5 text-[0.95rem] leading-relaxed text-muted-foreground">
-                  <p>
-                    I&apos;m a Botswana-based developer working across SAP Business One, business
-                    automation, full-stack web applications, APIs and databases. Most of my work
-                    starts with a process that people are doing by hand — and ends with a system
-                    that does it for them, correctly, every time.
-                  </p>
-                  <p>
-                    My background is Computer Engineering, and I hold a Bachelor of Engineering
-                    (Honours) in Computer Engineering with a minor in Computer Science. Day to day
-                    that means SAP add-on development with the DI and UI APIs, internal applications
-                    on PHP/IIS, SQL Server and MySQL data models, and the reporting that finance and
-                    operations teams actually use.
-                  </p>
-                </div>
-
-                <div className="mt-9 grid gap-6">
-                  <div className="font-mono text-[10px] uppercase tracking-widest text-primary">
-                    Experience
-                  </div>
-                  {experience.map((x) => (
-                    <div key={x.role} className="border-t border-border pt-4">
-                      <div className="flex flex-wrap items-baseline justify-between gap-2">
-                        <h3 className="text-sm font-semibold tracking-tight">{x.role}</h3>
-                        <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-                          {x.period}
-                        </span>
-                      </div>
-                      <p className="mt-1 text-xs text-muted-foreground">{x.org}</p>
-                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{x.body}</p>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mt-9 grid gap-4 sm:grid-cols-2">
-                  {education.slice(0, 4).map((e) => (
-                    <div key={e.id} className="border-t border-border pt-4">
-                      <div className="font-mono text-[10px] uppercase tracking-widest text-primary">
-                        {e.kind}
-                      </div>
-                      <div className="mt-2 text-sm font-semibold">{e.title}</div>
-                      <div className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                        {e.sub}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mt-9 border-t border-border pt-6">
-                  <div className="font-mono text-[10px] uppercase tracking-widest text-primary">
-                    Community · {volunteer.period}
-                  </div>
-                  <h3 className="mt-3 text-base font-semibold tracking-tight">{volunteer.title}</h3>
-                  <p className="mt-1 text-xs text-muted-foreground">{volunteer.org}</p>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                    {volunteer.body}
-                  </p>
-                </div>
-              </Reveal>
-            </div>
-          </div>
-        </section>
-
-        {/* ————— 11 Why work with me ————— */}
-        <section className={`${shell} ${section}`}>
-          <Reveal>
-            <Head
-              n="11"
-              label="Why work with me"
-              title="Built around real business needs"
-              sub="No borrowed testimonials — here's how I approach the work and what you can expect."
-            />
-          </Reveal>
-          <div className="grid gap-5 sm:grid-cols-2 lg:gap-6">
-            {whyWorkWithMe.map((w, i) => (
-              <Reveal key={w.label} delay={(i % 2) * 80}>
-                <div className="card-editorial h-full p-7 sm:p-9">
-                  <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-primary">
-                    {w.label}
-                  </div>
-                  <p className="mt-5 text-[0.95rem] leading-relaxed text-muted-foreground">
-                    {w.body}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-        </section>
-
-        {/* ————— 12 CV ————— */}
-        <section className="border-y border-border bg-surface/30">
-          <div className={`${shell} py-14 sm:py-20`}>
-            <Reveal>
-              <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
-                <div>
-                  <Label n="12">Curriculum vitae</Label>
-                  <h2 className="mt-5 text-[1.75rem] font-semibold tracking-tight sm:text-[2.25rem]">
-                    Want the full story?
-                  </h2>
-                  <p className="mt-4 max-w-xl text-[0.95rem] leading-relaxed text-muted-foreground">
-                    Download my CV to explore my experience, technical skills and professional
-                    background.
-                  </p>
-                </div>
-                <div className="flex flex-wrap gap-3">
-                  <a href={CV_PATH} download className={btnPrimary}>
-                    <Download className="h-4 w-4" aria-hidden /> Download CV
-                  </a>
-                  <CvPreviewButton label="Preview CV" className={btnSecondary} />
-                  <a href={GITHUB} target="_blank" rel="noreferrer" className={btnGhost}>
-                    <Github className="h-4 w-4" aria-hidden /> GitHub
-                  </a>
-                  <a href={LINKEDIN} target="_blank" rel="noreferrer" className={btnGhost}>
-                    <Linkedin className="h-4 w-4" aria-hidden /> LinkedIn
-                  </a>
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </section>
-
-        {/* ————— 13 Contact ————— */}
-        <section id="contact" className={`${shell} ${section}`}>
-          <Reveal>
-            <Head
-              n="13"
-              label="Contact"
-              title="Have a process that needs automation?"
-              sub="Let's turn the manual work into a reliable system."
-            />
-          </Reveal>
-          <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
-            <Reveal>
-              <div className="grid gap-3">
-                {[
-                  {
-                    icon: MessageCircle,
-                    label: "WhatsApp",
-                    value: `+267 ${WHATSAPP_LOCAL}`,
-                    href: WHATSAPP_URL,
-                    ext: true,
-                  },
-                  {
-                    icon: Mail,
-                    label: "Email Me",
-                    value: EMAIL,
-                    href: `mailto:${EMAIL}`,
-                  },
-                  {
-                    icon: Phone,
-                    label: "Phone",
-                    value: `+267 ${WHATSAPP_LOCAL}`,
-                    href: `tel:+267${WHATSAPP_LOCAL}`,
-                  },
-                  {
-                    icon: Github,
-                    label: "GitHub",
-                    value: "github.com/Gagoope",
-                    href: GITHUB,
-                    ext: true,
-                  },
-                  {
-                    icon: Linkedin,
-                    label: "LinkedIn",
-                    value: "linkedin.com/in/gagoope-merafhe",
-                    href: LINKEDIN,
-                    ext: true,
-                  },
-                ].map((c) => {
-                  const Icon = c.icon;
-                  return (
-                    <a
-                      key={c.label}
-                      href={c.href}
-                      {...(c.ext ? { target: "_blank", rel: "noreferrer" } : {})}
-                      className="card-editorial group flex min-h-11 items-center gap-4 p-4 sm:p-5"
-                    >
-                      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-primary/25 bg-primary/10 text-primary">
-                        <Icon className="h-4.5 w-4.5" aria-hidden />
-                      </span>
-                      <span className="min-w-0 flex-1">
-                        <span className="block font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-                          {c.label}
-                        </span>
-                        <span className="mt-0.5 block break-all text-sm font-medium">{c.value}</span>
-                      </span>
-                      <ArrowRight
-                        className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-300 group-hover:translate-x-1 group-hover:text-primary"
-                        aria-hidden
-                      />
-                    </a>
-                  );
-                })}
-                <p className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
-                  <MapPin className="h-4 w-4 shrink-0 text-primary" aria-hidden /> Gaborone,
-                  Botswana · remote &amp; on-site
-                </p>
-              </div>
-            </Reveal>
-            <Reveal delay={100}>
-              <ContactForm />
-            </Reveal>
+        <section id="contact" className="contact-band border-y border-border">
+          <div className={`${shell} py-14 sm:py-16`}>
+            <div className="flex flex-col justify-between gap-8 md:flex-row md:items-center"><div><p className="mb-3 font-mono text-xs text-primary">Let’s connect</p><h2 className="text-3xl font-semibold sm:text-4xl">Have something in mind?</h2><p className="mt-3 text-sm text-muted-foreground">Let’s turn your next idea into a working system.</p></div><a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className={`${btnPrimary} self-start md:self-auto`}>Start a conversation<ArrowUpRight className="h-4 w-4" aria-hidden /></a></div>
+            <div className="mt-8 flex flex-wrap gap-x-6 gap-y-4 border-t border-border pt-6 text-sm"><a href={`mailto:${EMAIL}`} className="inline-flex items-center gap-2 hover:text-primary"><Mail className="h-4 w-4 text-primary" aria-hidden />{EMAIL}</a><a href={`tel:+267${WHATSAPP_LOCAL}`} className="inline-flex items-center gap-2 hover:text-primary"><Phone className="h-4 w-4 text-primary" aria-hidden />+267 {WHATSAPP_LOCAL}</a><a href={LINKEDIN} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 hover:text-primary"><Linkedin className="h-4 w-4 text-primary" aria-hidden />LinkedIn</a><a href={GITHUB} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 hover:text-primary"><Github className="h-4 w-4 text-primary" aria-hidden />GitHub</a></div>
+            <details className="portfolio-details mt-6"><summary className="flex cursor-pointer list-none items-center gap-2 py-3 text-sm text-muted-foreground">Send a project enquiry<ChevronDown className="h-4 w-4" aria-hidden /></summary><div className="mt-3 max-w-2xl"><ContactForm /></div></details>
           </div>
         </section>
       </main>
-
-      <footer className="border-t border-border bg-surface/30 pb-28 sm:pb-0">
-        <div className={`${shell} py-12 sm:py-16`}>
-          <div className="grid gap-10 md:grid-cols-[1.3fr_1fr_1fr]">
-            <div>
-              <div className="flex items-center gap-2.5">
-                <span className="grid h-9 w-9 place-items-center rounded-xl border border-primary/30 bg-primary/10 font-mono text-xs font-bold text-primary">
-                  GCM
-                </span>
-                <span className="text-sm font-semibold tracking-tight">Gagoope Merafhe</span>
-              </div>
-              <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
-                Business Automation • Software Engineering
-              </p>
-              <p className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
-                <MapPin className="h-4 w-4 text-primary" aria-hidden /> Gaborone . Botswana 🇧🇼
-              </p>
-            </div>
-
-            <nav aria-label="Footer navigation" className="grid content-start gap-2.5 text-sm">
-              <span className="font-mono text-[10px] uppercase tracking-widest text-primary">
-                Sections
-              </span>
-              {navLinks.map((l) => (
-                <a
-                  key={l.href}
-                  href={l.href}
-                  className="text-muted-foreground transition hover:text-foreground"
-                >
-                  {l.label}
-                </a>
-              ))}
-            </nav>
-
-            <div className="grid content-start gap-2.5 text-sm">
-              <span className="font-mono text-[10px] uppercase tracking-widest text-primary">
-                Elsewhere
-              </span>
-              <a
-                href={GITHUB}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 text-muted-foreground transition hover:text-foreground"
-              >
-                <Github className="h-4 w-4" aria-hidden /> GitHub
-              </a>
-              <a
-                href={LINKEDIN}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 text-muted-foreground transition hover:text-foreground"
-              >
-                <Linkedin className="h-4 w-4" aria-hidden /> LinkedIn
-              </a>
-              <a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 text-muted-foreground transition hover:text-foreground"
-              >
-                <MessageCircle className="h-4 w-4" aria-hidden /> WhatsApp
-              </a>
-              <a
-                href={`mailto:${EMAIL}`}
-                className="inline-flex items-center gap-2 text-muted-foreground transition hover:text-foreground"
-              >
-                <Mail className="h-4 w-4" aria-hidden /> Email
-              </a>
-              <a
-                href={CV_PATH}
-                download
-                className="inline-flex items-center gap-2 text-muted-foreground transition hover:text-foreground"
-              >
-                <Download className="h-4 w-4" aria-hidden /> CV
-              </a>
-            </div>
-          </div>
-
-          <div className="mt-10 border-t border-border pt-6 text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Gagoope Merafhe. All rights reserved.
-          </div>
-        </div>
-      </footer>
-
+      <footer className={`${shell} flex flex-wrap justify-between gap-3 pb-28 pt-6 text-xs text-muted-foreground sm:pb-6`}><p>© {new Date().getFullYear()} Gagoope Merafhe</p><a href="#top" className="inline-flex items-center gap-2 hover:text-primary">Back to top <ArrowRight className="h-3 w-3 -rotate-90" aria-hidden /></a></footer>
       {open && <ProjectModal project={open} onClose={() => setOpen(null)} />}
     </div>
   );

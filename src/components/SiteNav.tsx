@@ -69,7 +69,7 @@ export function SiteNav({
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <div
             className={`grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 rounded-full px-3 py-2 transition-all duration-500 sm:px-4 ${
-              scrolled ? "glass shadow-soft" : "border border-transparent"
+              scrolled ? "glass shadow-soft" : "hero-glass hero-navigation"
             }`}
           >
             <a
@@ -111,7 +111,7 @@ export function SiteNav({
                 })}
               </nav>
 
-              <ThemeToggle className="hidden sm:inline-flex" />
+              <div className="hidden sm:block"><ThemeToggle /></div>
 
               <a
                 href={whatsappUrl}
@@ -183,13 +183,13 @@ export function SiteNav({
                 {l.label}
               </a>
             ))}
-            <a
+            {!links.some(l => l.href === "#contact") && <a
               href="#contact"
               onClick={() => setOpen(false)}
               className="rounded-xl px-4 py-3 text-base text-foreground transition hover:bg-surface"
             >
               Contact
-            </a>
+            </a>}
           </nav>
           <div className="mt-5 flex items-center justify-between gap-3 border-t border-border pt-5">
             <ThemeToggle />
