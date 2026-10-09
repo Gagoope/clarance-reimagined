@@ -110,7 +110,7 @@ function Portfolio() {
                 <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="hero-glass inline-flex min-h-11 items-center gap-2 rounded-full px-5 text-sm font-medium text-hero-foreground">Let’s talk <MessageCircle className="h-4 w-4" aria-hidden /></a>
               </div>
             </Reveal>
-            <div className="hero-glass mt-14 grid gap-5 rounded-2xl px-6 py-5 sm:mt-16 sm:grid-cols-[1.3fr_1fr_1fr] sm:gap-8">
+            <div className="hero-proof hero-glass mt-14 grid gap-5 rounded-2xl px-6 py-5 sm:mt-16 sm:grid-cols-[1.3fr_1fr_1fr] sm:gap-8">
               <div><span className="mb-2 block text-xs text-hero-muted">Specialising in</span><p className="text-sm font-medium text-hero-foreground">SAP Business One &amp; automation</p></div>
               <div className="border-t border-hero-border pt-4 sm:border-l sm:border-t-0 sm:pl-8 sm:pt-0"><span className="mb-2 block text-xs text-hero-muted">From idea to delivery</span><p className="text-sm font-medium text-hero-foreground">Full-stack business applications</p></div>
               <a href={CV_PATH} download className="flex items-center justify-between gap-4 border-t border-hero-border pt-4 text-sm font-medium text-hero-foreground sm:border-l sm:border-t-0 sm:pl-8 sm:pt-0">Download my CV <Download className="h-5 w-5 shrink-0" aria-hidden /></a>

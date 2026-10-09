@@ -351,6 +351,11 @@ html.light {
 .hero-navigation nav a:hover { color: var(--hero-foreground); }
 @media (max-width: 639px) {
   .portfolio-hero { min-height: 0; }
+  .portfolio-hero > div:last-child { padding-top: 7rem; padding-bottom: 2rem; }
+  .portfolio-hero h1 { font-size: 2.25rem; }
+  .hero-proof { margin-top: 2rem; grid-template-columns: 1.3fr 1fr; gap: 1rem; padding: 1rem; }
+  .hero-proof > div:nth-child(2) { display: none; }
+  .hero-proof > a { border-top: 0; border-left: 1px solid var(--hero-border); padding-top: 0; padding-left: 1rem; }
   .hero-shade { background: color-mix(in oklch, var(--background) 80%, transparent); }
   html.light .hero-shade { background: oklch(0.1 0.012 255 / 0.82); }
 }

@@ -183,13 +183,13 @@ export function SiteNav({
                 {l.label}
               </a>
             ))}
-            <a
+            {!links.some(l => l.href === "#contact") && <a
               href="#contact"
               onClick={() => setOpen(false)}
               className="rounded-xl px-4 py-3 text-base text-foreground transition hover:bg-surface"
             >
               Contact
-            </a>
+            </a>}
           </nav>
           <div className="mt-5 flex items-center justify-between gap-3 border-t border-border pt-5">
             <ThemeToggle />
