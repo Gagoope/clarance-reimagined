@@ -342,7 +342,7 @@ html.light {
 }
 .portfolio-project:hover { border-color: var(--border-strong); transform: translateY(-4px); }
 .project-image-button { display: block; height: auto; min-height: 0; }
-.contact-band { background: color-mix(in oklch, var(--surface-elevated) 55%, var(--background)); }
+.contact-band { background: color-mix(in oklch, var(--surface-elevated) 55%, transparent); }
 .portfolio-details summary::-webkit-details-marker { display: none; }
 .portfolio-details[open] > summary > svg { transform: rotate(180deg); }
 .portfolio-details summary:focus-visible { outline-offset: -2px; }
@@ -358,4 +358,24 @@ html.light {
   .hero-proof > a { border-top: 0; border-left: 1px solid var(--hero-border); padding-top: 0; padding-left: 1rem; }
   .hero-shade { background: color-mix(in oklch, var(--background) 62%, transparent); }
   html.light .hero-shade { background: oklch(0.1 0.012 255 / 0.62); }
+}
+
+/* Shared workstation backdrop behind all sections after the hero */
+.section-backdrop { position: relative; isolation: isolate; }
+.section-backdrop::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(to bottom, color-mix(in oklch, var(--background) 86%, transparent), color-mix(in oklch, var(--background) 72%, transparent)),
+    url("./assets/gcm-workspace-bg.jpg");
+  background-size: cover;
+  background-position: center 35%;
+  background-attachment: fixed;
+}
+html.light .section-backdrop::before {
+  background-image:
+    linear-gradient(to bottom, oklch(1 0 0 / 0.88), oklch(1 0 0 / 0.8)),
+    url("./assets/gcm-workspace-bg.jpg");
 }
