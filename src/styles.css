@@ -376,6 +376,6 @@ html.light {
 }
 html.light .section-backdrop::before {
   background-image:
-    linear-gradient(to bottom, oklch(1 0 0 / 0.88), oklch(1 0 0 / 0.8)),
+    linear-gradient(to bottom, oklch(1 0 0 / 0.62), oklch(1 0 0 / 0.5)),
     url("./assets/gcm-workspace-bg.jpg");
 }
