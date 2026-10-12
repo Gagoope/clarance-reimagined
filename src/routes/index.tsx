@@ -95,7 +95,7 @@ function Portfolio() {
       <LoadingSplash />
       <SiteNav links={links} whatsappUrl={WHATSAPP_URL} />
       <WhatsAppFab />
-      <main id="main">
+      <main id="main" className="section-backdrop relative isolate">
         <section id="top" className="portfolio-hero relative isolate overflow-hidden">
           <img src={heroImage} alt="Software development workstation" decoding="async" fetchPriority="high" className="absolute inset-0 -z-20 h-full w-full object-cover object-center" />
           <div className="hero-shade absolute inset-0 -z-10" />
