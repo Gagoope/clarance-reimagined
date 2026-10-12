@@ -491,7 +491,7 @@ export const education = [
     id: "EDU-001",
     kind: "Tertiary · 2024",
     title: "Bachelor of Engineering (Honours) in Computer Engineering",
-    sub: "Minor in Computer Science · Gaborone, Botswana",
+    sub: "Botho University · Minor in Computer Science · GPA 2.83 · Certified 2024 · Gaborone, Botswana",
   },
   {
     id: "EDU-007",
