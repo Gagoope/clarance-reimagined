@@ -292,7 +292,8 @@ export const projects: Project[] = [
     ],
     result: "Deployed as a working demo environment covering the full lending lifecycle.",
     impact: "Lending operations, oversight and reporting run from one system.",
-    demoCreds: "Username: admin · Password: Passw0rd! (on request)",
+    demoUrl: "https://bombram.liveblog365.com//login.php",
+    demoCreds: "Username: admin · Password: Passw0rd!",
   },
   {
     id: "hospital",
