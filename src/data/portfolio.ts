@@ -35,7 +35,8 @@ export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_INTL}?text=Hi%20Gagoope%2C
 
 export function getProjectLink(project: Project) {
   if (project.demoUrl) return { href: project.demoUrl, label: "Launch Demo", external: true };
-  if (project.id === "portfolio") return { href: "#top", label: "View Portfolio", external: false };
+  if (project.id === "portfolio")
+    return { href: "https://clarance-app.vercel.app/", label: "View Live Site", external: true };
   return {
     href: `https://wa.me/${WHATSAPP_INTL}?text=${encodeURIComponent(`Hi Gagoope, I'd like to learn more about ${project.title}. Please share any available demo or project details.`)}`,
     label: "Request Project Details",
