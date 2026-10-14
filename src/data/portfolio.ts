@@ -15,6 +15,14 @@ import {
   Wrench,
   type LucideIcon,
 } from "lucide-react";
+import sapJournalImage from "@/assets/project-sap-journal.jpg";
+import posImage from "@/assets/project-pos.jpg";
+import approvalsImage from "@/assets/project-nardi-approvals.jpg";
+import investmentImage from "@/assets/project-loan-investment.jpg";
+import payrollImage from "@/assets/project-iduela.jpg";
+import loanSpecImage from "@/assets/project-loan-system.jpg";
+import attendanceImage from "@/assets/project-attendance.jpg";
+import portfolioImage from "@/assets/project-portfolio.jpg";
 
 export const WHATSAPP_LOCAL = "77447823";
 export const WHATSAPP_INTL = "26777447823";
@@ -24,6 +32,16 @@ export const LINKEDIN = "https://www.linkedin.com/in/gagoope-merafhe-7b5656437/"
 export const CV_PATH = "/assets/Gagoope_Clarance_Merafhe_CV.pdf";
 export const PROFILE_IMG = "/assets/gcm-profile.jpeg";
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_INTL}?text=Hi%20Gagoope%2C%20I%27d%20like%20to%20discuss%20a%20project.`;
+
+export function getProjectLink(project: Project) {
+  if (project.demoUrl) return { href: project.demoUrl, label: "Launch Demo", external: true };
+  if (project.id === "portfolio") return { href: "#top", label: "View Portfolio", external: false };
+  return {
+    href: `https://wa.me/${WHATSAPP_INTL}?text=${encodeURIComponent(`Hi Gagoope, I'd like to learn more about ${project.title}. Please share any available demo or project details.`)}`,
+    label: "Request Project Details",
+    external: true,
+  };
+}
 
 export const navLinks = [
   { label: "Work", href: "#work" },
@@ -157,7 +175,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     id: "sap-journal",
-    image: "/assets/work/sap-business-one-journal-addon.jpg",
+    image: sapJournalImage,
     title: "SAP Business One Journal Automation",
     category: "SAP",
     client: "RPC Data Limited",
@@ -194,7 +212,7 @@ export const projects: Project[] = [
   },
   {
     id: "pos",
-    image: "/assets/work/point-of-sale.jpg",
+    image: posImage,
     title: "Point of Sale Platform",
     category: "Web",
     client: "Personal product",
@@ -221,7 +239,7 @@ export const projects: Project[] = [
   },
   {
     id: "nardi-approvals",
-    image: "/assets/work/request-and-approval-system.png",
+    image: approvalsImage,
     title: "Request & Approval System",
     category: "Enterprise",
     client: "NARDI",
@@ -246,7 +264,7 @@ export const projects: Project[] = [
   },
   {
     id: "loan-investment",
-    image: "/assets/work/loan-investment-management.png",
+    image: investmentImage,
     title: "Loan & Investment Management System",
     category: "Enterprise",
     client: "Personal product",
@@ -311,7 +329,7 @@ export const projects: Project[] = [
   },
   {
     id: "iduela",
-    image: "/assets/work/iduela-hr-payroll.png",
+    image: payrollImage,
     title: "IDuela HR & Payroll Configuration",
     category: "Enterprise",
     client: "NARDI",
@@ -334,7 +352,7 @@ export const projects: Project[] = [
   },
   {
     id: "loan-system",
-    image: "/assets/work/loan-management-system-spec.svg",
+    image: loanSpecImage,
     title: "Loan Management System Specification",
     category: "Data",
     client: "Thobela Pawn Shop",
@@ -358,7 +376,7 @@ export const projects: Project[] = [
   },
   {
     id: "attendance",
-    image: "/assets/work/Attendance_system.jpg",
+    image: attendanceImage,
     title: "Automated Attendance Tracking",
     category: "Automation",
     client: "Botho University",
@@ -380,7 +398,7 @@ export const projects: Project[] = [
   },
   {
     id: "portfolio",
-    image: "/assets/work/portfolio-website.png",
+    image: portfolioImage,
     title: "Developer Portfolio Platform",
     category: "Web",
     client: "My-Portfolio",

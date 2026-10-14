@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import { ArrowLeft, ExternalLink, X } from "lucide-react";
 import type { Project } from "@/data/portfolio";
 import { btnPrimary, btnSecondary } from "@/components/ui-kit";
-import { WHATSAPP_URL } from "@/data/portfolio";
+import { WHATSAPP_URL, getProjectLink } from "@/data/portfolio";
 
 function Block({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -33,6 +33,7 @@ export function ProjectModal({
 
   if (typeof document === "undefined") return null;
   const Icon = project.icon;
+  const projectLink = getProjectLink(project);
 
   return createPortal(
     <div className="fixed inset-0 z-[9999]">
@@ -66,7 +67,7 @@ export function ProjectModal({
 
         <div className="min-h-0 flex-1 overflow-y-auto px-4 pb-10 sm:px-8">
           {project.image && (
-            <div className="mt-4 aspect-[16/9] overflow-hidden rounded-2xl border border-border bg-surface/60">
+            <div className="mt-4 aspect-[4/3] overflow-hidden rounded-2xl border border-border bg-surface/60">
               <img
                 src={project.image}
                 alt={`${project.title} — project visual`}
@@ -156,9 +157,9 @@ export function ProjectModal({
             <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className={btnPrimary}>
               Discuss a similar build
             </a>
-            {project.demoUrl && (
-              <a href={project.demoUrl} target="_blank" rel="noreferrer" className={btnSecondary}>
-                Launch Demo <ExternalLink className="h-4 w-4" aria-hidden />
+            {(
+              <a href={projectLink.href} target={projectLink.external ? "_blank" : undefined} rel={projectLink.external ? "noreferrer" : undefined} onClick={projectLink.external ? undefined : onClose} className={btnSecondary}>
+                {projectLink.label} <ExternalLink className="h-4 w-4" aria-hidden />
               </a>
             )}
           </div>
