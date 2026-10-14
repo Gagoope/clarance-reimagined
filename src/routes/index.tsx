@@ -10,7 +10,7 @@ import { ContactForm } from "@/components/ContactForm";
 import { WhatsAppFab } from "@/components/WhatsAppFab";
 import { Button, btnPrimary, btnSecondary, btnGhost } from "@/components/ui-kit";
 import heroImage from "@/assets/gcm-workstation-hero.jpg";
-import { CV_PATH, EMAIL, GITHUB, LINKEDIN, PROFILE_IMG, WHATSAPP_LOCAL, WHATSAPP_URL, education, experience, heroTech, processSteps, projects, services, techGroups, volunteer, type Project } from "@/data/portfolio";
+import { CV_PATH, EMAIL, GITHUB, LINKEDIN, PROFILE_IMG, WHATSAPP_LOCAL, WHATSAPP_URL, education, experience, heroTech, processSteps, projects, services, techGroups, volunteer, getProjectLink, type Project } from "@/data/portfolio";
 
 const TITLE = "Gagoope Merafhe | SAP Business One & Business Automation Engineer";
 const DESCRIPTION =
@@ -123,13 +123,14 @@ function Portfolio() {
           <div className="grid gap-6 md:grid-cols-3">
             {visible.map((p, i) => {
               const Icon = p.icon;
+              const projectLink = getProjectLink(p);
               return <Reveal key={p.id} delay={(i % 3) * 60}>
                 <article className="portfolio-project group h-full overflow-hidden rounded-2xl border border-border">
                   <Button variant="ghost" onClick={() => setOpen(p)} aria-label={`View ${p.title}`} className="project-image-button relative block aspect-[4/3] w-full overflow-hidden rounded-none p-0">
-                    {p.image ? <img src={p.image} alt={p.title} loading="lazy" decoding="async" sizes="(max-width: 767px) 100vw, 33vw" className="h-full w-full object-contain object-center transition-transform duration-500 group-hover:scale-105" /> : <div className="grid h-full w-full place-items-center bg-surface"><Icon className="h-14 w-14 text-primary" aria-hidden /></div>}
+                    {p.image ? <img src={p.image} alt={p.title} loading="lazy" decoding="async" width={640} height={480} sizes="(max-width: 767px) 100vw, 33vw" className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105" /> : <div className="grid h-full w-full place-items-center bg-surface"><Icon className="h-14 w-14 text-primary" aria-hidden /></div>}
                     <span className="hero-glass absolute bottom-3 right-3 grid h-9 w-9 place-items-center rounded-full text-hero-foreground"><ArrowUpRight className="h-4 w-4" aria-hidden /></span>
                   </Button>
-                  <div className="p-6"><p className="text-xs text-primary">{p.category} · {p.client}</p><h3 className="mt-3 text-xl font-semibold leading-snug"><Button variant="ghost" onClick={() => setOpen(p)} className="min-h-0 justify-start rounded-none p-0 text-left text-xl font-semibold leading-snug text-foreground hover:bg-transparent hover:text-primary">{p.title}</Button></h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.short}</p><p className="mt-5 border-t border-border pt-4 text-xs text-muted-foreground">{p.stack.slice(0, 3).join(" / ")}</p></div>
+                  <div className="p-6"><p className="text-xs text-primary">{p.category} · {p.client}</p><h3 className="mt-3 text-xl font-semibold leading-snug"><Button variant="ghost" onClick={() => setOpen(p)} className="min-h-0 justify-start rounded-none p-0 text-left text-xl font-semibold leading-snug text-foreground hover:bg-transparent hover:text-primary">{p.title}</Button></h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.short}</p><p className="mt-5 border-t border-border pt-4 text-xs text-muted-foreground">{p.stack.slice(0, 3).join(" / ")}</p><a href={projectLink.href} target={projectLink.external ? "_blank" : undefined} rel={projectLink.external ? "noreferrer" : undefined} aria-label={`${projectLink.label} — ${p.title}`} className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-primary hover:underline">{projectLink.label}<ArrowUpRight className="h-4 w-4" aria-hidden /></a></div>
                 </article>
               </Reveal>;
             })}
