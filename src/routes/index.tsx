@@ -85,6 +85,24 @@ function SectionTitle({ label, title }: { label: string; title: string }) {
   return <header className="mb-8"><p className="mb-3 font-mono text-xs text-primary">{label}</p><h2 className="text-3xl font-semibold leading-tight sm:text-4xl">{title}</h2></header>;
 }
 
+/* Details panel that opens while the pointer is over it and closes on leave
+   (hover-capable devices only; touch users keep tap-to-toggle). */
+function HoverDetails({ className, id, children }: { className?: string; id?: string; children: React.ReactNode }) {
+  const ref = useRef<HTMLDetailsElement>(null);
+  const canHover = () => typeof window !== "undefined" && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  return (
+    <details
+      ref={ref}
+      id={id}
+      className={className}
+      onMouseEnter={() => { if (canHover()) ref.current?.setAttribute("open", ""); }}
+      onMouseLeave={() => { if (canHover()) ref.current?.removeAttribute("open"); }}
+    >
+      {children}
+    </details>
+  );
+}
+
 function Portfolio() {
   const [open, setOpen] = useState<Project | null>(null);
   const [allWork, setAllWork] = useState(false);
