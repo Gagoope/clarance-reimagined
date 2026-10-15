@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, ChevronDown, Download, Github, Linkedin, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { CvPreviewButton } from "@/components/CvPreview";
@@ -87,16 +87,44 @@ function SectionTitle({ label, title }: { label: string; title: string }) {
 
 /* Details panel that opens while the pointer is over it and closes on leave
    (hover-capable devices only; touch users keep tap-to-toggle). */
+const OPEN_DELAY = 220;
+const CLOSE_DELAY = 320;
+
 function HoverDetails({ className, id, children }: { className?: string; id?: string; children: React.ReactNode }) {
   const ref = useRef<HTMLDetailsElement>(null);
+  const timer = useRef<number | null>(null);
   const canHover = () => typeof window !== "undefined" && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+  const clear = () => {
+    if (timer.current !== null) {
+      window.clearTimeout(timer.current);
+      timer.current = null;
+    }
+  };
+
+  useEffect(() => clear, []);
+
   return (
     <details
       ref={ref}
       id={id}
       className={className}
-      onMouseEnter={() => { if (canHover()) ref.current?.setAttribute("open", ""); }}
-      onMouseLeave={() => { if (canHover()) ref.current?.removeAttribute("open"); }}
+      onMouseEnter={() => {
+        if (!canHover()) return;
+        clear();
+        timer.current = window.setTimeout(() => {
+          timer.current = null;
+          ref.current?.setAttribute("open", "");
+        }, OPEN_DELAY);
+      }}
+      onMouseLeave={() => {
+        if (!canHover()) return;
+        clear();
+        timer.current = window.setTimeout(() => {
+          timer.current = null;
+          ref.current?.removeAttribute("open");
+        }, CLOSE_DELAY);
+      }}
     >
       {children}
     </details>
