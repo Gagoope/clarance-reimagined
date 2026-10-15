@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, ChevronDown, Download, Github, Linkedin, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { CvPreviewButton } from "@/components/CvPreview";
