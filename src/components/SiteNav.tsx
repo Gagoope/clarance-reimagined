@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Menu, X, MessageCircle } from "lucide-react";
-import { ThemeToggle } from "./ThemeToggle";
 
 export type NavLink = { label: string; href: string };
 
@@ -104,7 +103,6 @@ export function SiteNav({
                 })}
               </nav>
 
-              <div className="hidden sm:block"><ThemeToggle /></div>
 
               <a
                 href={whatsappUrl}
@@ -184,13 +182,12 @@ export function SiteNav({
               Contact
             </a>}
           </nav>
-          <div className="mt-5 flex items-center justify-between gap-3 border-t border-border pt-5">
-            <ThemeToggle />
+          <div className="mt-5 border-t border-border pt-5">
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex min-h-11 items-center gap-2 rounded-full bg-primary px-4 text-sm font-medium text-primary-foreground"
+              className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-primary px-4 text-sm font-medium text-primary-foreground"
             >
               <MessageCircle className="h-4 w-4" aria-hidden /> WhatsApp
             </a>
