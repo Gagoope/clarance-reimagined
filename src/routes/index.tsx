@@ -211,7 +211,7 @@ function Portfolio() {
           </div>
         </section>
       </main>
-      <footer className={`${shell} flex flex-wrap justify-between gap-3 pb-28 pt-6 text-xs text-muted-foreground sm:pb-6`}><p>© {new Date().getFullYear()} Gagoope Merafhe</p><a href="#top" className="inline-flex items-center gap-2 hover:text-primary">Back to top <ArrowRight className="h-3 w-3 -rotate-90" aria-hidden /></a></footer>
+      <footer className={`${shell} flex flex-wrap justify-between gap-3 pb-10 pt-6 text-xs text-muted-foreground`}><p>© {new Date().getFullYear()} Gagoope Merafhe</p><a href="#top" className="inline-flex items-center gap-2 hover:text-primary">Back to top <ArrowRight className="h-3 w-3 -rotate-90" aria-hidden /></a></footer>
       {open && <ProjectModal project={open} onClose={() => setOpen(null)} />}
     </div>
   );
