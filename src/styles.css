@@ -45,7 +45,7 @@
 
 /* ---- Dark (default) ---- */
 :root {
-  --radius: 1.5rem;
+  --radius: 0.375rem;
   --background: oklch(0.145 0.012 255);
   --foreground: oklch(0.97 0.008 250);
   --surface: oklch(0.185 0.026 260);
@@ -462,3 +462,26 @@ html.light .section-backdrop::before {
   .about-approach:hover { transform: none; }
   .about-entry:hover::before { height: 0; }
 }
+
+/* Apex-inspired editorial accents */
+.apex-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.apex-eyebrow::before {
+  content: "";
+  width: 2.5rem;
+  height: 2px;
+  background: currentColor;
+}
+main h2 { letter-spacing: -0.03em; line-height: 1.04; }
+main .rounded-2xl, main .rounded-xl, header .rounded-2xl { border-radius: 0.25rem; }
+main a.rounded-full, header a.rounded-full, main button.rounded-full { border-radius: 0.125rem; }
+.portfolio-project { border-radius: 0.25rem !important; }
+.portfolio-project:hover { border-color: color-mix(in oklab, var(--primary) 55%, var(--border)); }
