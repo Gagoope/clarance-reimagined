@@ -1,15 +1,8 @@
 import { useEffect, useState } from "react";
-import { Menu, X, MessageCircle, Home, Layers, Briefcase, User } from "lucide-react";
+import { Menu, X, MessageCircle } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 
 export type NavLink = { label: string; href: string };
-
-const mobileTabs = [
-  { label: "Home", href: "#top", icon: Home },
-  { label: "Work", href: "#work", icon: Briefcase },
-  { label: "Services", href: "#services", icon: Layers },
-  { label: "About", href: "#about", icon: User },
-];
 
 
 export function SiteNav({
@@ -24,7 +17,7 @@ export function SiteNav({
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const ids = [...links, ...mobileTabs].map((l) => l.href.slice(1));
+    const ids = links.map((l) => l.href.slice(1));
     const onScroll = () => setScrolled(window.scrollY > 12);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -205,40 +198,6 @@ export function SiteNav({
         </div>
       </div>
 
-      {/* Mobile bottom nav */}
-      <nav
-        aria-label="Quick navigation"
-        className="fixed inset-x-0 bottom-0 z-40 pb-[env(safe-area-inset-bottom)] sm:hidden"
-      >
-        <div className="mx-3 mb-3 grid grid-cols-5 items-center gap-1 rounded-2xl glass p-1.5 shadow-lift">
-          {mobileTabs.map((t) => {
-            const Icon = t.icon;
-            const isActive = active === t.href;
-            return (
-              <a
-                key={t.href}
-                href={t.href}
-                className={`flex min-h-12 flex-col items-center justify-center gap-1 rounded-xl text-[10px] font-medium transition duration-300 ${
-                  isActive ? "bg-primary/12 text-primary" : "text-muted-foreground"
-                }`}
-              >
-                <Icon className="h-4 w-4" aria-hidden />
-                {t.label}
-              </a>
-            );
-          })}
-          <a
-            href={whatsappUrl}
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Chat on WhatsApp"
-            className="flex min-h-12 flex-col items-center justify-center gap-1 rounded-xl bg-primary text-[10px] font-medium text-primary-foreground"
-          >
-            <MessageCircle className="h-4 w-4" aria-hidden />
-            Chat
-          </a>
-        </div>
-      </nav>
     </>
   );
 }
