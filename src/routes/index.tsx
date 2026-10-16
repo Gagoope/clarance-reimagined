@@ -82,7 +82,7 @@ const links = [
 ];
 
 function SectionTitle({ label, title }: { label: string; title: string }) {
-  return <header className="mb-8"><p className="mb-3 font-mono text-xs text-primary">{label}</p><h2 className="text-3xl font-semibold leading-tight sm:text-4xl">{title}</h2></header>;
+  return <header className="mb-8"><p className="apex-eyebrow mb-4 text-primary">{label}</p><h2 className="text-3xl font-semibold leading-tight sm:text-4xl">{title}</h2></header>;
 }
 
 /* Details panel that opens while the pointer is over it and closes on leave
@@ -205,7 +205,7 @@ function Portfolio() {
 
         <section id="contact" className="contact-band border-y border-border">
           <div className={`${shell} py-14 sm:py-16`}>
-            <div className="flex flex-col justify-between gap-8 md:flex-row md:items-center"><div><p className="mb-3 font-mono text-xs text-primary">Let’s connect</p><h2 className="text-3xl font-semibold sm:text-4xl">Have something in mind?</h2><p className="mt-3 text-sm text-muted-foreground">Let’s turn your next idea into a working system.</p></div><a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className={`${btnPrimary} self-start md:self-auto`}>Start a conversation<ArrowUpRight className="h-4 w-4" aria-hidden /></a></div>
+            <div className="flex flex-col justify-between gap-8 md:flex-row md:items-center"><div><p className="apex-eyebrow mb-4 text-primary">Let’s connect</p><h2 className="text-3xl font-semibold sm:text-4xl">Have something in mind?</h2><p className="mt-3 text-sm text-muted-foreground">Let’s turn your next idea into a working system.</p></div><a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className={`${btnPrimary} self-start md:self-auto`}>Start a conversation<ArrowUpRight className="h-4 w-4" aria-hidden /></a></div>
             <div className="mt-8 flex flex-wrap gap-x-6 gap-y-4 border-t border-border pt-6 text-sm"><a href={`mailto:${EMAIL}`} className="inline-flex items-center gap-2 hover:text-primary"><Mail className="h-4 w-4 text-primary" aria-hidden />{EMAIL}</a><a href={`tel:+267${WHATSAPP_LOCAL}`} className="inline-flex items-center gap-2 hover:text-primary"><Phone className="h-4 w-4 text-primary" aria-hidden />+267 {WHATSAPP_LOCAL}</a><a href={LINKEDIN} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 hover:text-primary"><Linkedin className="h-4 w-4 text-primary" aria-hidden />LinkedIn</a><a href={GITHUB} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 hover:text-primary"><Github className="h-4 w-4 text-primary" aria-hidden />GitHub</a></div>
             <details className="portfolio-details mt-6"><summary className="flex cursor-pointer list-none items-center gap-2 py-3 text-sm text-muted-foreground">Send a project enquiry<ChevronDown className="h-4 w-4" aria-hidden /></summary><div className="mt-3 max-w-2xl"><ContactForm /></div></details>
           </div>
