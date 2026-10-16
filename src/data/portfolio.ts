@@ -327,7 +327,8 @@ export const projects: Project[] = [
     ],
     result: "Working demo covering patient-to-billing operations end to end.",
     impact: "Shows domain modelling across clinical, pharmacy and finance workflows.",
-    demoCreds: "Username: admin · Password: Passw0rd! (on request)",
+    demoUrl: "https://medicarehms.liveblog365.com/",
+    demoCreds: "Login details available on request",
   },
   {
     id: "iduela",
