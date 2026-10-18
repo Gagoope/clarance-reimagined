@@ -23,6 +23,7 @@ import payrollImage from "@/assets/project-iduela.jpg";
 import loanSpecImage from "@/assets/project-loan-system.jpg";
 import attendanceImage from "@/assets/project-attendance.jpg";
 import portfolioImage from "@/assets/project-portfolio.jpg";
+import brunoImage from "@/assets/project-bruno.png";
 
 export const WHATSAPP_LOCAL = "77447823";
 export const WHATSAPP_INTL = "26777447823";
@@ -420,6 +421,32 @@ export const projects: Project[] = [
     ],
     result: "Live, fast and fully responsive.",
     impact: "The site you're reading now.",
+  },
+  {
+    id: "bruno-app",
+    image: brunoImage,
+    title: "Risk & Insurance Portfolio Platform",
+    category: "Web",
+    client: "Kebatho Modise",
+    period: "2026",
+    icon: Globe,
+    short:
+      "A polished professional portfolio for risk management, insurance advisory and industry training services.",
+    problem:
+      "A specialist insurance professional needed a clear digital presence for advisory, training and consultation work.",
+    approach:
+      "Built a focused portfolio experience that presents expertise, credentials, experience and consultation pathways.",
+    architecture: ["React", "Responsive UI", "Content Sections", "Static Hosting"],
+    stack: ["React", "TypeScript", "Tailwind CSS"],
+    implementation: [
+      "Structured professional profile and service sections",
+      "Responsive navigation and consultation calls to action",
+      "Experience, expertise and credential presentation",
+      "Deployed to Vercel for fast public access",
+    ],
+    result: "A live, responsive portfolio that makes specialist services easy to understand.",
+    impact: "Creates a credible first touchpoint for clients, learners and consulting opportunities.",
+    demoUrl: "https://bruno-app-ten.vercel.app/",
   },
 ];
 
