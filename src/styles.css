@@ -83,7 +83,7 @@
   --ring: oklch(0.82 0.16 88);
   --shadow-soft: 0 1px 2px oklch(0.2 0.035 235 / 0.06), 0 10px 28px -16px oklch(0.2 0.035 235 / 0.22);
   --shadow-lift: 0 4px 8px oklch(0.2 0.035 235 / 0.08), 0 22px 45px -22px oklch(0.2 0.035 235 / 0.32);
-  --glass-bg: oklch(0.99 0.008 92 / 0.82);
+  --glass-bg: oklch(0.16 0.025 255 / 0.96);
   --hero-foreground: oklch(0.98 0.008 92);
   --hero-muted: oklch(0.86 0.018 92);
   --hero-border: oklch(0.9 0.01 92 / 0.3);
@@ -191,6 +191,7 @@ html.light {
 
 /* Frosted surface used for nav, sheets and floating panels */
 @utility glass {
+  color: var(--color-foreground);
   background: var(--glass-bg);
   backdrop-filter: blur(18px) saturate(140%);
   border: 1px solid color-mix(in oklch, var(--color-border-strong) 60%, transparent);
@@ -382,7 +383,8 @@ html.light {
   inset: 0;
   z-index: -1;
   background-image:
-    linear-gradient(to bottom, color-mix(in oklch, var(--background) 58%, transparent), color-mix(in oklch, var(--background) 42%, transparent)),
+    linear-gradient(to bottom, color-mix(in oklch, var(--background) 72%, transparent), color-mix(in oklch, var(--background) 58%, transparent)),
+    linear-gradient(90deg, color-mix(in oklch, var(--background) 20%, transparent), transparent 45%, color-mix(in oklch, var(--background) 22%, transparent)),
     url("./assets/gcm-workspace-bg.jpg");
   background-size: cover;
   background-position: center 35%;

@@ -120,7 +120,7 @@ export function SiteNav({
                 aria-expanded={open}
                 className="grid min-h-11 min-w-11 place-items-center rounded-full border border-border bg-surface/60 text-foreground transition hover:border-primary/50 lg:hidden"
               >
-                <Menu className="h-5 w-5" aria-hidden />
+                <Menu className="pointer-events-none h-5 w-5" aria-hidden />
               </button>
             </div>
           </div>
