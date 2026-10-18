@@ -382,7 +382,7 @@ html.light {
   inset: 0;
   z-index: -1;
   background-image:
-    linear-gradient(to bottom, color-mix(in oklch, var(--background) 86%, transparent), color-mix(in oklch, var(--background) 72%, transparent)),
+    linear-gradient(to bottom, color-mix(in oklch, var(--background) 58%, transparent), color-mix(in oklch, var(--background) 42%, transparent)),
     url("./assets/gcm-workspace-bg.jpg");
   background-size: cover;
   background-position: center 35%;
