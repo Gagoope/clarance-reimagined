@@ -423,7 +423,7 @@ export const projects: Project[] = [
   },
   {
     id: "bruno-app",
-    image: "https://bruno-app-ten.vercel.app/favicon.png",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-R8bFuwNW5lodbn9geiydML0cyLojJd.png",
     title: "Risk & Insurance Portfolio Platform",
     category: "Web",
     client: "Kebatho Modise",
