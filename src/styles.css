@@ -562,3 +562,46 @@ button:hover, a[class*="bg-primary"]:hover {
   box-shadow: 3px 3px 0 color-mix(in oklch, var(--color-primary) 36%, transparent);
   transform: translate(-1px, -1px);
 }
+
+/* Keep every navigation surface aligned with the angular visual language. */
+header > div > div,
+header nav a,
+header button,
+header a[class*="bg-primary"],
+[role="dialog"],
+[role="dialog"] nav a,
+[role="dialog"] button,
+[role="dialog"] a[class*="bg-primary"] {
+  border-radius: 0.125rem !important;
+}
+
+header nav a {
+  position: relative;
+  transition: color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
+}
+header nav a:hover,
+header nav a[aria-current="true"] {
+  background: color-mix(in oklch, var(--color-primary) 12%, transparent);
+  color: var(--color-primary);
+  transform: translateY(-2px);
+}
+header nav a:hover::after,
+header nav a[aria-current="true"]::after {
+  content: "";
+  position: absolute;
+  inset: auto 0.875rem -0.125rem;
+  height: 2px;
+  background: var(--color-primary);
+}
+
+[role="dialog"] nav a {
+  border-left: 2px solid transparent;
+}
+[role="dialog"] nav a:hover,
+[role="dialog"] nav a:focus-visible,
+[role="dialog"] nav a[aria-current="true"] {
+  border-left-color: var(--color-primary);
+  background: color-mix(in oklch, var(--color-primary) 12%, transparent);
+  color: var(--color-primary);
+  transform: translateX(3px);
+}

@@ -34,7 +34,7 @@ export const PROFILE_IMG = "/assets/gcm-profile.jpeg";
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_INTL}?text=Hi%20Gagoope%2C%20I%27d%20like%20to%20discuss%20a%20project.`;
 
 export function getProjectLink(project: Project) {
-  if (project.demoUrl) return { href: project.demoUrl, label: "Launch Demo", external: true };
+  if (project.demoUrl) return { href: project.demoUrl, label: "Visit Site", external: true };
   if (project.id === "portfolio")
     return { href: "https://clarance-app.vercel.app/", label: "View Live Site", external: true };
   return {
@@ -420,6 +420,32 @@ export const projects: Project[] = [
     ],
     result: "Live, fast and fully responsive.",
     impact: "The site you're reading now.",
+  },
+  {
+    id: "bruno-app",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-R8bFuwNW5lodbn9geiydML0cyLojJd.png",
+    title: "Risk & Insurance Portfolio Platform",
+    category: "Web",
+    client: "Kebatho Modise",
+    period: "2026",
+    icon: Globe,
+    short:
+      "A polished professional portfolio for risk management, insurance advisory and industry training services.",
+    problem:
+      "A specialist insurance professional needed a clear digital presence for advisory, training and consultation work.",
+    approach:
+      "Built a focused portfolio experience that presents expertise, credentials, experience and consultation pathways.",
+    architecture: ["React", "Responsive UI", "Content Sections", "Static Hosting"],
+    stack: ["React", "TypeScript", "Tailwind CSS"],
+    implementation: [
+      "Structured professional profile and service sections",
+      "Responsive navigation and consultation calls to action",
+      "Experience, expertise and credential presentation",
+      "Deployed to Vercel for fast public access",
+    ],
+    result: "A live, responsive portfolio that makes specialist services easy to understand.",
+    impact: "Creates a credible first touchpoint for clients, learners and consulting opportunities.",
+    demoUrl: "https://bruno-app-ten.vercel.app/",
   },
 ];
 
