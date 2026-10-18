@@ -23,7 +23,6 @@ import payrollImage from "@/assets/project-iduela.jpg";
 import loanSpecImage from "@/assets/project-loan-system.jpg";
 import attendanceImage from "@/assets/project-attendance.jpg";
 import portfolioImage from "@/assets/project-portfolio.jpg";
-import brunoImage from "@/assets/project-bruno.png";
 
 export const WHATSAPP_LOCAL = "77447823";
 export const WHATSAPP_INTL = "26777447823";
@@ -35,7 +34,7 @@ export const PROFILE_IMG = "/assets/gcm-profile.jpeg";
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_INTL}?text=Hi%20Gagoope%2C%20I%27d%20like%20to%20discuss%20a%20project.`;
 
 export function getProjectLink(project: Project) {
-  if (project.demoUrl) return { href: project.demoUrl, label: "Launch Demo", external: true };
+  if (project.demoUrl) return { href: project.demoUrl, label: "Visit Site", external: true };
   if (project.id === "portfolio")
     return { href: "https://clarance-app.vercel.app/", label: "View Live Site", external: true };
   return {
@@ -424,7 +423,7 @@ export const projects: Project[] = [
   },
   {
     id: "bruno-app",
-    image: brunoImage,
+    image: "https://bruno-app-ten.vercel.app/favicon.png",
     title: "Risk & Insurance Portfolio Platform",
     category: "Web",
     client: "Kebatho Modise",
