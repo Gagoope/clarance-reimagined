@@ -148,8 +148,8 @@ function Portfolio() {
           <div className={`${shell} pb-10 pt-36 sm:pb-12 sm:pt-44`}>
             <Reveal>
               <p className="mb-6 flex items-center gap-2 text-sm text-hero-muted"><MapPin className="h-4 w-4" aria-hidden />Gaborone, Botswana</p>
-              <h1 className="max-w-3xl text-[2.5rem] font-semibold leading-[1.08] text-hero-foreground sm:text-6xl">Gagoope<br />Clarance Merafhe<span className="text-primary">.</span></h1>
-              <p className="mt-6 text-lg font-medium text-hero-foreground sm:text-xl">Web Developer &amp; Business Automation Engineer</p>
+              <h1 className="max-w-3xl text-[2.5rem] font-semibold leading-[1.08] text-hero-foreground sm:text-6xl">Gagoope<br /><span className="hero-name-accent">Clarance</span> Merafhe<span className="text-primary">.</span></h1>
+              <p className="hero-role mt-6 text-lg font-medium text-hero-foreground sm:text-xl">Web Developer &amp; Business Automation Engineer</p>
               <p className="mt-3 max-w-lg text-sm leading-relaxed text-hero-muted sm:text-base">SAP Business One, web applications and connected systems. I build software that eliminates manual work.</p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a href="#work" className={btnPrimary}>Explore my work <ArrowUpRight className="h-4 w-4" aria-hidden /></a>

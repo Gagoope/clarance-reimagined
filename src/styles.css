@@ -511,6 +511,29 @@ html, html.light {
   --card-foreground: oklch(0.94 0.012 95);
 }
 
+/* Hero name and role accents keep the opening statement visually active. */
+.hero-name-accent {
+  color: var(--color-primary);
+  text-shadow: 0 0 24px color-mix(in oklch, var(--color-primary) 28%, transparent);
+}
+.hero-role {
+  width: fit-content;
+  background: linear-gradient(110deg, var(--hero-foreground) 0%, var(--hero-foreground) 38%, var(--color-primary) 50%, var(--hero-foreground) 62%, var(--hero-foreground) 100%);
+  background-size: 220% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: hero-role-shimmer 5s ease-in-out infinite;
+}
+@keyframes hero-role-shimmer {
+  0%, 20% { background-position: 100% 50%; }
+  55%, 75% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-role { animation: none; color: var(--hero-foreground); }
+}
+
 /* Angular surfaces echo the reference: crisp corners, hard borders and lifted hover states. */
 .card-surface, .card-editorial, .portfolio-project, .about-photo, .hero-glass, .glass {
   border-radius: 0.25rem !important;
