@@ -145,6 +145,10 @@ function Portfolio() {
         <section id="top" className="portfolio-hero relative isolate overflow-hidden">
           <img src={heroImage} alt="Software development workstation" decoding="async" fetchPriority="high" className="absolute inset-0 -z-20 h-full w-full object-cover object-center" />
           <div className="hero-shade absolute inset-0 -z-10" />
+          <div className="hero-aurora hero-aurora-one" aria-hidden="true" />
+          <div className="hero-aurora hero-aurora-two" aria-hidden="true" />
+          <div className="hero-orbit hero-orbit-one" aria-hidden="true" />
+          <div className="hero-orbit hero-orbit-two" aria-hidden="true" />
           <div className={`${shell} pb-10 pt-36 sm:pb-12 sm:pt-44`}>
             <Reveal>
               <p className="mb-6 flex items-center gap-2 text-sm text-hero-muted"><MapPin className="h-4 w-4" aria-hidden />Gaborone, Botswana</p>

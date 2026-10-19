@@ -534,7 +534,27 @@ html, html.light {
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-role { animation: none; color: var(--hero-foreground); }
+  .hero-aurora, .hero-orbit { animation: none; }
 }
+
+/* Premium ambient hero system: slow, low-contrast light movement keeps the technical surface alive. */
+.portfolio-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -5;
+  pointer-events: none;
+  background: radial-gradient(circle at 72% 28%, color-mix(in oklch, var(--color-primary) 12%, transparent), transparent 22%), radial-gradient(circle at 88% 74%, oklch(0.48 0.18 300 / 0.18), transparent 25%);
+  mix-blend-mode: screen;
+}
+.hero-aurora, .hero-orbit { position: absolute; pointer-events: none; z-index: -4; }
+.hero-aurora { border-radius: 999px; filter: blur(12px); opacity: 0.46; animation: hero-drift 16s ease-in-out infinite alternate; }
+.hero-aurora-one { width: 22rem; height: 22rem; right: 8%; top: 8%; background: oklch(0.7 0.2 210 / 0.2); }
+.hero-aurora-two { width: 17rem; height: 17rem; right: 32%; bottom: 2%; background: oklch(0.62 0.21 300 / 0.16); animation-delay: -7s; }
+.hero-orbit { width: 24rem; height: 24rem; right: 10%; top: 18%; border: 1px solid oklch(0.8 0.18 210 / 0.24); transform: rotate(-18deg); animation: hero-orbit 22s linear infinite; }
+.hero-orbit-two { width: 16rem; height: 16rem; right: 20%; top: 31%; border-color: oklch(0.75 0.19 300 / 0.2); animation-duration: 15s; animation-direction: reverse; }
+@keyframes hero-drift { from { transform: translate3d(-2rem, 1rem, 0) scale(0.95); } to { transform: translate3d(2rem, -1rem, 0) scale(1.08); } }
+@keyframes hero-orbit { to { transform: rotate(342deg); } }
 
 /* Angular surfaces echo the reference: crisp corners, hard borders and lifted hover states. */
 .card-surface, .card-editorial, .portfolio-project, .about-photo, .hero-glass, .glass {
@@ -562,6 +582,9 @@ button:hover, a[class*="bg-primary"]:hover {
   box-shadow: 3px 3px 0 color-mix(in oklch, var(--color-primary) 36%, transparent);
   transform: translate(-1px, -1px);
 }
+
+.nav-progress { position: fixed; inset: 0 0 auto; z-index: 70; height: 2px; background: transparent; }
+.nav-progress span { display: block; height: 100%; background: linear-gradient(90deg, oklch(0.76 0.18 220), oklch(0.78 0.2 300), var(--color-primary)); box-shadow: 0 0 14px color-mix(in oklch, var(--color-primary) 65%, transparent); transition: width 120ms linear; }
 
 /* Keep every navigation surface aligned with the angular visual language. */
 header > div > div,

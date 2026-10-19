@@ -14,10 +14,15 @@ export function SiteNav({
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("#top");
   const [scrolled, setScrolled] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const ids = links.map((l) => l.href.slice(1));
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 12);
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      setProgress(max > 0 ? Math.min(100, Math.max(0, (window.scrollY / max) * 100)) : 0);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
 
@@ -53,6 +58,7 @@ export function SiteNav({
 
   return (
     <>
+      <div className="nav-progress" aria-hidden="true"><span style={{ width: `${progress}%` }} /></div>
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
           scrolled ? "py-2 sm:py-3" : "py-3 sm:py-5"
