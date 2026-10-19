@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Menu, X, MessageCircle } from "lucide-react";
+import { Button } from "@/components/ui-kit";
+import { useDialogFocus } from "@/hooks/use-dialog-focus";
 
 export type NavLink = { label: string; href: string };
 
@@ -12,6 +14,8 @@ export function SiteNav({
   whatsappUrl: string;
 }) {
   const [open, setOpen] = useState(false);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  useDialogFocus(dialogRef, open);
   const [active, setActive] = useState("#top");
   const [scrolled, setScrolled] = useState(false);
 
@@ -113,15 +117,15 @@ export function SiteNav({
                 <MessageCircle className="h-4 w-4" aria-hidden /> Let&apos;s Talk
               </a>
 
-              <button
+              <Button
                 type="button"
                 onClick={() => setOpen(true)}
                 aria-label="Open menu"
                 aria-expanded={open}
-                className="grid min-h-11 min-w-11 place-items-center rounded-full border border-border bg-surface/60 text-foreground transition hover:border-primary/50 lg:hidden"
+                className="grid min-h-11 min-w-11 p-0 place-items-center rounded-full border border-border bg-surface/60 text-foreground transition hover:border-primary/50 lg:hidden"
               >
                 <Menu className="pointer-events-none h-5 w-5" aria-hidden />
-              </button>
+              </Button>
             </div>
           </div>
         </div>
@@ -150,14 +154,14 @@ export function SiteNav({
             <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-primary">
               Menu
             </span>
-            <button
+            <Button
               type="button"
               onClick={() => setOpen(false)}
               aria-label="Close menu"
-              className="grid min-h-11 min-w-11 place-items-center rounded-full border border-border text-muted-foreground transition hover:border-primary hover:text-primary"
+              className="grid min-h-11 min-w-11 p-0 place-items-center rounded-full border border-border text-muted-foreground transition hover:border-primary hover:text-primary"
             >
               <X className="h-4 w-4" aria-hidden />
-            </button>
+            </Button>
           </div>
           <nav className="mt-4 grid gap-1">
             {links.map((l) => (

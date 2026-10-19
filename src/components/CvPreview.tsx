@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { X, Download, FileText, Loader2 } from "lucide-react";
+import { Button } from "@/components/ui-kit";
+import { useDialogFocus } from "@/hooks/use-dialog-focus";
 const cvAsset = { url: "/assets/Gagoope_Clarance_Merafhe_CV.pdf" };
 
 export function CvPreviewButton({
@@ -13,6 +15,8 @@ export function CvPreviewButton({
   variant?: "outline" | "solid";
 }) {
   const [open, setOpen] = useState(false);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  useDialogFocus(dialogRef, open);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -33,7 +37,7 @@ export function CvPreviewButton({
 
   return (
     <>
-      <button
+      <Button
         type="button"
         onClick={() => setOpen(true)}
         aria-haspopup="dialog"
@@ -43,7 +47,7 @@ export function CvPreviewButton({
         }
       >
         <FileText className="h-4 w-4" aria-hidden /> {label}
-      </button>
+      </Button>
 
       {open &&
         typeof document !== "undefined" &&
@@ -53,6 +57,7 @@ export function CvPreviewButton({
             onClick={() => setOpen(false)}
           >
             <div
+              ref={dialogRef}
               role="dialog"
               aria-modal="true"
               aria-label="Curriculum Vitae preview"
@@ -78,14 +83,14 @@ export function CvPreviewButton({
                     <Download className="h-3.5 w-3.5" aria-hidden />
                     <span className="hidden sm:inline">Download</span>
                   </a>
-                  <button
+                  <Button
                     type="button"
                     onClick={() => setOpen(false)}
                     aria-label="Close preview"
-                    className="grid min-h-10 min-w-10 shrink-0 place-items-center rounded-full border border-border text-muted-foreground transition hover:border-primary hover:text-primary"
+                    className="grid min-h-11 min-w-11 p-0 shrink-0 place-items-center rounded-full border border-border text-muted-foreground transition hover:border-primary hover:text-primary"
                   >
                     <X className="h-4 w-4" aria-hidden />
-                  </button>
+                  </Button>
                 </div>
               </div>
               <div className="relative flex-1 overflow-hidden">
@@ -103,7 +108,7 @@ export function CvPreviewButton({
                   title="CV preview"
                   src={`${cvAsset.url}#view=FitH`}
                   onLoad={() => setLoaded(true)}
-                  className="h-full w-full bg-white"
+                  className="h-full w-full bg-card"
                 />
               </div>
               <div className="border-t border-border bg-surface-elevated/70 px-4 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] text-center sm:hidden">

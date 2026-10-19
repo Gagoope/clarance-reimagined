@@ -5,15 +5,15 @@ import { twMerge } from "tailwind-merge";
 /* ————— Buttons ————— */
 
 const btnBase =
-  "group inline-flex items-center justify-center gap-2 rounded-sm text-sm font-medium " +
+  "group inline-flex items-center justify-center gap-2 rounded-lg text-sm font-medium " +
   "transition duration-300 ease-out active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50 " +
   "min-h-11 px-5";
 
 export const btnPrimary =
-  `${btnBase} bg-primary text-primary-foreground shadow-soft hover:shadow-lift hover:brightness-110`;
+  `${btnBase} bg-primary text-primary-foreground shadow-soft hover:shadow-lift hover:brightness-110 hover:bg-electric focus-visible:shadow-lift`;
 
 export const btnSecondary =
-  `${btnBase} border border-border bg-surface/60 text-foreground hover:border-primary/50 hover:bg-surface`;
+  `${btnBase} border border-border bg-surface/60 text-foreground hover:border-primary/50 hover:bg-surface hover:shadow-soft`;
 
 export const btnGhost =
   `${btnBase} text-muted-foreground hover:bg-surface hover:text-foreground`;

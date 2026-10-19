@@ -1,9 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { ArrowLeft, ExternalLink, X } from "lucide-react";
 import type { Project } from "@/data/portfolio";
-import { btnPrimary, btnSecondary } from "@/components/ui-kit";
+import { Button, btnPrimary, btnSecondary } from "@/components/ui-kit";
 import { WHATSAPP_URL, getProjectLink } from "@/data/portfolio";
+import { useDialogFocus } from "@/hooks/use-dialog-focus";
 
 function Block({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -21,6 +22,8 @@ export function ProjectModal({
   project: Project;
   onClose: () => void;
 }) {
+  const dialogRef = useRef<HTMLDivElement>(null);
+  useDialogFocus(dialogRef);
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     document.body.style.overflow = "hidden";
@@ -42,27 +45,28 @@ export function ProjectModal({
         className="absolute inset-0 animate-fade-in bg-background/80 backdrop-blur-sm"
       />
       <div
+        ref={dialogRef}
         role="dialog"
         aria-modal="true"
         aria-label={project.title}
         className="absolute inset-x-0 bottom-0 top-0 mx-auto flex w-full max-w-3xl flex-col sm:inset-4 sm:top-8 sm:bottom-8 sm:rounded-2xl overflow-hidden border border-border bg-background shadow-lift"
       >
         <header className="glass flex items-center justify-between gap-3 px-4 py-3 pt-[max(0.75rem,env(safe-area-inset-top))] sm:px-6">
-          <button
+          <Button
             type="button"
             onClick={onClose}
             className="inline-flex min-h-11 items-center gap-2 text-sm text-muted-foreground transition hover:text-foreground"
           >
             <ArrowLeft className="h-4 w-4" aria-hidden /> Back to Work
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
             onClick={onClose}
             aria-label="Close project details"
-            className="grid min-h-11 min-w-11 place-items-center rounded-full border border-border text-muted-foreground transition hover:border-primary hover:text-primary"
+            className="grid min-h-11 min-w-11 p-0 place-items-center rounded-full border border-border text-muted-foreground transition hover:border-primary hover:text-primary"
           >
             <X className="h-4 w-4" aria-hidden />
-          </button>
+          </Button>
         </header>
 
         <div className="min-h-0 flex-1 overflow-y-auto px-4 pb-10 sm:px-8">
@@ -87,7 +91,7 @@ export function ProjectModal({
                 <div className="font-mono text-[10px] uppercase tracking-[0.28em] text-primary">
                   {project.category}
                 </div>
-                <div className="truncate text-sm text-muted-foreground">
+                <div className="text-sm text-muted-foreground">
                   {project.client} · {project.period}
                 </div>
               </div>
@@ -101,7 +105,7 @@ export function ProjectModal({
                   <span className="font-mono text-[10px] text-muted-foreground">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="min-w-0 truncate text-sm">{step}</span>
+                  <span className="min-w-0 text-sm">{step}</span>
                 </div>
               ))}
             </div>
