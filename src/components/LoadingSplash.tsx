@@ -6,11 +6,13 @@ export function LoadingSplash() {
 
   useEffect(() => {
     // Only run on initial load per session
-    if (typeof window !== "undefined" && sessionStorage.getItem("gcm_splash_seen")) {
+    let seen = false;
+    try { seen = sessionStorage.getItem("gcm_splash_seen") === "1"; } catch { /* storage may be unavailable */ }
+    if (seen || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setVisible(false);
       return;
     }
-    const t1 = setTimeout(() => setFading(true), 1800);
+    const t1 = setTimeout(() => setFading(true), 450);
     const t2 = setTimeout(() => {
       setVisible(false);
       try {
@@ -18,7 +20,7 @@ export function LoadingSplash() {
       } catch {
         /* ignore */
       }
-    }, 2400);
+    }, 850);
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);

@@ -5,6 +5,7 @@ import { CvPreviewButton } from "@/components/CvPreview";
 import { LoadingSplash } from "@/components/LoadingSplash";
 import { SiteNav } from "@/components/SiteNav";
 import { Reveal } from "@/components/Reveal";
+import { HeroAtmosphere, ScrollProgress, SystemsVisual } from "@/components/PortfolioMotion";
 import { ProjectModal } from "@/components/ProjectModal";
 import { ContactForm } from "@/components/ContactForm";
 import { WhatsAppFab } from "@/components/WhatsAppFab";
@@ -25,12 +26,12 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/" },
+      { property: "og:url", content: "https://clarance-app.vercel.app/" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESCRIPTION },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: "https://clarance-app.vercel.app/" }],
     scripts: [
       {
         type: "application/ld+json",
@@ -138,17 +139,21 @@ function Portfolio() {
 
   return (
     <div className="min-h-dvh bg-background text-foreground">
+      <a href="#main" className="skip-link">Skip to content</a>
       <LoadingSplash />
+      <ScrollProgress />
       <SiteNav links={links} whatsappUrl={WHATSAPP_URL} />
       <WhatsAppFab />
       <main id="main" className="section-backdrop relative isolate">
         <section id="top" className="portfolio-hero relative isolate overflow-hidden">
           <img src={heroImage} alt="Software development workstation" decoding="async" fetchPriority="high" className="absolute inset-0 -z-20 h-full w-full object-cover object-center" />
           <div className="hero-shade absolute inset-0 -z-10" />
+          <HeroAtmosphere />
           <div className={`${shell} pb-10 pt-36 sm:pb-12 sm:pt-44`}>
+            <div className="hero-composition">
             <Reveal>
               <p className="mb-6 flex items-center gap-2 text-sm text-hero-muted"><MapPin className="h-4 w-4" aria-hidden />Gaborone, Botswana</p>
-              <h1 className="max-w-3xl text-[2.5rem] font-semibold leading-[1.08] text-hero-foreground sm:text-6xl">Gagoope<br /><span className="hero-name-accent">Clarance</span> Merafhe<span className="text-primary">.</span></h1>
+              <h1 className="max-w-3xl text-[2.5rem] font-semibold leading-[1.08] text-hero-foreground sm:text-5xl lg:text-6xl">Gagoope<br /><span className="hero-name-accent">Clarance</span> Merafhe<span className="text-primary">.</span></h1>
               <p className="hero-role mt-6 text-lg font-medium text-hero-foreground sm:text-xl">Web Developer &amp; Business Automation Engineer</p>
               <p className="mt-3 max-w-lg text-sm leading-relaxed text-hero-muted sm:text-base">SAP Business One, web applications and connected systems. I build software that eliminates manual work.</p>
               <div className="mt-8 flex flex-wrap gap-3">
@@ -156,6 +161,8 @@ function Portfolio() {
                 <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="hero-glass inline-flex min-h-11 items-center gap-2 rounded-full px-5 text-sm font-medium text-hero-foreground">Let’s talk <MessageCircle className="h-4 w-4" aria-hidden /></a>
               </div>
             </Reveal>
+            <Reveal delay={160} className="hero-system-wrap"><SystemsVisual /></Reveal>
+            </div>
             <div className="hero-proof hero-glass mt-14 grid gap-5 rounded-2xl px-6 py-5 sm:mt-16 sm:grid-cols-[1.3fr_1fr_1fr] sm:gap-8">
               <div><span className="mb-2 block text-xs text-hero-muted">Specialising in</span><p className="text-sm font-medium text-hero-foreground">SAP Business One &amp; automation</p></div>
               <div className="border-t border-hero-border pt-4 sm:border-l sm:border-t-0 sm:pl-8 sm:pt-0"><span className="mb-2 block text-xs text-hero-muted">From idea to delivery</span><p className="text-sm font-medium text-hero-foreground">Full-stack business applications</p></div>
@@ -166,7 +173,7 @@ function Portfolio() {
 
         <section id="work" className={`${shell} py-16 sm:py-20`}>
           <div className="flex flex-wrap items-end justify-between gap-4"><SectionTitle label="Selected work" title="Built for the real world." /><span className="mb-8 text-sm text-muted-foreground">Finance · Operations · Enterprise</span></div>
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="work-grid grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {visible.map((p, i) => {
               const Icon = p.icon;
               const projectLink = getProjectLink(p);
@@ -176,7 +183,7 @@ function Portfolio() {
                     {p.image ? <img src={p.image} alt={p.title} loading="lazy" decoding="async" width={640} height={480} sizes="(max-width: 767px) 100vw, 33vw" className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105" /> : <div className="grid h-full w-full place-items-center bg-surface"><Icon className="h-14 w-14 text-primary" aria-hidden /></div>}
                     <span className="hero-glass absolute bottom-3 right-3 grid h-9 w-9 place-items-center rounded-full text-hero-foreground"><ArrowUpRight className="h-4 w-4" aria-hidden /></span>
                   </Button>
-                  <div className="p-6"><p className="text-xs text-primary">{p.category} · {p.client}</p><h3 className="mt-3 text-xl font-semibold leading-snug"><Button variant="ghost" onClick={() => setOpen(p)} className="min-h-0 justify-start rounded-none p-0 text-left text-xl font-semibold leading-snug text-foreground hover:bg-transparent hover:text-primary">{p.title}</Button></h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.short}</p><p className="mt-5 border-t border-border pt-4 text-xs text-muted-foreground">{p.stack.slice(0, 3).join(" / ")}</p><a href={projectLink.href} target={projectLink.external ? "_blank" : undefined} rel={projectLink.external ? "noreferrer" : undefined} aria-label={`${projectLink.label} — ${p.title}`} className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-primary hover:underline">{projectLink.label}<ArrowUpRight className="h-4 w-4" aria-hidden /></a></div>
+                  <div className="p-6"><p className="text-xs text-primary">{p.category} · {p.client}</p><h3 className="mt-3 text-xl font-semibold leading-snug"><Button variant="ghost" onClick={() => setOpen(p)} className="min-h-0 justify-start rounded-none p-0 text-left text-xl font-semibold leading-snug text-foreground hover:bg-transparent hover:text-primary">{p.title}</Button></h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.short}</p><div className="project-tags mt-5 flex flex-wrap gap-2 border-t border-border pt-4">{p.stack.slice(0, 3).map(t => <span key={t}>{t}</span>)}</div><a href={projectLink.href} target={projectLink.external ? "_blank" : undefined} rel={projectLink.external ? "noreferrer" : undefined} aria-label={`${projectLink.label} — ${p.title}`} className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-primary hover:underline">{projectLink.label}<ArrowUpRight className="h-4 w-4" aria-hidden /></a></div>
                 </article>
               </Reveal>;
             })}
@@ -188,7 +195,7 @@ function Portfolio() {
           <div className={`${shell} py-14 sm:py-16`}>
             <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
               <SectionTitle label="What I do" title="Less manual work. Better systems." />
-              <div className="grid gap-x-8 sm:grid-cols-2">{services.map(s => { const Icon = s.icon; return <a key={s.n} href="#contact" className="group flex gap-3 border-t border-border py-5"><Icon className="mt-1 h-5 w-5 shrink-0 text-primary" aria-hidden /><div><h3 className="text-sm font-semibold">{s.title}</h3><p className="mt-2 text-xs leading-relaxed text-muted-foreground">{s.desc}</p></div><ArrowUpRight className="mt-1 h-4 w-4 shrink-0 text-muted-foreground transition group-hover:text-primary" aria-hidden /></a>; })}</div>
+              <div className="grid gap-x-8 sm:grid-cols-2">{services.map(s => { const Icon = s.icon; return <a key={s.n} href="#contact" className="service-link group flex gap-3 border-t border-border py-5"><Icon className="mt-1 h-5 w-5 shrink-0 text-primary" aria-hidden /><div><h3 className="text-sm font-semibold">{s.title}</h3><p className="mt-2 text-xs leading-relaxed text-muted-foreground">{s.desc}</p></div><ArrowUpRight className="mt-1 h-4 w-4 shrink-0 text-muted-foreground transition group-hover:text-primary" aria-hidden /></a>; })}</div>
             </div>
           </div>
         </section>

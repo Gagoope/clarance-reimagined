@@ -38,6 +38,9 @@
   --color-hero-foreground: var(--hero-foreground);
   --color-hero-muted: var(--hero-muted);
   --color-hero-border: var(--hero-border);
+  --color-electric: var(--electric);
+  --color-violet: var(--violet);
+  --color-magenta: var(--magenta);
   --color-ink-amber: var(--ink-amber);
   --color-ink-mint: var(--ink-mint);
   --color-ink-lilac: var(--ink-lilac);
@@ -50,7 +53,7 @@
 
 /* ---- Permanent dark palette: ink, electric amber and cool lilac ---- */
 :root {
-  --radius: 0.125rem;
+  --radius: 0.5rem;
   --background: oklch(0.13 0.018 255);
   --foreground: oklch(0.94 0.012 95);
   --surface: oklch(0.17 0.022 255);
@@ -59,14 +62,14 @@
   --card-foreground: oklch(0.94 0.012 95);
   --popover: oklch(0.19 0.024 255);
   --popover-foreground: oklch(0.94 0.012 95);
-  --primary: oklch(0.82 0.16 88);
+  --primary: oklch(0.8 0.14 215);
   --primary-foreground: oklch(0.14 0.02 255);
-  --primary-soft: oklch(0.3 0.08 88);
+  --primary-soft: oklch(0.3 0.08 215);
   --secondary: oklch(0.22 0.025 255);
   --secondary-foreground: oklch(0.9 0.012 95);
   --muted: oklch(0.22 0.025 255);
-  --muted-foreground: oklch(0.68 0.018 255);
-  --accent: oklch(0.82 0.16 88);
+  --muted-foreground: oklch(0.78 0.018 255);
+  --accent: oklch(0.8 0.14 215);
   --accent-foreground: oklch(0.14 0.02 255);
   --destructive: oklch(0.68 0.18 25);
   --destructive-foreground: oklch(0.98 0 0);
@@ -80,7 +83,7 @@
   --border: oklch(0.35 0.03 255 / 0.9);
   --border-strong: oklch(0.52 0.04 255);
   --input: oklch(0.28 0.025 255);
-  --ring: oklch(0.82 0.16 88);
+  --ring: oklch(0.8 0.14 215);
   --shadow-soft: 0 1px 2px oklch(0.2 0.035 235 / 0.06), 0 10px 28px -16px oklch(0.2 0.035 235 / 0.22);
   --shadow-lift: 0 4px 8px oklch(0.2 0.035 235 / 0.08), 0 22px 45px -22px oklch(0.2 0.035 235 / 0.32);
   --glass-bg: oklch(0.16 0.025 255 / 0.96);
@@ -90,8 +93,13 @@
   --hero-glass-bg: oklch(0.2 0.035 235 / 0.38);
   --hero-shade: linear-gradient(90deg, oklch(0.08 0.035 235 / 0.92), oklch(0.08 0.035 235 / 0.72) 58%, oklch(0.08 0.035 235 / 0.2));
   --glass-highlight: inset 0 1px 0 oklch(1 0 0 / 0.2);
+  --electric: oklch(0.7 0.18 255);
+  --violet: oklch(0.75 0.15 295);
+  --magenta: oklch(0.76 0.15 340);
+  --gradient-spectrum: linear-gradient(110deg, var(--primary), var(--electric), var(--violet), var(--magenta), var(--primary));
+  --shadow-glow: 0 0 30px -12px color-mix(in oklch, var(--primary) 45%, transparent);
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 /* ---- Light ---- */
@@ -479,129 +487,3 @@ html.light .section-backdrop::before {
   .about-entry:hover::before { height: 0; }
 }
 
-/* Apex-inspired editorial accents */
-.apex-eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  line-height: 1;
-}
-.apex-eyebrow::before {
-  content: "";
-  width: 2.5rem;
-  height: 2px;
-  background: currentColor;
-}
-main h2 { letter-spacing: -0.03em; line-height: 1.04; }
-main .rounded-2xl, main .rounded-xl, header .rounded-2xl { border-radius: 0.25rem; }
-main a.rounded-full, header a.rounded-full, main button.rounded-full { border-radius: 0.125rem; }
-.portfolio-project { border-radius: 0.25rem !important; }
-.portfolio-project:hover { border-color: color-mix(in oklab, var(--primary) 55%, var(--border)); }
-
-/* Permanent dark mode: keep the portfolio consistent regardless of OS preference. */
-html, html.light {
-  color-scheme: dark;
-  --background: oklch(0.13 0.018 255);
-  --foreground: oklch(0.94 0.012 95);
-  --surface: oklch(0.17 0.022 255);
-  --surface-elevated: oklch(0.21 0.026 255);
-  --card: oklch(0.17 0.022 255);
-  --card-foreground: oklch(0.94 0.012 95);
-}
-
-/* Hero name and role accents keep the opening statement visually active. */
-.hero-name-accent {
-  color: var(--color-primary);
-  text-shadow: 0 0 24px color-mix(in oklch, var(--color-primary) 28%, transparent);
-}
-.hero-role {
-  width: fit-content;
-  background: linear-gradient(110deg, var(--hero-foreground) 0%, var(--hero-foreground) 38%, var(--color-primary) 50%, var(--hero-foreground) 62%, var(--hero-foreground) 100%);
-  background-size: 220% 100%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  animation: hero-role-shimmer 5s ease-in-out infinite;
-}
-@keyframes hero-role-shimmer {
-  0%, 20% { background-position: 100% 50%; }
-  55%, 75% { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .hero-role { animation: none; color: var(--hero-foreground); }
-}
-
-/* Angular surfaces echo the reference: crisp corners, hard borders and lifted hover states. */
-.card-surface, .card-editorial, .portfolio-project, .about-photo, .hero-glass, .glass {
-  border-radius: 0.25rem !important;
-  border-color: color-mix(in oklch, var(--color-border-strong) 72%, transparent);
-  box-shadow: 4px 4px 0 color-mix(in oklch, var(--color-primary) 18%, transparent), var(--shadow-soft);
-}
-.card-surface:hover, .card-editorial:hover, .portfolio-project:hover, .about-photo:hover {
-  transform: translate(-2px, -4px);
-  box-shadow: 6px 6px 0 color-mix(in oklch, var(--color-primary) 28%, transparent), var(--shadow-lift);
-}
-
-/* Give image wells the same graphic, editorial edge as the cards. */
-.media-frame, .portfolio-project img, .about-photo > img {
-  border-radius: 0 !important;
-  filter: saturate(0.88) contrast(1.06);
-}
-.project-image-button, .portfolio-project .hero-glass { border-radius: 0 !important; }
-
-/* Strong, compact action buttons. */
-button, a[class*="bg-primary"] {
-  border-radius: 0.125rem;
-}
-button:hover, a[class*="bg-primary"]:hover {
-  box-shadow: 3px 3px 0 color-mix(in oklch, var(--color-primary) 36%, transparent);
-  transform: translate(-1px, -1px);
-}
-
-/* Keep every navigation surface aligned with the angular visual language. */
-header > div > div,
-header nav a,
-header button,
-header a[class*="bg-primary"],
-[role="dialog"],
-[role="dialog"] nav a,
-[role="dialog"] button,
-[role="dialog"] a[class*="bg-primary"] {
-  border-radius: 0.125rem !important;
-}
-
-header nav a {
-  position: relative;
-  transition: color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
-}
-header nav a:hover,
-header nav a[aria-current="true"] {
-  background: color-mix(in oklch, var(--color-primary) 12%, transparent);
-  color: var(--color-primary);
-  transform: translateY(-2px);
-}
-header nav a:hover::after,
-header nav a[aria-current="true"]::after {
-  content: "";
-  position: absolute;
-  inset: auto 0.875rem -0.125rem;
-  height: 2px;
-  background: var(--color-primary);
-}
-
-[role="dialog"] nav a {
-  border-left: 2px solid transparent;
-}
-[role="dialog"] nav a:hover,
-[role="dialog"] nav a:focus-visible,
-[role="dialog"] nav a[aria-current="true"] {
-  border-left-color: var(--color-primary);
-  background: color-mix(in oklch, var(--color-primary) 12%, transparent);
-  color: var(--color-primary);
-  transform: translateX(3px);
-}
