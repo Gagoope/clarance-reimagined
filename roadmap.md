@@ -5,3 +5,5 @@
 - [x] Generate matching, card-sized photographs for the eight non-HMS projects.
 - [x] Verify CV project links and provide honest project-specific access options.
 - [x] Check all project pictures and links in the portfolio.
+- [ ] Apply the uploaded premium animated portfolio design brief without changing content or project data.
+- [ ] Verify project details, CV, enquiry form, navigation and About interactions at desktop, tablet and mobile sizes.
