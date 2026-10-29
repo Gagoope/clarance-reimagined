@@ -74,11 +74,13 @@ export const Route = createFileRoute("/")({
 });
 
 const shell = "mx-auto w-full max-w-6xl px-5 sm:px-8";
-const links = [
-  { label: "How it works", href: "#process" },
-  { label: "Calculator", href: "#services" },
-  { label: "Why Gagoope", href: "#about" },
-];
+  const links = [
+    { label: "About me", href: "#about" },
+    { label: "Services", href: "#services" },
+    { label: "Projects", href: "#projects" },
+    { label: "Process", href: "#process" },
+    { label: "Contact", href: "#contact" },
+  ];
 
 function SectionTitle({ label, title }: { label: string; title: string }) {
   return <header className="mb-8"><p className="apex-eyebrow mb-4 text-primary">{label}</p><h2 className="text-3xl font-semibold leading-tight sm:text-4xl">{title}</h2></header>;
@@ -158,7 +160,7 @@ function Portfolio() {
                 <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="hero-glass inline-flex min-h-11 items-center gap-2 rounded-full px-5 text-sm font-medium text-hero-foreground">Let’s talk <MessageCircle className="h-4 w-4" aria-hidden /></a>
               </div>
             </Reveal>
-            <Reveal delay={160} className="hero-system-wrap"><div className="hero-profile-visual"><figure className="hero-profile-card"><img src={PROFILE_IMG} alt="Gagoope Clarance Merafhe" loading="eager" /><figcaption><strong>Gagoope Merafhe</strong><span>IT Systems Developer · Botswana</span></figcaption></figure><SystemsVisual /></div></Reveal>
+            <Reveal delay={160} className="hero-system-wrap"><SystemsVisual /></Reveal>
             </div>
             <div className="hero-proof hero-glass mt-14 grid gap-5 rounded-2xl px-6 py-5 sm:mt-16 sm:grid-cols-[1.3fr_1fr_1fr] sm:gap-8">
               <div><span className="mb-2 block text-xs text-hero-muted">Specialising in</span><p className="text-sm font-medium text-hero-foreground">SAP Business One &amp; automation</p></div>
