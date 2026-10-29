@@ -487,6 +487,53 @@ html.light .section-backdrop::before {
   .about-entry:hover::before { height: 0; }
 }
 
+/* Reference-inspired editorial finance treatment. Content and portfolio data remain unchanged. */
+html.light {
+  --background: oklch(0.975 0.008 88);
+  --foreground: oklch(0.18 0.035 255);
+  --surface: oklch(0.99 0.004 88);
+  --surface-elevated: oklch(1 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.035 255);
+  --muted-foreground: oklch(0.43 0.025 255);
+  --primary: oklch(0.72 0.13 83);
+  --primary-foreground: oklch(0.16 0.04 255);
+  --accent: oklch(0.72 0.13 83);
+  --accent-foreground: oklch(0.16 0.04 255);
+  --border: oklch(0.86 0.018 85);
+  --border-strong: oklch(0.7 0.04 84);
+  --input: oklch(0.9 0.012 85);
+  --ring: oklch(0.34 0.08 255);
+  --hero-foreground: oklch(0.98 0.01 88);
+  --hero-muted: oklch(0.9 0.02 88);
+  --hero-border: oklch(0.98 0.01 88 / 0.28);
+  --hero-glass-bg: oklch(0.18 0.06 255 / 0.28);
+  --hero-shade: linear-gradient(90deg, oklch(0.08 0.06 255 / 0.9), oklch(0.08 0.06 255 / 0.66) 58%, oklch(0.08 0.06 255 / 0.2));
+  color-scheme: light;
+}
+
+html.light body { background: var(--background); }
+html.light h1, html.light h2, html.light h3, html.light h4 { font-family: Georgia, "Times New Roman", serif; }
+html.light .portfolio-hero { min-height: 680px; }
+html.light .portfolio-hero h1 { font-size: clamp(3.7rem, 7vw, 6.6rem); font-weight: 400; line-height: 0.95; letter-spacing: -0.055em; }
+html.light .hero-name-accent { background: none; color: var(--primary); font-style: italic; }
+html.light .hero-role { font-family: var(--font-sans); letter-spacing: 0.02em; }
+html.light .hero-composition { grid-template-columns: minmax(0, 1fr) minmax(360px, 0.9fr); gap: 3rem; }
+html.light .hero-proof { border-radius: 0.25rem; background: oklch(0.16 0.05 255 / 0.38); }
+html.light .portfolio-project, html.light .card-editorial { border-radius: 0.25rem; background: var(--surface); box-shadow: 0 12px 35px oklch(0.2 0.08 255 / 0.07); }
+html.light .portfolio-project:hover { transform: translateY(-5px); border-color: var(--primary); }
+html.light .contact-band { background: oklch(0.16 0.05 255); color: white; }
+html.light .contact-band .text-muted-foreground { color: oklch(0.82 0.02 88); }
+html.light .contact-band .border-border { border-color: oklch(0.98 0.01 88 / 0.18); }
+html.light .section-backdrop::before { background-image: linear-gradient(to bottom, oklch(0.975 0.008 88 / 0.94), oklch(0.975 0.008 88 / 0.96)), url("./assets/gcm-workspace-bg.jpg"); }
+html.light .hero-glass { border-radius: 0.25rem; }
+html.light .apex-eyebrow { color: oklch(0.52 0.08 78); }
+
+@media (max-width: 767px) {
+  html.light .hero-composition { grid-template-columns: 1fr; }
+  html.light .portfolio-hero h1 { font-size: 3.7rem; }
+}
+
 
 /* Premium engineering presentation: restrained spectral light, readable ink. */
 html { color-scheme: dark; }
