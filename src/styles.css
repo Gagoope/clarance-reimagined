@@ -714,4 +714,13 @@ html.light a[class*="bg-primary"] { background: #c99b35; color: #102b4d; }
   html.light .portfolio-hero { min-height: 760px; }
   html.light header > div > div { border-radius: 1rem; }
 }
-html.light .reveal { opacity: 1; transform: none; }
+  html.light .reveal { opacity: 1; transform: none; }
+
+  /* Restored portrait treatment for the dark portfolio theme. */
+  .profile-portrait-wrap { display: flex; justify-content: center; }
+  .profile-portrait { width: min(100%, 22rem); padding: .55rem; border: 1px solid var(--border-strong); border-radius: 1rem; background: color-mix(in oklch, var(--surface-elevated) 82%, transparent); box-shadow: 0 24px 55px oklch(0.04 0.02 255 / .32); transform: rotate(2deg); }
+  .profile-portrait img { display: block; width: 100%; aspect-ratio: 4 / 5; border-radius: .65rem; object-fit: cover; object-position: top; }
+  .profile-portrait figcaption { display: grid; gap: .2rem; padding: .75rem .45rem .35rem; }
+  .profile-portrait strong { color: var(--foreground); font-size: .82rem; }
+  .profile-portrait span { color: var(--muted-foreground); font-size: .68rem; }
+  @media (max-width: 767px) { .profile-portrait { width: min(100%, 18rem); } }
