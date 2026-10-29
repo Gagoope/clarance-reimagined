@@ -75,10 +75,9 @@ export const Route = createFileRoute("/")({
 
 const shell = "mx-auto w-full max-w-6xl px-5 sm:px-8";
 const links = [
-  { label: "Work", href: "#work" },
-  { label: "Services", href: "#services" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: "How it works", href: "#process" },
+  { label: "Calculator", href: "#services" },
+  { label: "Why Gagoope", href: "#about" },
 ];
 
 function SectionTitle({ label, title }: { label: string; title: string }) {

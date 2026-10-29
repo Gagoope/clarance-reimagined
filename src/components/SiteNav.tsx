@@ -64,7 +64,7 @@ export function SiteNav({
       >
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <div
-            className={`grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 border-b border-border bg-background/95 px-3 py-3 transition-all duration-500 backdrop-blur-md sm:px-4 ${
+            className={`grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 rounded-none border-b border-[#e9e5dc] bg-[#f8f7f3]/95 px-3 py-3 transition-all duration-500 backdrop-blur-md sm:px-4 ${
               scrolled ? "shadow-soft" : ""
             }`}
           >
@@ -114,7 +114,7 @@ export function SiteNav({
                 rel="noreferrer"
                 className="hidden min-h-10 items-center gap-2 rounded-full bg-primary px-4 text-sm font-medium text-primary-foreground shadow-soft transition duration-300 hover:shadow-lift hover:brightness-110 sm:inline-flex"
               >
-                <MessageCircle className="h-4 w-4" aria-hidden /> Let&apos;s Talk
+                <MessageCircle className="h-4 w-4" aria-hidden /> Apply now
               </a>
 
               <Button

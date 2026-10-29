@@ -46,8 +46,8 @@
   --color-ink-lilac: var(--ink-lilac);
   --color-ink-rose: var(--ink-rose);
   --color-ink-sand: var(--ink-sand);
-  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: Georgia, "Times New Roman", serif;
+  --font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
@@ -105,8 +105,8 @@
 /* ---- Light ---- */
 html.light {
   color-scheme: light;
-  --background: oklch(0.985 0.004 250);
-  --foreground: oklch(0.2 0.02 260);
+  --background: oklch(0.975 0.012 92);
+  --foreground: oklch(0.18 0.035 255);
   --surface: oklch(1 0 0);
   --surface-elevated: oklch(1 0 0);
   --card: oklch(1 0 0);
@@ -155,8 +155,8 @@ html.light {
     text-rendering: optimizeLegibility;
   }
   h1, h2, h3, h4 {
-    font-family: var(--font-sans);
-    letter-spacing: 0;
+    font-family: var(--font-display);
+    letter-spacing: -0.035em;
     text-wrap: balance;
   }
   p { text-wrap: pretty; }
@@ -195,6 +195,33 @@ html.light {
 
 @utility shadow-lift {
   box-shadow: var(--shadow-lift);
+}
+
+/* Reference-inspired editorial portfolio treatment */
+html.light body {
+  background: #f7f6f1;
+}
+html.light .section-backdrop {
+  background: linear-gradient(180deg, #f7f6f1 0%, #ffffff 48%, #f3f1eb 100%);
+}
+html.light .portfolio-project {
+  background: #ffffff;
+  border-color: #e8e3d8;
+  border-radius: 1.25rem;
+  box-shadow: 0 12px 30px -24px rgba(17, 42, 76, .45);
+}
+html.light .portfolio-project:hover {
+  border-color: #d4a63d;
+  box-shadow: 0 20px 40px -26px rgba(17, 42, 76, .4);
+}
+html.light .service-link,
+html.light .portfolio-details,
+html.light .contact-band {
+  border-color: #e5e0d5;
+}
+html.light .apex-eyebrow {
+  color: #c89025;
+  letter-spacing: .18em;
 }
 
 /* Frosted surface used for nav, sheets and floating panels */
