@@ -650,3 +650,68 @@ html.light .portfolio-hero { background: linear-gradient(115deg, oklch(0.12 0.05
 .hero-profile-card span { color: var(--hero-muted); font-size: 0.58rem; }
 .hero-profile-visual .systems-visual { padding-top: 5.8rem; }
 @media (max-width: 767px) { .hero-profile-card { top: -1rem; right: 0.25rem; width: 8.5rem; } .hero-profile-visual .systems-visual { padding-top: 4.8rem; } }
+
+/* Kells-inspired full-site redesign: calm finance palette, editorial type, and crisp panels. */
+html.light body {
+  background: #f8f7f3;
+  background-image: none;
+  color: #142943;
+}
+html.light .section-backdrop {
+  background: #f8f7f3;
+}
+html.light .section-backdrop::before { display: none; }
+html.light .portfolio-hero {
+  min-height: 720px;
+  background: #102b4d;
+}
+html.light .portfolio-hero > img {
+  opacity: .28;
+  mix-blend-mode: screen;
+}
+html.light .hero-shade {
+  background: linear-gradient(90deg, rgba(16,43,77,.98) 0%, rgba(16,43,77,.86) 55%, rgba(16,43,77,.5) 100%);
+}
+html.light .portfolio-hero h1,
+html.light .portfolio-hero .hero-role { font-family: Georgia, "Times New Roman", serif; }
+html.light .portfolio-hero h1 { font-size: clamp(3.4rem, 7vw, 6.2rem); font-weight: 400; line-height: .96; }
+html.light .hero-name-accent { color: #d3a43d; font-style: italic; }
+html.light .hero-proof { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.25); }
+html.light header > div > div {
+  border: 1px solid #e2dfd7;
+  border-radius: 999px;
+  background: rgba(255,255,255,.96);
+  box-shadow: 0 10px 30px rgba(16,43,77,.08);
+}
+html.light header a { color: #142943; }
+html.light header nav a[aria-current="true"] { color: #b88920; }
+html.light header nav a span { background: #c99b35; }
+html.light .portfolio-project {
+  border: 1px solid #e5e1d8;
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 12px 30px rgba(16,43,77,.06);
+}
+html.light .portfolio-project:hover { border-color: #c99b35; }
+html.light .portfolio-project .project-image-button { border-radius: .9rem .9rem 0 0; }
+html.light .portfolio-project h3,
+html.light .portfolio-project h3 button,
+html.light section h2,
+html.light section h3 { font-family: Georgia, "Times New Roman", serif; }
+html.light .portfolio-project h3,
+html.light .portfolio-project h3 button { font-size: 1.45rem; font-weight: 400; }
+html.light .project-tags span { border-radius: 999px; background: #f1efe8; padding: .3rem .55rem; color: #526176; font-size: .7rem; }
+html.light .service-link { background: #fff; border: 1px solid #e5e1d8; margin-bottom: .75rem; padding: 1.2rem; }
+html.light .service-link:hover { border-color: #c99b35; background: #fff; }
+html.light .contact-band { background: #102b4d; }
+html.light .contact-band h2,
+html.light .contact-band a:not(.btn-primary) { color: #fff; }
+html.light .about-chip { background: #fff; border-color: #e5e1d8; }
+html.light .hero-profile-card { border-color: rgba(255,255,255,.3); }
+html.light .btn-primary,
+html.light a[class*="bg-primary"] { background: #c99b35; color: #102b4d; }
+@media (max-width: 767px) {
+  html.light .portfolio-hero { min-height: 760px; }
+  html.light header > div > div { border-radius: 1rem; }
+}
+html.light .reveal { opacity: 1; transform: none; }
