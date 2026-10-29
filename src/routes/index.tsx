@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, ChevronDown, Download, Github, Linkedin, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { CvPreviewButton } from "@/components/CvPreview";
-import { LoadingSplash } from "@/components/LoadingSplash";
 import { SiteNav } from "@/components/SiteNav";
 import { Reveal } from "@/components/Reveal";
 import { HeroAtmosphere, ScrollProgress, SystemsVisual } from "@/components/PortfolioMotion";
@@ -140,7 +139,6 @@ function Portfolio() {
   return (
     <div className="min-h-dvh bg-background text-foreground">
       <a href="#main" className="skip-link">Skip to content</a>
-      <LoadingSplash />
       <ScrollProgress />
       <SiteNav links={links} whatsappUrl={WHATSAPP_URL} />
       <WhatsAppFab />
@@ -161,7 +159,7 @@ function Portfolio() {
                 <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="hero-glass inline-flex min-h-11 items-center gap-2 rounded-full px-5 text-sm font-medium text-hero-foreground">Let’s talk <MessageCircle className="h-4 w-4" aria-hidden /></a>
               </div>
             </Reveal>
-            <Reveal delay={160} className="hero-system-wrap"><SystemsVisual /></Reveal>
+            <Reveal delay={160} className="hero-system-wrap"><div className="hero-profile-visual"><figure className="hero-profile-card"><img src={PROFILE_IMG} alt="Gagoope Clarance Merafhe" loading="eager" /><figcaption><strong>Gagoope Merafhe</strong><span>IT Systems Developer · Botswana</span></figcaption></figure><SystemsVisual /></div></Reveal>
             </div>
             <div className="hero-proof hero-glass mt-14 grid gap-5 rounded-2xl px-6 py-5 sm:mt-16 sm:grid-cols-[1.3fr_1fr_1fr] sm:gap-8">
               <div><span className="mb-2 block text-xs text-hero-muted">Specialising in</span><p className="text-sm font-medium text-hero-foreground">SAP Business One &amp; automation</p></div>
@@ -201,8 +199,7 @@ function Portfolio() {
         </section>
 
         <section id="about" className={`${shell} py-16 sm:py-20`}>
-          <div className="grid items-center gap-10 md:grid-cols-[0.7fr_1.3fr] lg:gap-16">
-            <Reveal><figure className="about-photo relative overflow-hidden rounded-2xl"><img src={PROFILE_IMG} alt="Gagoope Clarance Merafhe" loading="lazy" className="aspect-[4/5] max-h-[420px] w-full object-cover object-top" /><figcaption className="hero-glass absolute inset-x-4 bottom-4 rounded-xl p-4 text-hero-foreground"><p className="text-sm font-medium">Gagoope Merafhe</p><p className="mt-1 text-xs text-hero-muted">IT Systems Developer · Botswana</p></figcaption></figure></Reveal>
+          <div className="grid items-center gap-10 md:grid-cols-1 lg:gap-16">
             <Reveal><SectionTitle label="A little about me" title="Technology with a purpose." /><p className="text-base leading-relaxed text-muted-foreground">I’m a Botswana-based developer working across SAP Business One, business automation, full-stack web applications, APIs and databases. My work starts with a real business problem — and ends with a system that solves it.</p><p className="mt-4 text-sm leading-relaxed text-muted-foreground">Bachelor of Engineering (Honours) in Computer Engineering, with a minor in Computer Science.</p><div className="mt-6 flex flex-wrap gap-x-4 gap-y-2 text-xs text-primary">{heroTech.map(t => <span key={t} className="about-chip">{t}</span>)}</div><div className="mt-7 flex flex-wrap gap-3"><a href={CV_PATH} download className={btnSecondary}><Download className="h-4 w-4" aria-hidden />Download CV</a><CvPreviewButton label="Preview CV" className={btnGhost} /></div>
             </Reveal>
           </div>

@@ -609,3 +609,17 @@ header a[class*="bg-primary"]:hover { color: var(--primary-foreground); }
 @media (max-width: 1023px) { .hero-composition { grid-template-columns: minmax(0,1.3fr) minmax(0,0.8fr); gap: 1rem; } .systems-visual { padding: 0; } .system-node { min-height: 65px; font-size: 0.5625rem; } }
 @media (max-width: 767px) { .hero-composition { grid-template-columns: minmax(0,1fr); } .hero-system-wrap { max-width: 320px; width: 100%; margin: 0.75rem auto 0; } .systems-map { margin: 0.5rem 0; } .systems-caption { font-size: 0.6875rem; } .portfolio-hero h1 { font-size: 2.5rem; } .hero-proof { margin-top: 1.5rem; } #about > .grid > .reveal:last-child { padding: 1rem; } .section-backdrop::before { background-attachment: scroll; } }
 @media (prefers-reduced-motion: reduce) { .hero-aurora, .hero-particles, .system-signal, .hero-name-accent, .portfolio-details[open] > div, .portfolio-details[open] > ol { animation: none; } .hero-name-accent { color: var(--primary); background: none; } .portfolio-project:hover, .portfolio-project:focus-within, .service-link:hover, .portfolio-project:hover .project-image-button > span { transform: none; } .reveal { opacity: 1; transform: none; } }
+
+/* Professional canvas: a quiet paper texture keeps every section connected without competing with the work. */
+html.light body { background: #f4f5f7; background-image: radial-gradient(circle at 1px 1px, oklch(0.25 0.03 255 / 0.06) 1px, transparent 0); background-size: 24px 24px; }
+html.light .section-backdrop { background: linear-gradient(180deg, oklch(0.98 0.008 88 / 0.82), oklch(0.95 0.012 255 / 0.74)); }
+html.light .section-backdrop::before { opacity: 0.22; }
+html.light .portfolio-hero { background: linear-gradient(115deg, oklch(0.12 0.055 255 / 0.97), oklch(0.18 0.07 255 / 0.94)); }
+.hero-profile-visual { position: relative; }
+.hero-profile-card { position: absolute; top: -1.5rem; right: 0; z-index: 2; width: 11rem; padding: 0.45rem; border: 1px solid var(--hero-border); border-radius: 0.75rem; background: oklch(0.1 0.04 255 / 0.72); box-shadow: 0 18px 40px oklch(0.06 0.03 255 / 0.3); backdrop-filter: blur(14px); transform: rotate(3deg); }
+.hero-profile-card img { display: block; width: 100%; aspect-ratio: 1; border-radius: 0.5rem; object-fit: cover; object-position: top; }
+.hero-profile-card figcaption { display: grid; gap: 0.15rem; padding: 0.55rem 0.35rem 0.3rem; color: var(--hero-foreground); }
+.hero-profile-card strong { font-size: 0.72rem; font-weight: 600; }
+.hero-profile-card span { color: var(--hero-muted); font-size: 0.58rem; }
+.hero-profile-visual .systems-visual { padding-top: 5.8rem; }
+@media (max-width: 767px) { .hero-profile-card { top: -1rem; right: 0.25rem; width: 8.5rem; } .hero-profile-visual .systems-visual { padding-top: 4.8rem; } }
