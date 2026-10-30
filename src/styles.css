@@ -703,6 +703,31 @@ html.light .portfolio-project h3 button { font-size: 1.45rem; font-weight: 400; 
 html.light .project-tags span { border-radius: 999px; background: #f1efe8; padding: .3rem .55rem; color: #526176; font-size: .7rem; }
 html.light .service-link { background: #fff; border: 1px solid #e5e1d8; margin-bottom: .75rem; padding: 1.2rem; }
 html.light .service-link:hover { border-color: #c99b35; background: #fff; }
+
+/* Refined interaction layer */
+body { font-family: "Trebuchet MS", var(--font-sans), sans-serif; }
+h1, h2, h3, h4, .systems-caption, .portfolio-hero .hero-role { font-family: Cambria, Georgia, var(--font-display), serif; }
+
+header nav a, .service-link, .portfolio-project, .about-chip, .about-approach, .hero-cta, #contact a { position: relative; }
+header nav a { transition: color 240ms ease, background-color 240ms ease, transform 240ms ease; }
+header nav a:hover, header nav a:focus-visible { transform: translateY(-2px); }
+header nav a::after { content: ""; position: absolute; left: 0.75rem; right: 0.75rem; bottom: 0.35rem; height: 1px; background: var(--primary); transform: scaleX(0); transform-origin: right; transition: transform 260ms ease; }
+header nav a:hover::after, header nav a:focus-visible::after { transform: scaleX(1); transform-origin: left; }
+
+.portfolio-project, .service-link, .about-chip, .about-approach { transition: transform 320ms cubic-bezier(.2,.8,.2,1), border-color 240ms ease, background-color 240ms ease, box-shadow 320ms ease; }
+.portfolio-project:hover, .portfolio-project:focus-within { transform: translateY(-8px) scale(1.01); box-shadow: 0 18px 42px -22px color-mix(in oklch, var(--primary) 60%, transparent); }
+.portfolio-project img { transition: transform 550ms cubic-bezier(.2,.8,.2,1), filter 550ms ease; }
+.portfolio-project:hover img, .portfolio-project:focus-within img { transform: scale(1.045); filter: saturate(1.12) contrast(1.04); }
+.service-link:hover, .service-link:focus-visible { transform: translateX(7px); }
+.about-chip:hover, .about-chip:focus-visible { transform: translateY(-4px) rotate(-1deg); box-shadow: 0 10px 24px -18px var(--primary); }
+.about-approach:hover, .about-approach:focus-visible { transform: translateY(-5px); box-shadow: 0 14px 30px -22px var(--primary); }
+.hero-cta { transition: transform 260ms ease, box-shadow 260ms ease, background-color 260ms ease; }
+.hero-cta:hover, .hero-cta:focus-visible { transform: translateY(-3px); box-shadow: 0 12px 24px -16px var(--primary); }
+
+@media (prefers-reduced-motion: reduce) {
+  header nav a, .portfolio-project, .service-link, .about-chip, .about-approach, .hero-cta, .portfolio-project img { transition: none; }
+  header nav a:hover, .portfolio-project:hover, .portfolio-project:focus-within, .service-link:hover, .about-chip:hover, .about-approach:hover, .hero-cta:hover { transform: none; }
+}
 html.light .contact-band { background: #102b4d; }
 html.light .contact-band h2,
 html.light .contact-band a:not(.btn-primary) { color: #fff; }
