@@ -70,6 +70,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title },
       { name: "description", content: description },
       { name: "author", content: "Gagoope Clarance Merafhe" },
+      { name: "google-site-verification", content: "jUohvbgSmTBDaX8lSZb5ahS8p31uKWyQhJlVYCpnQUU" },
       { property: "og:title", content: title },
       { property: "og:description", content: description },
       { property: "og:type", content: "website" },

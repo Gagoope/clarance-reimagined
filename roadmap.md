@@ -8,3 +8,4 @@
 - [x] Apply the uploaded premium animated portfolio design brief without changing content or project data.
 - [x] Verify project details, CV, enquiry form, navigation and About interactions at desktop, tablet and mobile sizes.
 - [x] Replace the portfolio project's old address with https://www.gagoope.site/ on its card and popup.
+- [ ] Complete Google Search Console verification for the published Lovable site and submit its corrected sitemap.
