@@ -7,3 +7,4 @@
 - [x] Check all project pictures and links in the portfolio.
 - [ ] Apply the uploaded premium animated portfolio design brief without changing content or project data.
 - [ ] Verify project details, CV, enquiry form, navigation and About interactions at desktop, tablet and mobile sizes.
+- [ ] Replace the portfolio project's old address with https://www.gagoope.site/ on its card and popup.
