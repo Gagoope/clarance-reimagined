@@ -29,7 +29,7 @@ export const WHATSAPP_INTL = "26777447823";
 export const EMAIL = "meragcm@gmail.com";
 export const GITHUB = "https://github.com/Gagoope";
 export const LINKEDIN = "https://www.linkedin.com/in/gagoope-merafhe-7b5656437/";
-export const CV_PATH = "/assets/Gagoope_Clarance_Merafhe_CV.pdf";
+export const CV_PATH = "/assets/Gagoope_Merafhe_Updated_CV.pdf";
 export const PROFILE_IMG = "/assets/gcm-profile.jpeg";
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_INTL}?text=Hi%20Gagoope%2C%20I%27d%20like%20to%20discuss%20a%20project.`;
 
@@ -54,12 +54,12 @@ export const navLinks = [
 
 export const heroTech = [
   "SAP Business One",
-  "C#",
-  ".NET",
-  "PHP",
+  "Crystal Reports",
   "SQL Server",
-  "REST APIs",
-  "IIS",
+  "SAP HANA",
+  "PHP",
+  "JavaScript",
+  "Python",
 ];
 
 export const metrics: { value: number; suffix?: string; label: string }[] = [
@@ -113,7 +113,7 @@ export const services: {
     icon: Server,
     title: "SAP Business One Development",
     desc: "Custom SAP Business One integrations, add-ons, automation and business workflows.",
-    tags: ["DI API", "UI API", "PHP", "C#"],
+    tags: ["SAP SDK", "PHP", "Crystal Reports"],
   },
   {
     n: "02",
@@ -127,7 +127,7 @@ export const services: {
     icon: Globe,
     title: "Enterprise Web Applications",
     desc: "Full-stack business applications designed around real operational requirements.",
-    tags: ["PHP", "IIS", "React", "TypeScript"],
+    tags: ["PHP", "JavaScript", "HTML5", "CSS3", "Bootstrap"],
   },
   {
     n: "04",
@@ -453,45 +453,54 @@ export const filters = ["All", "SAP", "Automation", "Web", "Enterprise", "Data"]
 
 export const techGroups: { group: string; items: { name: string; use: string }[] }[] = [
   {
-    group: "Enterprise",
+    group: "SAP & Reporting",
     items: [
-      { name: "SAP Business One", use: "Add-ons, automation and business workflows" },
-      { name: "DI API", use: "Programmatic posting into SAP documents" },
-      { name: "UI API", use: "Extending SAP screens and forms" },
-      { name: "IIS", use: "Hosting internal business applications" },
+      { name: "SAP Business One", use: "Configuration, support and add-on deployment" },
+      { name: "SAP SDK", use: "Custom add-on development" },
+      { name: "Crystal Reports", use: "Financial, operational and ageing reports" },
+      { name: "SAP dashboards", use: "KPI views and business insights" },
+      { name: "Document layouts", use: "Invoices and client-specific print layouts" },
     ],
   },
   {
-    group: "Backend",
+    group: "Software Development",
     items: [
-      { name: "C#", use: "SAP add-on and service development" },
-      { name: ".NET", use: "Enterprise application logic" },
-      { name: "PHP", use: "Business web applications and integrations" },
-      { name: "REST APIs", use: "Connecting systems securely" },
+      { name: "PHP", use: "Business applications and SAP integrations" },
+      { name: "Java", use: "Application development and coursework" },
+      { name: "C++", use: "Application development fundamentals" },
+      { name: "JavaScript", use: "Interactive web applications" },
+      { name: "Python", use: "Scripting and data analysis" },
+      { name: "HTML5 · CSS3 · Bootstrap", use: "Responsive web interfaces" },
     ],
   },
   {
-    group: "Database",
+    group: "Databases & Analytics",
     items: [
-      { name: "SQL Server", use: "SAP data, reporting and queries" },
-      { name: "MySQL", use: "Application databases and reporting" },
-      { name: "Crystal Reports", use: "Operational and financial reports" },
+      { name: "Microsoft SQL Server", use: "SAP data, reporting and queries" },
+      { name: "SAP HANA", use: "SAP reporting and data sources" },
+      { name: "MySQL · Oracle · PostgreSQL", use: "Relational database management" },
+      { name: "SQL", use: "Queries, validation and report datasets" },
+      { name: "Data analysis", use: "Interpretation, statistics and reporting" },
+      { name: "R fundamentals", use: "Statistical analysis foundations" },
     ],
   },
   {
-    group: "Frontend",
+    group: "Systems & Support",
     items: [
-      { name: "HTML / CSS", use: "Structure and layout" },
-      { name: "JavaScript", use: "Interactive application behaviour" },
-      { name: "React / TypeScript", use: "Typed component-driven interfaces" },
+      { name: "Windows · macOS · Linux", use: "Operating system support" },
+      { name: "Hardware & software support", use: "Troubleshooting and user assistance" },
+      { name: "Server management", use: "System maintenance and continuity" },
+      { name: "API integration", use: "Connecting business applications" },
+      { name: "Debugging & data validation", use: "Reliable implementation and support" },
     ],
   },
   {
-    group: "Tools",
+    group: "Professional Skills & Languages",
     items: [
-      { name: "Git & GitHub", use: "Version control and collaboration" },
-      { name: "Swagger", use: "Documenting and testing APIs" },
-      { name: "Visual Studio", use: "C# / .NET development" },
+      { name: "Communication & teamwork", use: "Client and stakeholder collaboration" },
+      { name: "Customer service & adaptability", use: "Responsive technical support" },
+      { name: "Organisation & attention to detail", use: "Reliable delivery and validation" },
+      { name: "English", use: "Language" },
     ],
   },
 ];
@@ -569,6 +578,13 @@ export const experience: {
   period: string;
   body: string;
 }[] = [
+  {
+    role: "Junior Software Developer",
+    org: "RPC Data Limited — Gaborone",
+    period: "Jul 2025 – Present",
+    body:
+      "Design SAP Business One add-ons and integrations; develop and maintain Crystal Reports using SQL Server and SAP HANA; create client-specific document layouts and KPI dashboards; and support the Request and Approval system. Work with clients and internal teams to gather requirements, validate outputs and improve business processes.",
+  },
   {
     role: "IDuela Developer Trainee",
     org: "RPC Data Limited — Gaborone",
