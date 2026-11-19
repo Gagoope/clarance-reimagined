@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import { X, Download, FileText, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui-kit";
 import { useDialogFocus } from "@/hooks/use-dialog-focus";
-const cvAsset = { url: "/assets/Gagoope_Clarance_Merafhe_CV.pdf" };
+const cvAsset = { url: "/assets/Gagoope_Merafhe_Updated_CV.pdf" };
 
 export function CvPreviewButton({
   className,
@@ -76,7 +76,7 @@ export function CvPreviewButton({
                 <div className="flex shrink-0 items-center gap-2">
                   <a
                     href={cvAsset.url}
-                    download="Gagoope_Clarance_Merafhe_CV.pdf"
+                    download="Gagoope_Merafhe_Updated_CV.pdf"
                     aria-label="Download CV"
                     className="inline-flex min-h-10 items-center gap-2 rounded-full bg-primary px-3 text-xs font-medium text-primary-foreground transition duration-300 hover:brightness-110 sm:px-4"
                   >

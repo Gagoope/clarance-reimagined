@@ -13,9 +13,9 @@ import { Button, btnPrimary, btnSecondary, btnGhost } from "@/components/ui-kit"
 import heroImage from "@/assets/gcm-workstation-hero.jpg";
 import { CV_PATH, EMAIL, GITHUB, LINKEDIN, PROFILE_IMG, WHATSAPP_LOCAL, WHATSAPP_URL, education, experience, heroTech, processSteps, projects, services, techGroups, volunteer, getProjectLink, type Project } from "@/data/portfolio";
 
-const TITLE = "Gagoope Merafhe | SAP Business One & Business Automation Engineer";
+const TITLE = "Gagoope Merafhe | IT Systems & Software Developer";
 const DESCRIPTION =
-  "Web Developer and software engineer specialising in business automation, enterprise applications, APIs, databases and system integrations.";
+  "IT Systems and Software Developer specialising in SAP Business One add-ons, Crystal Reports, dashboards, business automation and database-driven applications.";
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
@@ -41,7 +41,7 @@ export const Route = createFileRoute("/")({
             {
               "@type": "Person",
               name: "Gagoope Clarance Merafhe",
-              jobTitle: "SAP Business One & Business Automation Engineer",
+              jobTitle: "IT Systems and Software Developer",
               worksFor: { "@type": "Organization", name: "RPC Data" },
               email: EMAIL,
               telephone: `+267 ${WHATSAPP_LOCAL}`,
@@ -49,14 +49,20 @@ export const Route = createFileRoute("/")({
               alumniOf: { "@type": "CollegeOrUniversity", name: "Botho University" },
               knowsAbout: [
                 "SAP Business One",
-                "SAP DI API",
+                "SAP SDK add-on development",
+                "Crystal Reports",
+                "SAP HANA",
                 "Business process automation",
-                "C#",
-                ".NET",
                 "PHP",
-                "SQL Server",
-                "REST APIs",
-                "IIS",
+                "Java",
+                "C++",
+                "JavaScript",
+                "Python",
+                "Microsoft SQL Server",
+                "MySQL",
+                "Oracle",
+                "PostgreSQL",
+                "Dashboard design",
               ],
               sameAs: [GITHUB, LINKEDIN],
             },
@@ -154,8 +160,8 @@ function Portfolio() {
             <Reveal>
               <p className="mb-6 flex items-center gap-2 text-sm text-hero-muted"><MapPin className="h-4 w-4" aria-hidden />Gaborone, Botswana</p>
               <h1 className="max-w-3xl text-[2.5rem] font-semibold leading-[1.08] text-hero-foreground sm:text-5xl lg:text-6xl">Gagoope<br /><span className="hero-name-accent">Clarance</span> Merafhe<span className="text-primary">.</span></h1>
-              <p className="hero-role mt-6 text-lg font-medium text-hero-foreground sm:text-xl">Web Developer &amp; Business Automation Engineer</p>
-              <p className="mt-3 max-w-lg text-sm leading-relaxed text-hero-muted sm:text-base">SAP Business One, web applications and connected systems. I build software that eliminates manual work.</p>
+              <p className="hero-role mt-6 text-lg font-medium text-hero-foreground sm:text-xl">IT Systems &amp; Software Developer</p>
+              <p className="mt-3 max-w-lg text-sm leading-relaxed text-hero-muted sm:text-base">SAP Business One add-ons, Crystal Reports, dashboards and web applications. I turn business requirements into practical systems and automation.</p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a href="#work" className={btnPrimary}>Explore my work <ArrowUpRight className="h-4 w-4" aria-hidden /></a>
                 <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="hero-glass inline-flex min-h-11 items-center gap-2 rounded-full px-5 text-sm font-medium text-hero-foreground">Let’s talk <MessageCircle className="h-4 w-4" aria-hidden /></a>
@@ -203,7 +209,7 @@ function Portfolio() {
         <section id="about" className={`${shell} py-16 sm:py-20`}>
           <div className="grid items-center gap-10 md:grid-cols-[0.7fr_1.3fr] lg:gap-16">
             <Reveal><figure className="about-photo relative overflow-hidden rounded-2xl"><img src={PROFILE_IMG} alt="Gagoope Clarance Merafhe" loading="lazy" className="aspect-[4/5] max-h-[420px] w-full object-cover object-top" /><figcaption className="hero-glass absolute inset-x-4 bottom-4 rounded-xl p-4 text-hero-foreground"><p className="text-sm font-medium">Gagoope Merafhe</p><p className="mt-1 text-xs text-hero-muted">IT Systems Developer · Botswana</p></figcaption></figure></Reveal>
-            <Reveal><SectionTitle label="A little about me" title="Technology with a purpose." /><p className="text-base leading-relaxed text-muted-foreground">I’m a Botswana-based developer working across SAP Business One, business automation, full-stack web applications, APIs and databases. My work starts with a real business problem — and ends with a system that solves it.</p><p className="mt-4 text-sm leading-relaxed text-muted-foreground">Bachelor of Engineering (Honours) in Computer Engineering, with a minor in Computer Science.</p><div className="mt-6 flex flex-wrap gap-x-4 gap-y-2 text-xs text-primary">{heroTech.map(t => <span key={t} className="about-chip">{t}</span>)}</div><div className="mt-7 flex flex-wrap gap-3"><a href={CV_PATH} download className={btnSecondary}><Download className="h-4 w-4" aria-hidden />Download CV</a><CvPreviewButton label="Preview CV" className={btnGhost} /></div>
+            <Reveal><SectionTitle label="A little about me" title="Technology with a purpose." /><p className="text-base leading-relaxed text-muted-foreground">I’m a Botswana-based IT systems and software developer delivering end-to-end implementations, requirements analysis and technical support. My work spans SAP Business One add-ons, Crystal Reports, dashboard design, web applications and database-driven solutions—translating client needs into reliable systems that improve everyday business processes.</p><p className="mt-4 text-sm leading-relaxed text-muted-foreground">Bachelor of Engineering (Honours) in Computer Engineering, with a minor in Computer Science. SAP Business One Functional Consultant certified in client installation, Crystal Reports and functional consulting.</p><div className="mt-6 flex flex-wrap gap-x-4 gap-y-2 text-xs text-primary">{heroTech.map(t => <span key={t} className="about-chip">{t}</span>)}</div><div className="mt-7 flex flex-wrap gap-3"><a href={CV_PATH} download className={btnSecondary}><Download className="h-4 w-4" aria-hidden />Download CV</a><CvPreviewButton label="Preview CV" className={btnGhost} /></div>
             </Reveal>
           </div>
           <HoverDetails className="portfolio-details mt-10 border-y border-border"><summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-sm font-medium">Experience, education &amp; technical background<ChevronDown className="h-4 w-4 shrink-0 text-primary" aria-hidden /></summary><div className="grid gap-10 pb-8 md:grid-cols-2"><div><h3 className="mb-4 text-lg font-semibold">Experience</h3>{experience.map(x => <div key={x.role} className="about-entry mb-5"><h4 className="text-sm font-medium">{x.role}</h4><p className="mt-1 text-xs text-primary">{x.org} · {x.period}</p><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{x.body}</p></div>)}<h3 className="mb-4 mt-8 text-lg font-semibold">Education &amp; certifications</h3>{education.map(e => <div key={e.id} className="about-entry mb-4"><h4 className="text-sm font-medium">{e.title}</h4><p className="mt-1 text-xs leading-relaxed text-muted-foreground">{e.sub}</p></div>)}</div><div><h3 className="mb-4 text-lg font-semibold">Technical skills</h3>{techGroups.map(g => <div key={g.group} className="about-entry mb-4"><h4 className="text-sm font-medium">{g.group}</h4><p className="mt-1 text-sm leading-relaxed text-muted-foreground">{g.items.map(t => t.name).join(" · ")}</p></div>)}<h3 className="mb-3 mt-8 text-lg font-semibold">Community</h3><div className="about-entry"><h4 className="text-sm font-medium">{volunteer.title}</h4><p className="mt-1 text-xs text-primary">{volunteer.org} · {volunteer.period}</p><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{volunteer.body}</p></div></div></div></HoverDetails>
