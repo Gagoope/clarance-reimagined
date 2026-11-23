@@ -8,6 +8,7 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
+import { Analytics } from "@vercel/analytics/react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -50,9 +51,14 @@ function ErrorComponent({ error, reset }: { error: unknown; reset: () => void })
         <p className="mt-2 text-sm text-muted-foreground">Something went wrong.</p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
-            onClick={() => { router.invalidate(); reset(); }}
+            onClick={() => {
+              router.invalidate();
+              reset();
+            }}
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground"
-          >Try again</button>
+          >
+            Try again
+          </button>
         </div>
       </div>
     </div>
@@ -60,7 +66,8 @@ function ErrorComponent({ error, reset }: { error: unknown; reset: () => void })
 }
 
 const title = "Gagoope Clarance Merafhe — IT Systems & Web Developer";
-const description = "Portfolio of Gagoope Clarance Merafhe, IT Systems & Web Developer specialising in SAP Business One, full-stack web applications and database-driven solutions.";
+const description =
+  "Portfolio of Gagoope Clarance Merafhe, IT Systems & Web Developer specialising in SAP Business One, full-stack web applications and database-driven solutions.";
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
@@ -82,7 +89,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "apple-touch-icon", href: "/icon-192.png", sizes: "192x192" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap",
+      },
     ],
   }),
   shellComponent: RootShell,
@@ -91,24 +101,26 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   errorComponent: ErrorComponent,
 });
 
-
 function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className="dark">
       <head>
         <HeadContent />
       </head>
-      <body>{children}<Scripts /></body>
+      <body>
+        {children}
+        <Scripts />
+      </body>
     </html>
   );
 }
-
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
       <Outlet />
+      <Analytics />
     </QueryClientProvider>
   );
 }
