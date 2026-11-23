@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { X, Download, FileText, Loader2 } from "lucide-react";
+import { X, Download, FileText } from "lucide-react";
 import { Button } from "@/components/ui-kit";
+import { CvPdfViewer } from "@/components/CvPdfViewer";
 import { useDialogFocus } from "@/hooks/use-dialog-focus";
 const cvAsset = { url: "/assets/Gagoope_Merafhe_Updated_CV.pdf" };
 
@@ -17,7 +18,6 @@ export function CvPreviewButton({
   const [open, setOpen] = useState(false);
   const dialogRef = useRef<HTMLDivElement>(null);
   useDialogFocus(dialogRef, open);
-  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     if (!open) return;
@@ -93,23 +93,8 @@ export function CvPreviewButton({
                   </Button>
                 </div>
               </div>
-              <div className="relative flex-1 overflow-hidden">
-                {!loaded && (
-                  <div className="absolute inset-0 grid place-items-center gap-3 bg-surface">
-                    <div className="flex flex-col items-center gap-3 text-muted-foreground">
-                      <Loader2 className="h-5 w-5 animate-spin text-primary" aria-hidden />
-                      <span className="font-mono text-[10px] uppercase tracking-widest">
-                        Loading CV…
-                      </span>
-                    </div>
-                  </div>
-                )}
-                <iframe
-                  title="CV preview"
-                  src={`${cvAsset.url}#view=FitH`}
-                  onLoad={() => setLoaded(true)}
-                  className="h-full w-full bg-card"
-                />
+              <div className="relative min-h-0 flex-1 overflow-hidden bg-card">
+                <CvPdfViewer url={cvAsset.url} />
               </div>
               <div className="border-t border-border bg-surface-elevated/70 px-4 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] text-center sm:hidden">
                 <a
